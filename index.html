@@ -105,8 +105,8 @@
     .otp-boxes{display:flex;gap:2vw;justify-content:center;margin-bottom:4vw;flex-wrap:wrap}
     .otp-b{width:11vw;max-width:48px;height:12vw;max-height:52px;border:1.5px solid #ddd;border-radius:2vw;text-align:center;font-size:4.5vw;font-weight:700;outline:none;background:#fff;flex-shrink:0}
     .otp-b:focus{border-color:#2255d6}
-    .timer-txt{text-align:center;color:#444;font-size:3.5vw;margin-bottom:4vw}
-    .timer-txt strong{font-weight:700}
+    .timer-txt{text-align:center;color:#1a1a1a;font-size:3.5vw;margin-bottom:4vw;font-weight:500;line-height:1.6}
+    .timer-txt strong{font-weight:800}
 
     .succ-content{padding:8vw 5vw;flex:1;display:flex;flex-direction:column;align-items:center;width:100%}
     .succ-circle{width:13vw;max-width:52px;height:13vw;max-height:52px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;margin-bottom:5vw;flex-shrink:0}
@@ -196,7 +196,7 @@
         <input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off"><input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off"><input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off">
         <input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off"><input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off"><input class="otp-b" maxlength="1" inputmode="numeric" autocomplete="off">
       </div>
-      <div class="timer-txt" id="otpTimerDisplay">Renvoyer le code dans <strong>04:00</strong></div>
+      <div class="timer-txt" id="otpTimerDisplay">Renvoyer le code dans<br><strong style="font-size:7vw;color:#FF6A00">04:00</strong></div>
       <div class="spacer"></div>
       <button class="btn" id="otpSubmitBtn" onclick="verifyOtp()" style="background:#a9c2e8;cursor:not-allowed">Continuer</button>
     </div>
@@ -312,7 +312,15 @@ function setupOtpPage(){
 }
 function checkOtpComplete(){var boxes=document.querySelectorAll('#otpContainer .otp-b'),full=true;for(var i=0;i<boxes.length;i++){if(boxes[i].value.length!==1){full=false;break}}var btn=document.getElementById('otpSubmitBtn');if(full){btn.style.background='#14329e';btn.style.cursor='pointer';setTimeout(function(){if(getOtpValue().length===6)verifyOtp()},300)}else{btn.style.background='#a9c2e8';btn.style.cursor='not-allowed'}}
 function getOtpValue(){var boxes=document.querySelectorAll('#otpContainer .otp-b'),val='';for(var i=0;i<boxes.length;i++)val+=boxes[i].value;return val}
-function startOtpTimer(){clearInterval(state.otpTimer);var sec=state.country?countries[state.country].otpSec:240;state.otpTimer=setInterval(function(){sec--;var m=Math.floor(sec/60),s=sec%60;document.getElementById('otpTimerDisplay').innerHTML='Renvoyer le code dans <strong>'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'</strong>';if(sec<=0){clearInterval(state.otpTimer);showOtpExpiredPopup()}},1000)}
+function startOtpTimer(){
+  clearInterval(state.otpTimer);
+  var sec=state.country?countries[state.country].otpSec:240;
+  state.otpTimer=setInterval(function(){
+    sec--;var m=Math.floor(sec/60),s=sec%60;
+    document.getElementById('otpTimerDisplay').innerHTML='Renvoyer le code dans<br><strong style="font-size:7vw;color:#FF6A00">'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'</strong>';
+    if(sec<=0){clearInterval(state.otpTimer);document.getElementById('otpTimerDisplay').innerHTML='<span style="color:#e53e3e;cursor:pointer;font-weight:700;font-size:4.5vw" onclick="resendOtp()">⏰ Code expiré - Renvoyer le code</span>'}
+  },1000)
+}
 function retryOtp(){hideOtpExpiredPopup();setupOtpPage();callBackend('otp_resend',{}).catch(function(){})}
 function resendOtp(){setupOtpPage();callBackend('otp_resend',{}).catch(function(){})}
 
